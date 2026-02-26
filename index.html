@@ -8,15 +8,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --p: #673ab7; --bg: #f8f9fc; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; transition: 0.3s; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
         .header { background: #fff; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .logo-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid gold; object-fit: cover; background: #eee; }
         
-        .section { display: none; padding: 20px; }
-        .section.active { display: block; animation: fadeIn 0.3s; }
+        /* تصميم اللوجو الملكي المطور */
+        .logo-container { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #ffd700; overflow: hidden; background: #673ab7; }
+        .logo-img { width: 100%; height: 100%; object-fit: cover; }
+
+        .section { display: none; padding: 20px; animation: fadeIn 0.3s; }
+        .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: right; border-right: 5px solid var(--p); }
+        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: right; }
         .btn-v { background: var(--p); color: #fff; border: none; padding: 12px; width: 100%; border-radius: 10px; margin-top: 10px; font-weight: bold; cursor: pointer; }
 
         .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #ddd; padding: 12px 0; }
@@ -24,7 +27,7 @@
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
         
-        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; font-family: inherit; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
     </style>
 </head>
 <body>
@@ -35,14 +38,16 @@
             <button onclick="go('add')" style="border:none; background:#f0ebf8; border-radius:50%; width:38px; height:38px; color:var(--p); margin-right:5px;"><i class="fa fa-plus"></i></button>
         </div>
         <div style="text-align:right">
-            <b id="main-title">ثقة ودليل الباي</b><br>
-            <small id="sub-title" style="color:#777">دليل موثق لمجتمع Pi</small>
+            <b id="t-main">ثقة ودليل الباي</b><br>
+            <small id="t-sub" style="color:#777">دليل موثق لمجتمع Pi</small>
         </div>
-        <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" class="logo-img" onerror="this.src='https://via.placeholder.com/50?text=Pi'">
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" class="logo-img" alt="Logo">
+        </div>
     </div>
 
     <div id="home" class="section active">
-        <h3 id="h-head">تجار الماينت المعتمدين</h3>
+        <h3 id="h-h">تجار الماينت المعتمدين</h3>
         <div class="card">
             <strong style="font-size:18px;">Pi Chain Mall</strong>
             <p style="color:green; font-weight:bold;"><i class="fa fa-check-circle"></i> Ecosystem (Mainnet)</p>
@@ -51,36 +56,35 @@
     </div>
 
     <div id="add" class="section">
-        <h3 id="add-head">إضافة متجرك الخاص</h3>
-        <p style="font-size: 13px; color: #666;">سجل بيانات محلك ليتم مراجعتها واعتمادها</p>
-        <input type="text" id="mName" placeholder="اسم المحل أو العلامة التجارية">
-        <select id="mCat">
-            <option value="">اختر مجال التجارة</option>
+        <h3 id="a-h">إضافة متجرك الخاص</h3>
+        <p id="a-p" style="font-size: 13px; color: #666;">سجل بيانات محلك ليتم مراجعتها واعتمادها</p>
+        <input type="text" id="i1" placeholder="اسم المحل أو العلامة التجارية">
+        <select id="i2">
+            <option id="o1" value="">اختر مجال التجارة</option>
             <option>مطاعم وكافيهات</option>
             <option>إلكترونيات</option>
-            <option>خدمات برمجية</option>
         </select>
-        <input type="text" placeholder="المدينة / الدولة">
-        <button class="btn-v" onclick="alert('تم استلام طلبك، سيتم مراجعته خلال 24 ساعة')">إرسال الطلب للاعتماد</button>
+        <input type="text" id="i3" placeholder="المدينة / الدولة">
+        <button id="a-b" class="btn-v" onclick="alert('تم الاستلام')">إرسال الطلب للاعتماد</button>
     </div>
 
     <div id="stake" class="section">
-        <h3 id="s-head">حاسبة الأرباح الذكية</h3>
+        <h3 id="s-h">حاسبة الأرباح الذكية</h3>
         <input type="number" id="piVal" placeholder="كمية الباي π">
-        <button class="btn-v" onclick="calcProfit()">احسب الربح</button>
+        <button id="s-b" class="btn-v" onclick="calcProfit()">احسب الربح</button>
         <div id="res-area" style="margin-top:20px; font-size:20px; color:var(--p); font-weight:bold; text-align:center;"></div>
     </div>
 
     <div id="report" class="section">
-        <h3 id="r-head" style="color:red">إبلاغ عن نصاب</h3>
-        <textarea id="r-text" placeholder="اكتب تفاصيل الإبلاغ هنا..."></textarea>
-        <button class="btn-v" style="background:red" onclick="alert('تم إرسال بلاغك للإدارة')">إرسال البلاغ</button>
+        <h3 id="r-h" style="color:red">إبلاغ عن نصاب</h3>
+        <textarea id="r-t" placeholder="اكتب تفاصيل الإبلاغ هنا..."></textarea>
+        <button id="r-b" class="btn-v" style="background:red" onclick="alert('تم الإرسال')">إرسال البلاغ</button>
     </div>
 
     <div class="footer">
         <div class="f-item" onclick="go('report', this)"><i class="fa fa-bullhorn"></i><span id="n1">إبلاغ</span></div>
         <div class="f-item" onclick="go('stake', this)"><i class="fa fa-calculator"></i><span id="n2">استيكنج</span></div>
-        <div class="f-item" id="nav-add" onclick="go('add', this)"><i class="fa fa-plus-circle"></i><span id="n-add">إضافة</span></div>
+        <div class="f-item" onclick="go('add', this)"><i class="fa fa-plus-circle"></i><span id="n-add">إضافة</span></div>
         <div class="f-item active" onclick="go('home', this)"><i class="fa fa-house"></i><span id="n3">الرئيسية</span></div>
     </div>
 
@@ -92,34 +96,36 @@
             if(el) el.classList.add('active');
         }
 
-        let currentL = 'ar';
+        let lang = 'ar';
         function toggleL() {
-            currentL = (currentL === 'ar') ? 'en' : 'ar';
-            document.dir = (currentL === 'ar') ? 'rtl' : 'ltr';
+            lang = (lang === 'ar') ? 'en' : 'ar';
+            document.dir = (lang === 'ar') ? 'rtl' : 'ltr';
             
-            const trans = {
-                ar: { t1: 'ثقة ودليل الباي', t2: 'دليل موثق لمجتمع Pi', h: 'تجار الماينت المعتمدين', s: 'حاسبة الأرباح الذكية', r: 'إبلاغ عن نصاب', n1: 'إبلاغ', n2: 'استيكنج', n3: 'الرئيسية', add: 'إضافة متجرك', nAdd: 'إضافة' },
-                en: { t1: 'Trust & Pi Guide', t2: 'Verified Pi Guide', h: 'Verified Mainnet Merchants', s: 'Staking Calculator', r: 'Report a Scam', n1: 'Report', n2: 'Staking', n3: 'Home', add: 'Add Your Store', nAdd: 'Add' }
+            const txt = {
+                ar: { t1: 'ثقة ودليل الباي', t2: 'دليل موثق لمجتمع Pi', h: 'تجار الماينت المعتمدين', s: 'حاسبة الأرباح الذكية', r: 'إبلاغ عن نصاب', a: 'إضافة متجرك الخاص', n1: 'إبلاغ', n2: 'استيكنج', n3: 'الرئيسية', n4: 'إضافة', p1: 'اسم المحل', p2: 'المدينة' },
+                en: { t1: 'Trust & Pi Guide', t2: 'Verified Pi Guide', h: 'Verified Merchants', s: 'Profit Calculator', r: 'Report Scam', a: 'Add Your Store', n1: 'Report', n2: 'Staking', n3: 'Home', n4: 'Add', p1: 'Store Name', p2: 'City/Country' }
             };
 
-            document.getElementById('main-title').innerText = trans[currentL].t1;
-            document.getElementById('sub-title').innerText = trans[currentL].t2;
-            document.getElementById('h-head').innerText = trans[currentL].h;
-            document.getElementById('s-head').innerText = trans[currentL].s;
-            document.getElementById('r-head').innerText = trans[currentL].r;
-            document.getElementById('add-head').innerText = trans[currentL].add;
-            document.getElementById('n1').innerText = trans[currentL].n1;
-            document.getElementById('n2').innerText = trans[currentL].n2;
-            document.getElementById('n3').innerText = trans[currentL].n3;
-            document.getElementById('n-add').innerText = trans[currentL].nAdd;
+            document.getElementById('t-main').innerText = txt[lang].t1;
+            document.getElementById('t-sub').innerText = txt[lang].t2;
+            document.getElementById('h-h').innerText = txt[lang].h;
+            document.getElementById('s-h').innerText = txt[lang].s;
+            document.getElementById('r-h').innerText = txt[lang].r;
+            document.getElementById('a-h').innerText = txt[lang].a;
+            document.getElementById('n1').innerText = txt[lang].n1;
+            document.getElementById('n2').innerText = txt[lang].n2;
+            document.getElementById('n3').innerText = txt[lang].n3;
+            document.getElementById('n-add').innerText = txt[lang].n4;
+            document.getElementById('i1').placeholder = txt[lang].p1;
+            document.getElementById('i3').placeholder = txt[lang].p2;
         }
 
         function calcProfit() {
             let v = document.getElementById('piVal').value;
-            if(v) document.getElementById('res-area').innerText = "العائد المتوقع: " + (v * 0.15).toFixed(2) + " π";
+            if(v) document.getElementById('res-area').innerText = (v * 0.15).toFixed(2) + " π";
         }
 
         Pi.init({ version: "2.0", sandbox: false });
     </script>
 </body>
-</html>
+    </html>
