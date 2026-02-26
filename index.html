@@ -1,72 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-
-    <script>
-      // Hacking react-scripts method for defining environment variables because we want to be able to
-      // pass them at runtime when the container starts, instead of having to build the frontend once for
-      // each environment (e.g staging / production).
-      //
-      // This will be automatically templated:
-      // - in DEV, by react-scripts (see https://create-react-app.dev/docs/adding-custom-environment-variables/)
-      // - in PROD, by the container's entrypoint script found in docker/entrypoint.sh (this enables passing the
-      //   variables at runtime instead of consuming it at build time and building a non-portable container)
-      window.__ENV = {
-        backendURL: "%REACT_APP_BACKEND_URL%",
-        sandbox: "%REACT_APP_SANDBOX_SDK%",
-      }
-    </script>
-
-    <!-- Import the Pi Network App Platform SDK: -->
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثقة ودليل الباي - إضافة تاجر</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- TODO make sandbox conditional to env (dev / prod) -->
+    <style>
+        :root { --main-purple: #673ab7; --bg-color: #f8f9fc; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-color); margin: 0; padding-bottom: 50px; }
+        
+        .header { background: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .logo-area { display: flex; align-items: center; gap: 8px; }
+        .logo-circle { width: 35px; height: 35px; background: var(--main-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: gold; font-size: 18px; }
+        
+        /* أيقونات اللغة والإضافة */
+        .top-actions { display: flex; gap: 15px; align-items: center; }
+        .action-btn { background: #f0ebf8; color: var(--main-purple); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
+
+        .search-container { padding: 15px; }
+        .search-box { position: relative; max-width: 500px; margin: auto; }
+        .search-box input { width: 100%; padding: 10px 40px 10px 15px; border-radius: 20px; border: 1px solid #ddd; outline: none; }
+        .search-box i { position: absolute; right: 15px; top: 12px; color: #888; }
+
+        /* نموذج إضافة تاجر (مخفي) */
+        #add-merchant-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: white; width: 90%; max-width: 400px; padding: 20px; border-radius: 20px; position: relative; max-height: 80vh; overflow-y: auto; }
+        .form-group { margin-bottom: 15px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #444; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
+        .submit-btn { background: var(--main-purple); color: white; width: 100%; padding: 12px; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; }
+
+        .nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; padding: 10px; background: white; border-top: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+        .nav-item { text-align: center; color: #555; font-size: 11px; cursor: pointer; }
+        .nav-item i { display: block; font-size: 18px; color: var(--main-purple); margin-bottom: 3px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="top-actions">
+            <button class="action-btn" onclick="toggleModal()"><i class="fa fa-plus"></i></button>
+            <button class="action-btn"><i class="fa fa-globe"></i></button>
+        </div>
+        <div class="logo-area">
+            <div style="text-align: right;">
+                <strong style="display:block;">ثقة ودليل الباي</strong>
+                <small style="color: #777;">دليل موثق</small>
+            </div>
+            <div class="logo-circle"><i class="fa-solid fa-shield-halved"></i></div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" placeholder="البحث عن تاجر أو موقع...">
+            <i class="fa fa-search"></i>
+        </div>
+    </div>
+
+    <nav class="nav-grid">
+        <div class="nav-item"><i class="fa fa-bullhorn"></i>الإبلاغ</div>
+        <div class="nav-item"><i class="fa fa-calculator"></i>الاستيكنج</div>
+        <div class="nav-item"><i class="fa fa-chart-line"></i>الأعلى تقييماً</div>
+        <div class="nav-item"><i class="fa fa-store"></i>التجار</div>
+        <div class="nav-item active" style="color: var(--main-purple);"><i class="fa fa-house"></i>الرئيسية</div>
+    </nav>
+
+    <div id="add-merchant-modal">
+        <div class="modal-content">
+            <button onclick="toggleModal()" style="float: left; border: none; background: none; font-size: 20px;">&times;</button>
+            <h3 style="text-align: center; color: var(--main-purple);">طلب إضافة تاجر جديد</h3>
+            <p style="font-size: 12px; text-align: center; color: #666;">سيتم مراجعة البيانات من قبل الإدارة قبل النشر</p>
+            
+            <form id="merchantForm">
+                <div class="form-group">
+                    <label>اسم المتجر / التاجر</label>
+                    <input type="text" id="mName" required>
+                </div>
+                <div class="form-group">
+                    <label>نوع النشاط (مطعم، تقني، إلخ)</label>
+                    <input type="text" id="mType" required>
+                </div>
+                <div class="form-group">
+                    <label>المدينة / العنوان</label>
+                    <input type="text" id="mCity" required>
+                </div>
+                <div class="form-group">
+                    <label>رابط صورة المحل (اختياري)</label>
+                    <input type="url" id="mImg" placeholder="https://...">
+                </div>
+                <button type="button" class="submit-btn" onclick="submitMerchant()">إرسال للطلب للمراجعة</button>
+            </form>
+        </div>
+    </div>
+
+    <div style="padding: 20px; text-align: center; color: #888;">
+        أهلاً بكِ يا شريكتي.. الأزرار الآن جاهزة للاختبار!
+    </div>
+
     <script>
-      // Make the decision whether Pi SDK should run in "Sandbox" mode or "Pi Browser" mode based on the
-      // dedicated environment variable:
-      var runSDKInSandboxMode = window.__ENV.sandbox === "true"; // treat env vars as strings, not booleans
-      
-      // Init Pi SDK:
-      Pi.init({ version: "2.0", sandbox: runSDKInSandboxMode });
+        Pi.init({ version: "2.0", sandbox: false });
+
+        function toggleModal() {
+            const modal = document.getElementById('add-merchant-modal');
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function submitMerchant() {
+            const name = document.getElementById('mName').value;
+            if(name) {
+                alert("شكراً لك! تم استلام طلب إضافة (" + name + "). سيقوم فريق ثقة ودليل الباي بمراجعته وإضافته فوراً.");
+                toggleModal();
+                document.getElementById('merchantForm').reset();
+            } else {
+                alert("يرجى ملء البيانات الأساسية");
+            }
+        }
     </script>
-    
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
-</html>
+</body>
+  </html>
