@@ -3,109 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثقة ودليل الباي - النظام المتكامل</title>
+    <title>ثقة ودليل الباي - المرجع المعتمد</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --main-purple: #673ab7; --bg-color: #f8f9fc; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg-color); margin: 0; padding-bottom: 70px; }
-        .header { background: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .logo-circle { width: 40px; height: 40px; background: var(--main-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: gold; font-size: 20px; }
+        :root { --main-purple: #673ab7; --bg-gray: #f2f2f7; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg-gray); margin: 0; padding-bottom: 90px; }
         
-        /* شريط التنقل السفلي */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid #eee; padding: 10px 0; z-index: 1000; }
-        .nav-item { text-align: center; color: #888; cursor: pointer; font-size: 11px; }
-        .nav-item i { display: block; font-size: 20px; margin-bottom: 3px; }
-        .nav-item.active { color: var(--main-purple); font-weight: bold; }
+        /* الهيدر الاحترافي */
+        .header { background: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .logo-box { display: flex; align-items: center; gap: 10px; }
+        .my-logo { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid gold; }
+        .header-icons { display: flex; gap: 12px; }
+        .icon-btn { width: 35px; height: 35px; border-radius: 50%; background: #f0ebf8; border: none; color: var(--main-purple); cursor: pointer; }
 
-        /* الأقسام */
-        .page-section { display: none; padding: 15px; }
+        /* شريط البحث */
+        .search-area { padding: 15px; }
+        .search-input { width: 100%; padding: 12px 40px 12px 15px; border-radius: 12px; border: 1px solid #ddd; outline: none; box-sizing: border-box; }
+
+        /* تصميم البطاقات المطور */
+        .page-section { display: none; padding: 10px; animation: fadeIn 0.4s; }
         .page-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* بطاقات التجار */
-        .merchant-card { background: white; border-radius: 15px; margin-bottom: 15px; overflow: hidden; box-shadow: 0 3px 6px rgba(0,0,0,0.08); display: flex; padding: 10px; gap: 10px; align-items: center; }
-        .merchant-img { width: 70px; height: 70px; border-radius: 10px; background: var(--main-purple); color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; }
-        .verified-tag { color: #2ecc71; font-size: 12px; font-weight: bold; }
+        .card { background: white; border-radius: 20px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .card-banner { height: 120px; background: #673ab7; position: relative; }
+        .card-content { padding: 15px; position: relative; }
+        .card-avatar { width: 60px; height: 60px; border-radius: 15px; background: white; border: 3px solid white; position: absolute; top: -30px; right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 30px; }
+        .badge { background: #ffd700; color: #000; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: bold; }
+        .btn-action { background: var(--main-purple); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
 
-        /* حاسبة الاستيكنج */
-        .calc-box { background: white; padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        input[type="number"] { width: 80%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; margin: 10px 0; }
+        /* القائمة السفلية */
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #eee; }
+        .nav-link { text-align: center; color: #8e8e93; text-decoration: none; font-size: 11px; flex: 1; cursor: pointer; }
+        .nav-link i { display: block; font-size: 22px; margin-bottom: 4px; }
+        .nav-link.active { color: var(--main-purple); font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <div style="display:flex; gap:10px;">
-            <button onclick="alert('اللغات قريباً')" style="border:none; background:#eee; border-radius:50%; width:35px; height:35px;"><i class="fa fa-globe"></i></button>
-            <button onclick="showSection('add')" style="border:none; background:#eee; border-radius:50%; width:35px; height:35px; color:var(--main-purple);"><i class="fa fa-plus"></i></button>
+        <div class="header-icons">
+            <button class="icon-btn" onclick="alert('English Language Coming Soon')"><i class="fa fa-globe"></i></button>
+            <button class="icon-btn"><i class="fa fa-plus"></i></button>
         </div>
-        <div style="text-align:right;">
-            <strong style="display:block;">ثقة ودليل الباي</strong>
-            <small style="color:#888;">Ecosystem Guide</small>
+        <div class="logo-box">
+            <div style="text-align: right;">
+                <strong style="display:block;">ثقة ودليل الباي</strong>
+                <small style="color:#888;">دليل موثق لمجتمع Pi</small>
+            </div>
+            <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" class="my-logo" alt="Logo">
         </div>
-        <div class="logo-circle"><i class="fa fa-shield-check"></i></div>
+    </div>
+
+    <div class="search-area">
+        <div style="position:relative;">
+            <input type="text" class="search-input" placeholder="البحث عن تاجر أو موقع...">
+            <i class="fa fa-search" style="position:absolute; right:15px; top:15px; color:#aaa;"></i>
+        </div>
     </div>
 
     <div id="home" class="page-section active">
-        <h3 style="margin-top:0;">تجار معتمدين في Ecosystem</h3>
+        <h3 style="padding-right: 15px;">أحدث المحلات المضافة</h3>
         
-        <div class="merchant-card">
-            <div class="merchant-img"><i class="fa fa-shopping-cart"></i></div>
-            <div style="flex:1;">
-                <strong>Pi Chain Mall</strong>
-                <div class="verified-tag"><i class="fa fa-check-circle"></i> مشروع رسمي</div>
-                <small>أكبر متجر عالمي في شبكة باي</small>
+        <div class="card">
+            <div class="card-banner" style="background: url('https://via.placeholder.com/400x120/673ab7/ffffff?text=Pi+Chain+Mall') center/cover;"></div>
+            <div class="card-content">
+                <div class="card-avatar"><i class="fa fa-shopping-bag" style="color:var(--main-purple)"></i></div>
+                <h3 style="margin: 0;">Pi Chain Mall</h3>
+                <p style="color:#777; font-size: 14px; margin: 5px 0;"><i class="fa fa-location-dot"></i> Ecosystem (Mainnet)</p>
+                <div style="color: #f1c40f; margin-bottom: 10px;"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> <span style="color:#888">4.9</span></div>
+                <button class="btn-action">عرض التفاصيل</button>
             </div>
         </div>
 
-        <div class="merchant-card">
-            <div class="merchant-img"><i class="fa fa-briefcase"></i></div>
-            <div style="flex:1;">
-                <strong>WorkforcePool</strong>
-                <div class="verified-tag"><i class="fa fa-check-circle"></i> مشروع رسمي</div>
-                <small>منصة العمل الحر وربح الباي</small>
+        <div class="card">
+            <div class="card-banner" style="background: url('https://via.placeholder.com/400x120/555/ffffff?text=WorkforcePool') center/cover;"></div>
+            <div class="card-content">
+                <div class="card-avatar"><i class="fa fa-tools" style="color:#555"></i></div>
+                <h3 style="margin: 0;">WorkforcePool</h3>
+                <p style="color:#777; font-size: 14px; margin: 5px 0;"><i class="fa fa-location-dot"></i> Ecosystem (Mainnet)</p>
+                <button class="btn-action">عرض التفاصيل</button>
             </div>
         </div>
     </div>
 
     <div id="staking" class="page-section">
-        <div class="calc-box">
+        <div style="background:white; padding:30px; border-radius:20px; text-align:center;">
+            <i class="fa fa-calculator" style="font-size:50px; color:var(--main-purple)"></i>
             <h3>حاسبة أرباح الاستيكنج</h3>
-            <p>أدخل كمية الباي لمعرفة العائد</p>
-            <input type="number" id="piAmount" placeholder="كمية الباي (π)">
-            <button onclick="calc()" style="background:var(--main-purple); color:white; border:none; padding:10px 20px; border-radius:10px; width:80%;">احسب الآن</button>
-            <h4 id="result" style="margin-top:20px; color:var(--main-purple);"></h4>
+            <input type="number" id="pAmount" style="width:100%; padding:12px; margin:15px 0; border-radius:10px; border:1px solid #ddd;" placeholder="أدخل كمية π">
+            <button class="btn-action" onclick="doCalc()">احسب الآن</button>
+            <h2 id="pResult" style="color:var(--main-purple); margin-top:20px;"></h2>
         </div>
     </div>
 
-    <div id="report" class="page-section">
-        <h3>الإبلاغ عن تاجر نصاب</h3>
-        <textarea style="width:100%; height:100px; border-radius:10px; border:1px solid #ddd; padding:10px;" placeholder="اكتب تفاصيل الشكوى واسم التاجر..."></textarea>
-        <button onclick="alert('تم استلام البلاغ وسيتم فحصه')" style="background:red; color:white; border:none; padding:12px; border-radius:10px; width:100%; margin-top:10px;">إرسال البلاغ</button>
-    </div>
-
-    <div class="bottom-nav">
-        <div class="nav-item" onclick="showSection('report')"><i class="fa fa-bullhorn"></i>إبلاغ</div>
-        <div class="nav-item" onclick="showSection('staking')"><i class="fa fa-calculator"></i>استيكنج</div>
-        <div class="nav-item"><i class="fa fa-chart-line"></i>الأعلى</div>
-        <div class="nav-item"><i class="fa fa-store"></i>التجار</div>
-        <div class="nav-item active" onclick="showSection('home')"><i class="fa fa-house"></i>الرئيسية</div>
+    <div class="nav-bar">
+        <div class="nav-link" onclick="openS('report')"><i class="fa fa-bullhorn"></i>الإبلاغ</div>
+        <div class="nav-link" onclick="openS('staking')"><i class="fa fa-calculator"></i>الاستيكنج</div>
+        <div class="nav-link" onclick="openS('top')"><i class="fa fa-chart-line"></i>الأعلى</div>
+        <div class="nav-link" onclick="openS('home')"><i class="fa fa-store"></i>التجار</div>
+        <div class="nav-link active" onclick="openS('home')"><i class="fa fa-house"></i>الرئيسية</div>
     </div>
 
     <script>
         Pi.init({ version: "2.0", sandbox: false });
 
-        function showSection(id) {
+        function openS(id) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            const sec = document.getElementById(id);
+            if(sec) sec.classList.add('active');
+            event.currentTarget.classList.add('active');
         }
 
-        function calc() {
-            let amount = document.getElementById('piAmount').value;
-            let profit = amount * 0.15; // مثال لربح 15%
-            document.getElementById('result').innerText = "الأرباح المتوقعة سنوياً: " + profit.toFixed(2) + " π";
+        function doCalc() {
+            let val = document.getElementById('pAmount').value;
+            if(val) {
+                document.getElementById('pResult').innerText = "الربح السنوي: " + (val * 0.20).toFixed(2) + " π";
+            }
         }
     </script>
 </body>
-                </html>
+                    </html>
