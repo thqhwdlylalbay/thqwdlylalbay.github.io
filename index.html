@@ -7,93 +7,104 @@
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --p: #673ab7; --g: #f8f9fc; }
-        body { font-family: sans-serif; background: var(--g); margin: 0; padding-bottom: 80px; }
+        :root { --p: #673ab7; --bg: #f8f9fc; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; transition: 0.3s; }
         .header { background: #fff; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .logo-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid gold; }
+        /* إصلاح حجم اللوجو الملكي */
+        .logo-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid gold; object-fit: cover; background: #eee; }
         
-        /* إخفاء الأقسام افتراضياً */
-        .section { display: none; padding: 20px; text-align: center; }
-        .section.active { display: block; }
+        .section { display: none; padding: 20px; }
+        .section.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: right; }
-        .btn-v { background: var(--p); color: #fff; border: none; padding: 10px; width: 100%; border-radius: 10px; margin-top: 10px; cursor: pointer; }
+        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: right; border-right: 5px solid var(--p); }
+        .btn-v { background: var(--p); color: #fff; border: none; padding: 12px; width: 100%; border-radius: 10px; margin-top: 10px; font-weight: bold; cursor: pointer; }
 
-        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #ddd; padding: 10px 0; }
-        .f-item { flex: 1; text-align: center; color: #888; cursor: pointer; font-size: 12px; }
+        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #ddd; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .f-item { flex: 1; text-align: center; color: #888; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
-        .f-item i { display: block; font-size: 20px; margin-bottom: 2px; }
+        .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
+        
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <div>
-            <button onclick="changeL()" style="border:none; background:#eee; border-radius:50%; width:35px; height:35px;"><i class="fa fa-globe"></i></button>
-            <button onclick="go('add')" style="border:none; background:#eee; border-radius:50%; width:35px; height:35px; color:var(--p);"><i class="fa fa-plus"></i></button>
+            <button onclick="toggleL()" style="border:none; background:#f0ebf8; border-radius:50%; width:38px; height:38px; cursor:pointer;"><i class="fa fa-globe" style="color:var(--p)"></i></button>
+            <button onclick="go('add')" style="border:none; background:#f0ebf8; border-radius:50%; width:38px; height:38px; color:var(--p); margin-right:5px;"><i class="fa fa-plus"></i></button>
         </div>
         <div style="text-align:right">
-            <b id="t1">ثقة ودليل الباي</b><br><small id="t2">دليل موثق لمجتمع Pi</small>
+            <b id="main-title">ثقة ودليل الباي</b><br>
+            <small id="sub-title" style="color:#777">دليل موثق لمجتمع Pi</small>
         </div>
-        <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" class="logo-img">
+        <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" class="logo-img" onerror="this.src='https://via.placeholder.com/50?text=Pi'">
     </div>
 
     <div id="home" class="section active">
-        <h3 id="t3">تجار الماينت المعتمدين</h3>
+        <h3 id="h-head">تجار الماينت المعتمدين</h3>
         <div class="card">
-            <strong>Pi Chain Mall</strong>
-            <p>Ecosystem (Mainnet) <i class="fa fa-check-circle" style="color:green"></i></p>
-            <button class="btn-v" onclick="alert('تفاصيل المتجر قريباً')">عرض التفاصيل</button>
+            <strong style="font-size:18px;">Pi Chain Mall</strong>
+            <p style="color:green; font-weight:bold;"><i class="fa fa-check-circle"></i> Ecosystem (Mainnet)</p>
+            <button class="btn-v" onclick="alert('قريباً')">عرض التفاصيل</button>
         </div>
     </div>
 
     <div id="stake" class="section">
-        <h3>حاسبة الأرباح</h3>
-        <input type="number" id="piIn" placeholder="أدخل كمية π" style="width:80%; padding:10px; margin:10px auto; display:block; border-radius:10px; border:1px solid #ddd;">
-        <button class="btn-v" onclick="doC()">احسب</button>
-        <h2 id="res" style="color:var(--p)"></h2>
+        <h3 id="s-head">حاسبة الأرباح الذكية</h3>
+        <input type="number" id="piVal" placeholder="كمية الباي π">
+        <button class="btn-v" onclick="calcProfit()">احسب الربح</button>
+        <div id="res-area" style="margin-top:20px; font-size:20px; color:var(--p); font-weight:bold; text-align:center;"></div>
     </div>
 
     <div id="report" class="section">
-        <h3>إبلاغ عن نصاب</h3>
-        <textarea placeholder="اكتب التفاصيل هنا..." style="width:100%; height:100px; border-radius:10px; padding:10px;"></textarea>
-        <button class="btn-v" style="background:red" onclick="alert('تم الاستلام')">إرسال البلاغ</button>
+        <h3 id="r-head" style="color:red">إبلاغ عن نصاب</h3>
+        <textarea id="r-text" placeholder="اكتب تفاصيل الإبلاغ هنا..."></textarea>
+        <button class="btn-v" style="background:red" onclick="alert('تم إرسال بلاغك للإدارة')">إرسال البلاغ</button>
     </div>
 
     <div class="footer">
-        <div class="f-item" onclick="go('report', this)"><i class="fa fa-bullhorn"></i>إبلاغ</div>
-        <div class="f-item" onclick="go('stake', this)"><i class="fa fa-calculator"></i>استيكنج</div>
-        <div class="f-item" onclick="go('home', this)"><i class="fa fa-house"></i>الرئيسية</div>
+        <div class="f-item" onclick="go('report', this)"><i class="fa fa-bullhorn"></i><span id="n1">إبلاغ</span></div>
+        <div class="f-item" onclick="go('stake', this)"><i class="fa fa-calculator"></i><span id="n2">استيكنج</span></div>
+        <div class="f-item active" onclick="go('home', this)"><i class="fa fa-house"></i><span id="n3">الرئيسية</span></div>
     </div>
 
     <script>
-        // دالة التنقل - تم تبسيطها لتعمل 100%
+        // دالة التنقل الفوري
         function go(id, el) {
-            // إخفاء كل الأقسام
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            // إظهار القسم المطلوب
             document.getElementById(id).classList.add('active');
-            
-            // تغيير لون الأزرار تحت
             if(el) {
                 document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
                 el.classList.add('active');
             }
         }
 
-        // دالة اللغات
-        let L = 'ar';
-        function changeL() {
-            L = (L === 'ar') ? 'en' : 'ar';
-            document.dir = (L === 'ar') ? 'rtl' : 'ltr';
-            document.getElementById('t1').innerText = (L === 'ar') ? 'ثقة ودليل الباي' : 'Trust & Pi Guide';
-            document.getElementById('t3').innerText = (L === 'ar') ? 'تجار الماينت المعتمدين' : 'Verified Mainnet Merchants';
-            alert(L === 'ar' ? "تم التحويل للعربية" : "Switched to English");
+        // دالة تحويل اللغات الكاملة
+        let currentL = 'ar';
+        function toggleL() {
+            currentL = (currentL === 'ar') ? 'en' : 'ar';
+            document.dir = (currentL === 'ar') ? 'rtl' : 'ltr';
+            
+            const trans = {
+                ar: { t1: 'ثقة ودليل الباي', t2: 'دليل موثق لمجتمع Pi', h: 'تجار الماينت المعتمدين', s: 'حاسبة الأرباح الذكية', r: 'إبلاغ عن نصاب', n1: 'إبلاغ', n2: 'استيكنج', n3: 'الرئيسية' },
+                en: { t1: 'Trust & Pi Guide', t2: 'Verified Pi Guide', h: 'Verified Mainnet Merchants', s: 'Staking Calculator', r: 'Report a Scam', n1: 'Report', n2: 'Staking', n3: 'Home' }
+            };
+
+            document.getElementById('main-title').innerText = trans[currentL].t1;
+            document.getElementById('sub-title').innerText = trans[currentL].t2;
+            document.getElementById('h-head').innerText = trans[currentL].h;
+            document.getElementById('s-head').innerText = trans[currentL].s;
+            document.getElementById('r-head').innerText = trans[currentL].r;
+            document.getElementById('n1').innerText = trans[currentL].n1;
+            document.getElementById('n2').innerText = trans[currentL].n2;
+            document.getElementById('n3').innerText = trans[currentL].n3;
         }
 
-        function doC() {
-            let v = document.getElementById('piIn').value;
-            if(v) document.getElementById('res').innerText = (v * 0.2).toFixed(2) + " π";
+        function calcProfit() {
+            let v = document.getElementById('piVal').value;
+            if(v) document.getElementById('res-area').innerText = "العائد المتوقع: " + (v * 0.15).toFixed(2) + " π";
         }
 
         Pi.init({ version: "2.0", sandbox: false });
