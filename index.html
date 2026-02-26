@@ -10,7 +10,6 @@
         :root { --p: #673ab7; --bg: #f8f9fc; }
         body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; transition: 0.3s; }
         .header { background: #fff; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        /* إصلاح حجم اللوجو الملكي */
         .logo-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid gold; object-fit: cover; background: #eee; }
         
         .section { display: none; padding: 20px; }
@@ -20,19 +19,19 @@
         .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: right; border-right: 5px solid var(--p); }
         .btn-v { background: var(--p); color: #fff; border: none; padding: 12px; width: 100%; border-radius: 10px; margin-top: 10px; font-weight: bold; cursor: pointer; }
 
-        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #ddd; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #ddd; padding: 12px 0; }
         .f-item { flex: 1; text-align: center; color: #888; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
         
-        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; font-family: inherit; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <div>
-            <button onclick="toggleL()" style="border:none; background:#f0ebf8; border-radius:50%; width:38px; height:38px; cursor:pointer;"><i class="fa fa-globe" style="color:var(--p)"></i></button>
+            <button onclick="toggleL()" style="border:none; background:#f0ebf8; border-radius:50%; width:38px; height:38px;"><i class="fa fa-globe" style="color:var(--p)"></i></button>
             <button onclick="go('add')" style="border:none; background:#f0ebf8; border-radius:50%; width:38px; height:38px; color:var(--p); margin-right:5px;"><i class="fa fa-plus"></i></button>
         </div>
         <div style="text-align:right">
@@ -47,8 +46,22 @@
         <div class="card">
             <strong style="font-size:18px;">Pi Chain Mall</strong>
             <p style="color:green; font-weight:bold;"><i class="fa fa-check-circle"></i> Ecosystem (Mainnet)</p>
-            <button class="btn-v" onclick="alert('قريباً')">عرض التفاصيل</button>
+            <button class="btn-v" onclick="alert('تفاصيل المتجر قريباً')">عرض التفاصيل</button>
         </div>
+    </div>
+
+    <div id="add" class="section">
+        <h3 id="add-head">إضافة متجرك الخاص</h3>
+        <p style="font-size: 13px; color: #666;">سجل بيانات محلك ليتم مراجعتها واعتمادها</p>
+        <input type="text" id="mName" placeholder="اسم المحل أو العلامة التجارية">
+        <select id="mCat">
+            <option value="">اختر مجال التجارة</option>
+            <option>مطاعم وكافيهات</option>
+            <option>إلكترونيات</option>
+            <option>خدمات برمجية</option>
+        </select>
+        <input type="text" placeholder="المدينة / الدولة">
+        <button class="btn-v" onclick="alert('تم استلام طلبك، سيتم مراجعته خلال 24 ساعة')">إرسال الطلب للاعتماد</button>
     </div>
 
     <div id="stake" class="section">
@@ -67,29 +80,26 @@
     <div class="footer">
         <div class="f-item" onclick="go('report', this)"><i class="fa fa-bullhorn"></i><span id="n1">إبلاغ</span></div>
         <div class="f-item" onclick="go('stake', this)"><i class="fa fa-calculator"></i><span id="n2">استيكنج</span></div>
+        <div class="f-item" id="nav-add" onclick="go('add', this)"><i class="fa fa-plus-circle"></i><span id="n-add">إضافة</span></div>
         <div class="f-item active" onclick="go('home', this)"><i class="fa fa-house"></i><span id="n3">الرئيسية</span></div>
     </div>
 
     <script>
-        // دالة التنقل الفوري
         function go(id, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            if(el) {
-                document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
-                el.classList.add('active');
-            }
+            document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
+            if(el) el.classList.add('active');
         }
 
-        // دالة تحويل اللغات الكاملة
         let currentL = 'ar';
         function toggleL() {
             currentL = (currentL === 'ar') ? 'en' : 'ar';
             document.dir = (currentL === 'ar') ? 'rtl' : 'ltr';
             
             const trans = {
-                ar: { t1: 'ثقة ودليل الباي', t2: 'دليل موثق لمجتمع Pi', h: 'تجار الماينت المعتمدين', s: 'حاسبة الأرباح الذكية', r: 'إبلاغ عن نصاب', n1: 'إبلاغ', n2: 'استيكنج', n3: 'الرئيسية' },
-                en: { t1: 'Trust & Pi Guide', t2: 'Verified Pi Guide', h: 'Verified Mainnet Merchants', s: 'Staking Calculator', r: 'Report a Scam', n1: 'Report', n2: 'Staking', n3: 'Home' }
+                ar: { t1: 'ثقة ودليل الباي', t2: 'دليل موثق لمجتمع Pi', h: 'تجار الماينت المعتمدين', s: 'حاسبة الأرباح الذكية', r: 'إبلاغ عن نصاب', n1: 'إبلاغ', n2: 'استيكنج', n3: 'الرئيسية', add: 'إضافة متجرك', nAdd: 'إضافة' },
+                en: { t1: 'Trust & Pi Guide', t2: 'Verified Pi Guide', h: 'Verified Mainnet Merchants', s: 'Staking Calculator', r: 'Report a Scam', n1: 'Report', n2: 'Staking', n3: 'Home', add: 'Add Your Store', nAdd: 'Add' }
             };
 
             document.getElementById('main-title').innerText = trans[currentL].t1;
@@ -97,9 +107,11 @@
             document.getElementById('h-head').innerText = trans[currentL].h;
             document.getElementById('s-head').innerText = trans[currentL].s;
             document.getElementById('r-head').innerText = trans[currentL].r;
+            document.getElementById('add-head').innerText = trans[currentL].add;
             document.getElementById('n1').innerText = trans[currentL].n1;
             document.getElementById('n2').innerText = trans[currentL].n2;
             document.getElementById('n3').innerText = trans[currentL].n3;
+            document.getElementById('n-add').innerText = trans[currentL].nAdd;
         }
 
         function calcProfit() {
