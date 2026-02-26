@@ -3,105 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثقة ودليل الباي - Trust & Pi Guide</title>
+    <title>ثقة ودليل الباي</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --main-purple: #673ab7; --bg: #f8f9fc; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
+        :root { --p: #673ab7; --g: #f8f9fc; }
+        body { font-family: sans-serif; background: var(--g); margin: 0; padding-bottom: 80px; }
+        .header { background: #fff; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid gold; }
         
-        .header { background: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-        .logo-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid gold; object-fit: cover; }
-        .top-btns { display: flex; gap: 10px; }
-        .circle-btn { width: 35px; height: 35px; border-radius: 50%; border: none; background: #f0ebf8; color: var(--main-purple); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        /* إخفاء الأقسام افتراضياً */
+        .section { display: none; padding: 20px; text-align: center; }
+        .section.active { display: block; }
 
-        .page-section { display: none; padding: 15px; animation: fadeIn 0.3s; }
-        .page-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: right; }
+        .btn-v { background: var(--p); color: #fff; border: none; padding: 10px; width: 100%; border-radius: 10px; margin-top: 10px; cursor: pointer; }
 
-        .card { background: white; border-radius: 20px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); position: relative; }
-        .card-banner { height: 100px; background: linear-gradient(45deg, #673ab7, #9c27b0); }
-        .card-content { padding: 15px; text-align: right; }
-        .card-avatar { width: 50px; height: 50px; border-radius: 12px; background: white; position: absolute; top: 75px; left: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; color: var(--main-purple); font-size: 24px; }
-        .btn-purple { background: var(--main-purple); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; border-top: 1px solid #eee; padding: 10px 0; z-index: 1000; }
-        .nav-item { flex: 1; text-align: center; color: #8e8e93; font-size: 11px; cursor: pointer; }
-        .nav-item i { display: block; font-size: 20px; margin-bottom: 4px; }
-        .nav-item.active { color: var(--main-purple); font-weight: bold; }
+        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #ddd; padding: 10px 0; }
+        .f-item { flex: 1; text-align: center; color: #888; cursor: pointer; font-size: 12px; }
+        .f-item.active { color: var(--p); font-weight: bold; }
+        .f-item i { display: block; font-size: 20px; margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <div class="top-btns">
-            <button class="circle-btn" onclick="changeLang()"><i class="fa fa-globe"></i></button>
-            <button class="circle-btn" onclick="switchTab('add')"><i class="fa fa-plus"></i></button>
+        <div>
+            <button onclick="changeL()" style="border:none; background:#eee; border-radius:50%; width:35px; height:35px;"><i class="fa fa-globe"></i></button>
+            <button onclick="go('add')" style="border:none; background:#eee; border-radius:50%; width:35px; height:35px; color:var(--p);"><i class="fa fa-plus"></i></button>
         </div>
-        <div style="text-align: right;">
-            <strong id="h-title">ثقة ودليل الباي</strong><br>
-            <small id="h-sub" style="color: #888;">دليل موثق لمجتمع Pi</small>
+        <div style="text-align:right">
+            <b id="t1">ثقة ودليل الباي</b><br><small id="t2">دليل موثق لمجتمع Pi</small>
         </div>
-        <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" class="logo-img" alt="Logo">
+        <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" class="logo-img">
     </div>
 
-    <div id="home" class="page-section active">
-        <h3 id="sec-title">أحدث المحلات المضافة</h3>
+    <div id="home" class="section active">
+        <h3 id="t3">تجار الماينت المعتمدين</h3>
         <div class="card">
-            <div class="card-banner"></div>
-            <div class="card-content">
-                <div class="card-avatar"><i class="fa fa-shopping-bag"></i></div>
-                <h3 style="margin:0;">Pi Chain Mall</h3>
-                <p style="color:#666; font-size:14px; margin:5px 0;">Ecosystem (Mainnet) <i class="fa fa-location-dot"></i></p>
-                <div style="color:#f1c40f; margin-bottom:10px;"><i class="fa fa-star"></i> 4.9</div>
-                <button class="btn-purple" id="btn-det">عرض التفاصيل</button>
-            </div>
+            <strong>Pi Chain Mall</strong>
+            <p>Ecosystem (Mainnet) <i class="fa fa-check-circle" style="color:green"></i></p>
+            <button class="btn-v" onclick="alert('تفاصيل المتجر قريباً')">عرض التفاصيل</button>
         </div>
     </div>
 
-    <div id="staking" class="page-section">
-        <div style="background:white; padding:25px; border-radius:20px; text-align:center;">
-            <h3 id="st-title">حاسبة الاستيكنج</h3>
-            <input type="number" id="piVal" placeholder="أدخل كمية π" style="width:90%; padding:10px; margin:15px 0; border-radius:10px; border:1px solid #ddd;">
-            <button class="btn-purple" onclick="calc()">احسب الآن</button>
-            <h2 id="st-res" style="color:var(--main-purple); margin-top:15px;"></h2>
-        </div>
+    <div id="stake" class="section">
+        <h3>حاسبة الأرباح</h3>
+        <input type="number" id="piIn" placeholder="أدخل كمية π" style="width:80%; padding:10px; margin:10px auto; display:block; border-radius:10px; border:1px solid #ddd;">
+        <button class="btn-v" onclick="doC()">احسب</button>
+        <h2 id="res" style="color:var(--p)"></h2>
     </div>
 
-    <div class="nav-bar">
-        <div class="nav-item" onclick="switchTab('report', this)"><i class="fa fa-bullhorn"></i><span class="n-txt">الإبلاغ</span></div>
-        <div class="nav-item" onclick="switchTab('staking', this)"><i class="fa fa-calculator"></i><span class="n-txt">استيكنج</span></div>
-        <div class="nav-item" onclick="switchTab('top', this)"><i class="fa fa-chart-line"></i><span class="n-txt">الأعلى</span></div>
-        <div class="nav-item" onclick="switchTab('home', this)"><i class="fa fa-store"></i><span class="n-txt">التجار</span></div>
-        <div class="nav-item active" onclick="switchTab('home', this)"><i class="fa fa-house"></i><span class="n-txt">الرئيسية</span></div>
+    <div id="report" class="section">
+        <h3>إبلاغ عن نصاب</h3>
+        <textarea placeholder="اكتب التفاصيل هنا..." style="width:100%; height:100px; border-radius:10px; padding:10px;"></textarea>
+        <button class="btn-v" style="background:red" onclick="alert('تم الاستلام')">إرسال البلاغ</button>
+    </div>
+
+    <div class="footer">
+        <div class="f-item" onclick="go('report', this)"><i class="fa fa-bullhorn"></i>إبلاغ</div>
+        <div class="f-item" onclick="go('stake', this)"><i class="fa fa-calculator"></i>استيكنج</div>
+        <div class="f-item" onclick="go('home', this)"><i class="fa fa-house"></i>الرئيسية</div>
     </div>
 
     <script>
-        // تفعيل التنقل بين الأقسام
-        function switchTab(id, el) {
-            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        // دالة التنقل - تم تبسيطها لتعمل 100%
+        function go(id, el) {
+            // إخفاء كل الأقسام
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            // إظهار القسم المطلوب
             document.getElementById(id).classList.add('active');
-            if(el) el.classList.add('active');
+            
+            // تغيير لون الأزرار تحت
+            if(el) {
+                document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
+                el.classList.add('active');
+            }
         }
 
-        // تفعيل اللغات
-        let lang = 'ar';
-        function changeLang() {
-            lang = (lang === 'ar') ? 'en' : 'ar';
-            document.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-            document.getElementById('h-title').innerText = (lang === 'ar') ? 'ثقة ودليل الباي' : 'Trust & Pi Guide';
-            document.getElementById('sec-title').innerText = (lang === 'ar') ? 'أحدث المحلات المضافة' : 'Latest Added Shops';
-            document.getElementById('btn-det').innerText = (lang === 'ar') ? 'عرض التفاصيل' : 'View Details';
-            alert(lang === 'ar' ? "تم التحويل للعربية" : "Switched to English");
+        // دالة اللغات
+        let L = 'ar';
+        function changeL() {
+            L = (L === 'ar') ? 'en' : 'ar';
+            document.dir = (L === 'ar') ? 'rtl' : 'ltr';
+            document.getElementById('t1').innerText = (L === 'ar') ? 'ثقة ودليل الباي' : 'Trust & Pi Guide';
+            document.getElementById('t3').innerText = (L === 'ar') ? 'تجار الماينت المعتمدين' : 'Verified Mainnet Merchants';
+            alert(L === 'ar' ? "تم التحويل للعربية" : "Switched to English");
         }
 
-        function calc() {
-            let v = document.getElementById('piVal').value;
-            if(v) document.getElementById('st-res').innerText = (v * 0.18).toFixed(2) + " π";
+        function doC() {
+            let v = document.getElementById('piIn').value;
+            if(v) document.getElementById('res').innerText = (v * 0.2).toFixed(2) + " π";
         }
 
         Pi.init({ version: "2.0", sandbox: false });
     </script>
 </body>
-                                                                                               </html>
+</html>
