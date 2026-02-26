@@ -3,121 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثقة ودليل الباي - إضافة تاجر</title>
+    <title>ثقة ودليل الباي - النظام المتكامل</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
         :root { --main-purple: #673ab7; --bg-color: #f8f9fc; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-color); margin: 0; padding-bottom: 50px; }
-        
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg-color); margin: 0; padding-bottom: 70px; }
         .header { background: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .logo-area { display: flex; align-items: center; gap: 8px; }
-        .logo-circle { width: 35px; height: 35px; background: var(--main-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: gold; font-size: 18px; }
+        .logo-circle { width: 40px; height: 40px; background: var(--main-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: gold; font-size: 20px; }
         
-        /* أيقونات اللغة والإضافة */
-        .top-actions { display: flex; gap: 15px; align-items: center; }
-        .action-btn { background: #f0ebf8; color: var(--main-purple); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
+        /* شريط التنقل السفلي */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid #eee; padding: 10px 0; z-index: 1000; }
+        .nav-item { text-align: center; color: #888; cursor: pointer; font-size: 11px; }
+        .nav-item i { display: block; font-size: 20px; margin-bottom: 3px; }
+        .nav-item.active { color: var(--main-purple); font-weight: bold; }
 
-        .search-container { padding: 15px; }
-        .search-box { position: relative; max-width: 500px; margin: auto; }
-        .search-box input { width: 100%; padding: 10px 40px 10px 15px; border-radius: 20px; border: 1px solid #ddd; outline: none; }
-        .search-box i { position: absolute; right: 15px; top: 12px; color: #888; }
+        /* الأقسام */
+        .page-section { display: none; padding: 15px; }
+        .page-section.active { display: block; }
 
-        /* نموذج إضافة تاجر (مخفي) */
-        #add-merchant-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-content { background: white; width: 90%; max-width: 400px; padding: 20px; border-radius: 20px; position: relative; max-height: 80vh; overflow-y: auto; }
-        .form-group { margin-bottom: 15px; text-align: right; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #444; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
-        .submit-btn { background: var(--main-purple); color: white; width: 100%; padding: 12px; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; }
+        /* بطاقات التجار */
+        .merchant-card { background: white; border-radius: 15px; margin-bottom: 15px; overflow: hidden; box-shadow: 0 3px 6px rgba(0,0,0,0.08); display: flex; padding: 10px; gap: 10px; align-items: center; }
+        .merchant-img { width: 70px; height: 70px; border-radius: 10px; background: var(--main-purple); color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .verified-tag { color: #2ecc71; font-size: 12px; font-weight: bold; }
 
-        .nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; padding: 10px; background: white; border-top: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        .nav-item { text-align: center; color: #555; font-size: 11px; cursor: pointer; }
-        .nav-item i { display: block; font-size: 18px; color: var(--main-purple); margin-bottom: 3px; }
+        /* حاسبة الاستيكنج */
+        .calc-box { background: white; padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        input[type="number"] { width: 80%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; margin: 10px 0; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <div class="top-actions">
-            <button class="action-btn" onclick="toggleModal()"><i class="fa fa-plus"></i></button>
-            <button class="action-btn"><i class="fa fa-globe"></i></button>
+        <div style="display:flex; gap:10px;">
+            <button onclick="alert('اللغات قريباً')" style="border:none; background:#eee; border-radius:50%; width:35px; height:35px;"><i class="fa fa-globe"></i></button>
+            <button onclick="showSection('add')" style="border:none; background:#eee; border-radius:50%; width:35px; height:35px; color:var(--main-purple);"><i class="fa fa-plus"></i></button>
         </div>
-        <div class="logo-area">
-            <div style="text-align: right;">
-                <strong style="display:block;">ثقة ودليل الباي</strong>
-                <small style="color: #777;">دليل موثق</small>
+        <div style="text-align:right;">
+            <strong style="display:block;">ثقة ودليل الباي</strong>
+            <small style="color:#888;">Ecosystem Guide</small>
+        </div>
+        <div class="logo-circle"><i class="fa fa-shield-check"></i></div>
+    </div>
+
+    <div id="home" class="page-section active">
+        <h3 style="margin-top:0;">تجار معتمدين في Ecosystem</h3>
+        
+        <div class="merchant-card">
+            <div class="merchant-img"><i class="fa fa-shopping-cart"></i></div>
+            <div style="flex:1;">
+                <strong>Pi Chain Mall</strong>
+                <div class="verified-tag"><i class="fa fa-check-circle"></i> مشروع رسمي</div>
+                <small>أكبر متجر عالمي في شبكة باي</small>
             </div>
-            <div class="logo-circle"><i class="fa-solid fa-shield-halved"></i></div>
+        </div>
+
+        <div class="merchant-card">
+            <div class="merchant-img"><i class="fa fa-briefcase"></i></div>
+            <div style="flex:1;">
+                <strong>WorkforcePool</strong>
+                <div class="verified-tag"><i class="fa fa-check-circle"></i> مشروع رسمي</div>
+                <small>منصة العمل الحر وربح الباي</small>
+            </div>
         </div>
     </div>
 
-    <div class="search-container">
-        <div class="search-box">
-            <input type="text" placeholder="البحث عن تاجر أو موقع...">
-            <i class="fa fa-search"></i>
+    <div id="staking" class="page-section">
+        <div class="calc-box">
+            <h3>حاسبة أرباح الاستيكنج</h3>
+            <p>أدخل كمية الباي لمعرفة العائد</p>
+            <input type="number" id="piAmount" placeholder="كمية الباي (π)">
+            <button onclick="calc()" style="background:var(--main-purple); color:white; border:none; padding:10px 20px; border-radius:10px; width:80%;">احسب الآن</button>
+            <h4 id="result" style="margin-top:20px; color:var(--main-purple);"></h4>
         </div>
     </div>
 
-    <nav class="nav-grid">
-        <div class="nav-item"><i class="fa fa-bullhorn"></i>الإبلاغ</div>
-        <div class="nav-item"><i class="fa fa-calculator"></i>الاستيكنج</div>
-        <div class="nav-item"><i class="fa fa-chart-line"></i>الأعلى تقييماً</div>
+    <div id="report" class="page-section">
+        <h3>الإبلاغ عن تاجر نصاب</h3>
+        <textarea style="width:100%; height:100px; border-radius:10px; border:1px solid #ddd; padding:10px;" placeholder="اكتب تفاصيل الشكوى واسم التاجر..."></textarea>
+        <button onclick="alert('تم استلام البلاغ وسيتم فحصه')" style="background:red; color:white; border:none; padding:12px; border-radius:10px; width:100%; margin-top:10px;">إرسال البلاغ</button>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="showSection('report')"><i class="fa fa-bullhorn"></i>إبلاغ</div>
+        <div class="nav-item" onclick="showSection('staking')"><i class="fa fa-calculator"></i>استيكنج</div>
+        <div class="nav-item"><i class="fa fa-chart-line"></i>الأعلى</div>
         <div class="nav-item"><i class="fa fa-store"></i>التجار</div>
-        <div class="nav-item active" style="color: var(--main-purple);"><i class="fa fa-house"></i>الرئيسية</div>
-    </nav>
-
-    <div id="add-merchant-modal">
-        <div class="modal-content">
-            <button onclick="toggleModal()" style="float: left; border: none; background: none; font-size: 20px;">&times;</button>
-            <h3 style="text-align: center; color: var(--main-purple);">طلب إضافة تاجر جديد</h3>
-            <p style="font-size: 12px; text-align: center; color: #666;">سيتم مراجعة البيانات من قبل الإدارة قبل النشر</p>
-            
-            <form id="merchantForm">
-                <div class="form-group">
-                    <label>اسم المتجر / التاجر</label>
-                    <input type="text" id="mName" required>
-                </div>
-                <div class="form-group">
-                    <label>نوع النشاط (مطعم، تقني، إلخ)</label>
-                    <input type="text" id="mType" required>
-                </div>
-                <div class="form-group">
-                    <label>المدينة / العنوان</label>
-                    <input type="text" id="mCity" required>
-                </div>
-                <div class="form-group">
-                    <label>رابط صورة المحل (اختياري)</label>
-                    <input type="url" id="mImg" placeholder="https://...">
-                </div>
-                <button type="button" class="submit-btn" onclick="submitMerchant()">إرسال للطلب للمراجعة</button>
-            </form>
-        </div>
-    </div>
-
-    <div style="padding: 20px; text-align: center; color: #888;">
-        أهلاً بكِ يا شريكتي.. الأزرار الآن جاهزة للاختبار!
+        <div class="nav-item active" onclick="showSection('home')"><i class="fa fa-house"></i>الرئيسية</div>
     </div>
 
     <script>
         Pi.init({ version: "2.0", sandbox: false });
 
-        function toggleModal() {
-            const modal = document.getElementById('add-merchant-modal');
-            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        function showSection(id) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
         }
 
-        function submitMerchant() {
-            const name = document.getElementById('mName').value;
-            if(name) {
-                alert("شكراً لك! تم استلام طلب إضافة (" + name + "). سيقوم فريق ثقة ودليل الباي بمراجعته وإضافته فوراً.");
-                toggleModal();
-                document.getElementById('merchantForm').reset();
-            } else {
-                alert("يرجى ملء البيانات الأساسية");
-            }
+        function calc() {
+            let amount = document.getElementById('piAmount').value;
+            let profit = amount * 0.15; // مثال لربح 15%
+            document.getElementById('result').innerText = "الأرباح المتوقعة سنوياً: " + profit.toFixed(2) + " π";
         }
     </script>
 </body>
-  </html>
+                </html>
