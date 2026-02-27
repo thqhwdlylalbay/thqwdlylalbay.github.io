@@ -7,74 +7,82 @@
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --p: #673ab7; --bg: #f4f7f6; --gold: #ffd700; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
-        .header { background: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .logo-box { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; transition: 0.3s; }
+        .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        /* إصلاح اللوجو الملكي */
+        .logo-box { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; background: #fff; }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
-        .section { display: none; padding: 20px; animation: fadeIn 0.4s; }
+
+        .section { display: none; padding: 20px; animation: fadeIn 0.3s; }
         .section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-right: 5px solid var(--p); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-right: 5px solid var(--p); }
         .btn-v { background: var(--p); color: #fff; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
-        .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
+
+        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #ddd; padding: 12px 0; }
+        .f-item { flex: 1; text-align: center; color: #888; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
-        .f-item i { display: block; font-size: 20px; margin-bottom: 4px; }
-        input, textarea, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; outline: none; box-sizing: border-box; }
+        .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
+        
+        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <div>
-            <button onclick="toggleL()" style="border:none; background:#f0ebf8; border-radius:50%; width:40px; height:40px;"><i class="fa fa-globe" style="color:var(--p)"></i></button>
-            <button onclick="go('add')" style="border:none; background:#f0ebf8; border-radius:50%; width:40px; height:40px; color:var(--p); margin-right:5px;"><i class="fa fa-plus"></i></button>
+            <button onclick="toggleL()" style="border:none; background:#f0ebf8; border-radius:50%; width:38px; height:38px;"><i class="fa fa-globe" style="color:var(--p)"></i></button>
+            <button onclick="go('add')" style="border:none; background:#f0ebf8; border-radius:50%; width:38px; height:38px; color:var(--p); margin-right:5px;"><i class="fa fa-plus"></i></button>
         </div>
         <div style="text-align:right">
-            <b id="m-title" style="font-size: 18px;">ثقة ودليل الباي</b><br>
-            <small id="s-title" style="color:#888">دليل موثق لمجتمع Pi</small>
+            <b id="t-main">ثقة ودليل الباي</b><br>
+            <small id="t-sub" style="color:#777">دليل موثق لمجتمع Pi</small>
         </div>
         <div class="logo-box">
-            <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" alt="Logo" onerror="this.src='https://api.dicebear.com/7.x/initials/svg?seed=Pi&backgroundColor=673ab7'">
+            <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" onerror="this.src='https://via.placeholder.com/50/673ab7/ffffff?text=Pi'">
         </div>
     </div>
 
     <div id="home" class="section active">
-        <h3 id="h-h">آخر الأخبار</h3>
-        <div class="card" style="border-right-color: #2ecc71;">
-            <strong>مرحباً بكِ في ثقة</strong>
-            <p style="font-size: 14px; color: #666;">التطبيق الآن جاهز للاختبار وتجربة الأزرار.</p>
+        <h3 id="h-h">تجار الماينت المعتمدين</h3>
+        <div class="card">
+            <strong>Pi Chain Mall</strong>
+            <p style="color:green; font-size: 13px;"><i class="fa fa-check-circle"></i> مشروع رسمي في شبكة باي</p>
+            <button class="btn-v" onclick="alert('تفاصيل المتجر قريباً')">عرض التفاصيل</button>
         </div>
     </div>
 
     <div id="merchants" class="section">
-        <h3 id="m-h">التجار المعتمدين</h3>
+        <h3 id="m-h">قائمة التجار الموثوقين</h3>
         <div class="card">
-            <strong>Pi Chain Mall</strong>
-            <div style="color:var(--gold); margin: 5px 0;"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-            <button class="btn-v" onclick="alert('قريباً')">عرض التفاصيل</button>
+            <strong>WorkforcePool</strong>
+            <p style="font-size: 13px; color: #666;">منصة العمل الحر وربح الباي</p>
+            <button class="btn-v" onclick="alert('قريباً')">زيارة المنصة</button>
         </div>
     </div>
 
     <div id="stake" class="section">
-        <h3 id="st-h">حاسبة الاستيكنج</h3>
-        <input type="number" id="p-val" placeholder="كمية π">
-        <button class="btn-v" onclick="calc()">احسب الربح</button>
-        <div id="p-res" style="text-align:center; margin-top:15px; font-weight:bold; color:var(--p);"></div>
+        <h3 id="s-h">حاسبة الاستيكنج</h3>
+        <input type="number" id="piVal" placeholder="أدخل كمية الباي π">
+        <button class="btn-v" onclick="calc()">احسب الأرباح</button>
+        <div id="res" style="text-align:center; margin-top:15px; font-weight:bold; color:var(--p); font-size: 20px;"></div>
     </div>
 
     <div id="report" class="section">
         <h3 id="r-h" style="color:red">إبلاغ عن نصاب</h3>
-        <textarea placeholder="تفاصيل البلاغ..."></textarea>
-        <button class="btn-v" style="background:#e74c3c" onclick="alert('تم الاستلام')">إرسال</button>
+        <textarea placeholder="اكتب تفاصيل الإبلاغ..."></textarea>
+        <button class="btn-v" style="background:red" onclick="alert('تم الإرسال')">إرسال البلاغ</button>
     </div>
 
     <div id="add" class="section">
-        <h3 id="a-h">إضافة متجرك</h3>
-        <input type="text" placeholder="اسم المتجر">
-        <select><option>مجال المتجر</option><option>خدمات</option><option>سلع</option></select>
-        <button class="btn-v">تقديم الطلب</button>
+        <h3 id="a-h">إضافة متجرك الخاص</h3>
+        <input type="text" id="p1" placeholder="اسم المحل">
+        <select><option>اختر المجال</option><option>تجارة</option><option>خدمات</option></select>
+        <input type="text" id="p2" placeholder="المدينة / الدولة">
+        <button class="btn-v" onclick="alert('تم استلام طلبك')">إرسال الطلب</button>
     </div>
 
     <div class="footer">
@@ -91,22 +99,29 @@
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
             if(el) el.classList.add('active');
         }
-        let l = 'ar';
+
+        let lang = 'ar';
         function toggleL() {
-            l = (l === 'ar') ? 'en' : 'ar';
-            document.dir = (l === 'ar') ? 'rtl' : 'ltr';
-            const t = {
-                ar: { m: 'ثقة ودليل الباي', n1:'إبلاغ', n2:'استيكنج', n3:'التجار', n4:'الرئيسية' },
-                en: { m: 'Trust Pi Guide', n1:'Report', n2:'Staking', n3:'Merchants', n4:'Home' }
+            lang = (lang === 'ar') ? 'en' : 'ar';
+            document.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            const tx = {
+                ar: { t1: 'ثقة ودليل الباي', n1: 'إبلاغ', n2: 'استيكنج', n3: 'التجار', n4: 'الرئيسية', p1: 'اسم المحل', p2: 'المدينة' },
+                en: { t1: 'Trust Pi Guide', n1: 'Report', n2: 'Staking', n3: 'Stores', n4: 'Home', p1: 'Store Name', p2: 'City/Country' }
             };
-            document.getElementById('m-title').innerText = t[l].m;
-            document.getElementById('n1').innerText = t[l].n1; document.getElementById('n2').innerText = t[l].n2;
-            document.getElementById('n3').innerText = t[l].n3; document.getElementById('n4').innerText = t[l].n4;
+            document.getElementById('t-main').innerText = tx[lang].t1;
+            document.getElementById('n1').innerText = tx[lang].n1;
+            document.getElementById('n2').innerText = tx[lang].n2;
+            document.getElementById('n3').innerText = tx[lang].n3;
+            document.getElementById('n4').innerText = tx[lang].n4;
+            document.getElementById('p1').placeholder = tx[lang].p1;
+            document.getElementById('p2').placeholder = tx[lang].p2;
         }
+
         function calc() {
-            let v = document.getElementById('p-val').value;
-            if(v) document.getElementById('p-res').innerText = "العائد المتوقع: " + (v * 0.12).toFixed(2) + " π";
+            let v = document.getElementById('piVal').value;
+            if(v) document.getElementById('res').innerText = (v * 0.12).toFixed(2) + " π";
         }
+
         Pi.init({ version: "2.0", sandbox: false });
     </script>
 </body>
