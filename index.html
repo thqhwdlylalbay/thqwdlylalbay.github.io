@@ -8,26 +8,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --p: #673ab7; --bg: #f4f7f6; --gold: #ffd700; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
-        
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
         .header { background: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .logo-box { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--gold); background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .logo-box img { width: 90%; height: 90%; object-fit: contain; }
-
+        .logo-box { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .logo-box img { width: 100%; height: 100%; object-fit: cover; }
         .section { display: none; padding: 20px; animation: fadeIn 0.4s; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-right: 5px solid var(--p); position: relative; }
-        .stars { color: var(--gold); font-size: 14px; margin-top: 5px; }
-        .btn-v { background: var(--p); color: #fff; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
-        
+        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-right: 5px solid var(--p); }
+        .btn-v { background: var(--p); color: #fff; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; }
         .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
-        .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; transition: 0.3s; }
+        .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 20px; margin-bottom: 4px; }
-
-        input, textarea, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; outline: none; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; outline: none; box-sizing: border-box; }
     </style>
 </head>
 <body>
@@ -42,56 +36,45 @@
             <small id="s-title" style="color:#888">دليل موثق لمجتمع Pi</small>
         </div>
         <div class="logo-box">
-            <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" alt="Logo" onerror="this.src='https://via.placeholder.com/50/673ab7/ffffff?text=Pi'">
+            <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" alt="Logo" onerror="this.src='https://api.dicebear.com/7.x/initials/svg?seed=Pi&backgroundColor=673ab7'">
         </div>
     </div>
 
     <div id="home" class="section active">
-        <h3 id="h-h">آخر الأخبار والتحديثات</h3>
+        <h3 id="h-h">آخر الأخبار</h3>
         <div class="card" style="border-right-color: #2ecc71;">
-            <strong>نظام التوثيق الجديد</strong>
-            <p style="font-size: 14px; color: #666;">تم تفعيل مراجعة التجار يدوياً لضمان أعلى مستويات الأمان.</p>
+            <strong>مرحباً بكِ في ثقة</strong>
+            <p style="font-size: 14px; color: #666;">التطبيق الآن جاهز للاختبار وتجربة الأزرار.</p>
         </div>
     </div>
 
     <div id="merchants" class="section">
         <h3 id="m-h">التجار المعتمدين</h3>
         <div class="card">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <div>
-                    <strong>Pi Chain Mall</strong>
-                    <div class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> (4.9)</div>
-                    <p style="font-size:12px; color:green; margin:5px 0;">موثق من النظام الرسمي</p>
-                </div>
-                <i class="fa fa-shopping-bag" style="font-size:24px; color:var(--p)"></i>
-            </div>
-            <button class="btn-v" onclick="alert('سيتم فتح الرابط قريباً')">زيارة المتجر</button>
+            <strong>Pi Chain Mall</strong>
+            <div style="color:var(--gold); margin: 5px 0;"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+            <button class="btn-v" onclick="alert('قريباً')">عرض التفاصيل</button>
         </div>
     </div>
 
     <div id="stake" class="section">
-        <h3 id="st-h">حاسبة الاستيكنج الذكية</h3>
-        <p style="font-size:13px; color:#777;">احسب أرباحك المتوقعة عند المساهمة في تأمين الشبكة.</p>
-        <input type="number" id="p-val" placeholder="أدخل كمية π">
-        <button class="btn-v" onclick="calc()">احسب الآن</button>
-        <div id="p-res" style="text-align:center; margin-top:20px; font-size:22px; color:var(--p); font-weight:bold;"></div>
+        <h3 id="st-h">حاسبة الاستيكنج</h3>
+        <input type="number" id="p-val" placeholder="كمية π">
+        <button class="btn-v" onclick="calc()">احسب الربح</button>
+        <div id="p-res" style="text-align:center; margin-top:15px; font-weight:bold; color:var(--p);"></div>
     </div>
 
     <div id="report" class="section">
-        <h3 id="r-h" style="color:red">مركز البلاغات</h3>
-        <textarea id="r-msg" placeholder="صف المشكلة أو بيانات النصاب هنا..."></textarea>
-        <button class="btn-v" style="background:#e74c3c" onclick="alert('تم استلام بلاغك بنجاح وسيتم الفحص')">إرسال البلاغ</button>
+        <h3 id="r-h" style="color:red">إبلاغ عن نصاب</h3>
+        <textarea placeholder="تفاصيل البلاغ..."></textarea>
+        <button class="btn-v" style="background:#e74c3c" onclick="alert('تم الاستلام')">إرسال</button>
     </div>
 
     <div id="add" class="section">
-        <h3 id="a-h">تسجيل متجر جديد</h3>
-        <input type="text" id="storeName" placeholder="اسم المتجر">
-        <select>
-            <option>تجارة إلكترونية</option>
-            <option>خدمات عامة</option>
-            <option>أغذية ومشروبات</option>
-        </select>
-        <button class="btn-v" onclick="alert('تم إرسال طلبك للمراجعة')">تقديم الطلب</button>
+        <h3 id="a-h">إضافة متجرك</h3>
+        <input type="text" placeholder="اسم المتجر">
+        <select><option>مجال المتجر</option><option>خدمات</option><option>سلع</option></select>
+        <button class="btn-v">تقديم الطلب</button>
     </div>
 
     <div class="footer">
@@ -108,33 +91,23 @@
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
             if(el) el.classList.add('active');
         }
-
         let l = 'ar';
         function toggleL() {
             l = (l === 'ar') ? 'en' : 'ar';
             document.dir = (l === 'ar') ? 'rtl' : 'ltr';
             const t = {
-                ar: { m: 'ثقة ودليل الباي', s: 'دليل موثق لمجتمع Pi', h: 'آخر الأخبار', mh: 'التجار المعتمدين', st: 'حاسبة الاستيكنج', r: 'مركز البلاغات', n1:'إبلاغ', n2:'استيكنج', n3:'التجار', n4:'الرئيسية' },
-                en: { m: 'Trust & Pi Guide', s: 'Verified Community Guide', h: 'Latest News', mh: 'Verified Merchants', st: 'Staking Calc', r: 'Report Center', n1:'Report', n2:'Staking', n3:'Merchants', n4:'Home' }
+                ar: { m: 'ثقة ودليل الباي', n1:'إبلاغ', n2:'استيكنج', n3:'التجار', n4:'الرئيسية' },
+                en: { m: 'Trust Pi Guide', n1:'Report', n2:'Staking', n3:'Merchants', n4:'Home' }
             };
             document.getElementById('m-title').innerText = t[l].m;
-            document.getElementById('s-title').innerText = t[l].s;
-            document.getElementById('h-h').innerText = t[l].h;
-            document.getElementById('m-h').innerText = t[l].mh;
-            document.getElementById('st-h').innerText = t[l].st;
-            document.getElementById('r-h').innerText = t[l].r;
-            document.getElementById('n1').innerText = t[l].n1;
-            document.getElementById('n2').innerText = t[l].n2;
-            document.getElementById('n3').innerText = t[l].n3;
-            document.getElementById('n4').innerText = t[l].n4;
+            document.getElementById('n1').innerText = t[l].n1; document.getElementById('n2').innerText = t[l].n2;
+            document.getElementById('n3').innerText = t[l].n3; document.getElementById('n4').innerText = t[l].n4;
         }
-
         function calc() {
             let v = document.getElementById('p-val').value;
-            if(v) document.getElementById('p-res').innerText = "الربح السنوي: " + (v * 0.12).toFixed(2) + " π";
+            if(v) document.getElementById('p-res').innerText = "العائد المتوقع: " + (v * 0.12).toFixed(2) + " π";
         }
-
         Pi.init({ version: "2.0", sandbox: false });
     </script>
 </body>
-                </html>
+            </html>
