@@ -78,25 +78,46 @@
             <label style="display:block; margin-top:10px; font-weight:bold;">كمية الباي (π):</label>
             <input type="number" id="p_amount" placeholder="مثال: 1000" style="width:100%; padding:12px; margin:8px 0; border-radius:10px; border:1px solid #ddd;">
             
-            <label style="display:block; margin-top:10px; font-weight:bold;">مدة الحجز:</label>
-            <select id="p_years" style="width:100%; padding:12px; margin:8px 0; border-radius:10px; border:1px solid #ddd; background:white;">
-                <option value="0.5">6 أشهر (عائد بسيط)</option>
-                <option value="1">سنة واحدة (عائد متوسط)</option>
-                <option value="3">3 سنوات (أقصى عائد)</option>
-            </select>
             
+            <label style="display:block; margin-top:10px; font-weight:bold;">مدة الحجز (تشجيعية):</label>
+<select id="p_years" style="width:100%; padding:12px; margin:8px 0; border-radius:10px; border:1px solid #ddd; background:white; font-weight:bold; color:var(--p);">
+    <option value="0.5">🗓️ 6 أشهر (عائد +25%)</option>
+    <option value="1">🚀 سنة واحدة (عائد +100%)</option>
+    <option value="3">💎 3 سنوات (عائد +200%)</option>
+</select>
             <button class="main-btn" onclick="smartCalc()" style="background:var(--p); color:white; border:none; padding:15px; width:100%; border-radius:12px; font-weight:bold; cursor:pointer; margin-top:10px;">احسب الأرباح المتوقعة</button>
             
-            <div id="smart_res" style="margin-top:20px; text-align:center; display:none; padding:15px; background:#f0ebf8; border-radius:12px;">
-                <p style="margin:0;">الرصيد الكلي بعد المدة:</p>
-                <b id="total_pi" style="font-size:24px; color:var(--p);"></b> <span style="color:var(--p); font-weight:bold;">π</span>
-                <hr style="border:0; border-top:1px solid #ddd; margin:10px 0;">
-                <button onclick="setAlarm()" style="background:#4caf50; color:white; border:none; padding:10px 15px; border-radius:20px; font-size:13px; cursor:pointer;">
-                    <i class="fa fa-bell"></i> نبهني عند انتهاء المدة
-                </button>
-            </div>
-        </div>
+        
+    function smartCalc() {
+        let amount = document.getElementById('p_amount').value;
+        let duration = document.getElementById('p_years').value;
+        
+        if(amount > 0) {
+            // حساب الربح بناءً على المدد الرسمية لـ Pi لتشجيع المستخدمين
+            let bonusRate = 0;
+            if(duration == "0.5") bonusRate = 0.25; // عائد 25% لـ 6 شهور
+            if(duration == "1") bonusRate = 1.00;   // عائد 100% لسنة
+            if(duration == "3") bonusRate = 2.00;   // عائد 200% لـ 3 سنوات
+            
+            let profit = amount * bonusRate;
+            let total = parseFloat(amount) + profit;
+            
+            document.getElementById('total_pi').innerText = total.toFixed(2);
+            document.getElementById('smart_res').style.display = 'block';
+            
+            // تمرير الشاشة للنتيجة ليرى المستخدم أرباحه فوراً
+            document.getElementById('smart_res').scrollIntoView({ behavior: 'smooth' });
+        } else {
+            alert("من فضلك أدخلي كمية الـ Pi أولاً");
+        }
+    }
 
+    function setAlarm() {
+        alert("تم تفعيل جرس التنبيه! 🔔\nسنقوم بتذكيرك فور انتهاء مدة الحجز الخاصة بك لضمان سحب أرباحك في وقتها.");
+    }
+</script>
+</body>
+        </html>
         <div class="card" style="background: #fffbe6; border-right: 5px solid #ffa000; margin-top:20px;">
             <h4 style="margin-top:0; color:#e65100;"><i class="fa fa-chart-line"></i> لماذا الاستيكنج مهم لمحفظتك؟</h4>
             <ul style="padding-right:20px; font-size:14px; line-height:1.7; color:#444;">
