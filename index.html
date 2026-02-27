@@ -2,39 +2,27 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ثقة ودليل الباي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; }
-        * { box-sizing: border-box; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; width: 100%; overflow-x: hidden; }
-        
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        
-        /* الأيقونات العلوية (اللغات والإضافة) */
         .head-left { display: flex; gap: 10px; }
-        .head-btn { background: #f0ebf8; border: none; width: 40px; height: 40px; border-radius: 50%; color: var(--p); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-
-        /* اللوجو والعناوين */
-        .head-right { display: flex; align-items: center; gap: 12px; }
-        .logo-box { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; background: #fff; display: flex; align-items: center; justify-content: center; }
+        .head-btn { background: #f0ebf8; border: none; width: 40px; height: 40px; border-radius: 50%; color: var(--p); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .logo-box { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
-
-        .section { display: none; padding: 20px; width: 100%; animation: fadeIn 0.3s; }
+        .section { display: none; padding: 20px; animation: fadeIn 0.3s; }
         .section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-right: 6px solid var(--p); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-right: 5px solid var(--p); }
         .main-btn { background: var(--p); color: #fff; border: none; padding: 14px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-
-        /* القائمة السفلية */
-        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; box-shadow: 0 -2px 15px rgba(0,0,0,0.05); }
-        .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 12px; }
+        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; }
+        .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
-        .f-item i { display: block; font-size: 22px; margin-bottom: 5px; }
-        
-        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; }
+        .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
@@ -44,132 +32,78 @@
             <button class="head-btn" onclick="toggleLang()"><i class="fa fa-globe"></i></button>
             <button class="head-btn" onclick="go('add')"><i class="fa fa-plus"></i></button>
         </div>
-        <div class="head-right">
+        <div class="head-right" style="display:flex; align-items:center; gap:10px;">
             <div style="text-align: right;">
-                <b id="main-t" style="font-size: 18px; display: block;">ثقة ودليل الباي</b>
-                <small id="sub-t" style="color: #888;">دليل موثق لمجتمع Pi</small>
+                <b style="font-size: 16px;">ثقة ودليل الباي</b><br>
+                <small style="color: #888;">دليل موثق لمجتمع Pi</small>
             </div>
             <div class="logo-box">
-                <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" alt="Logo" onerror="this.src='https://api.dicebear.com/7.x/initials/svg?seed=Pi&backgroundColor=673ab7'">
+                <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" onerror="this.style.display='none'">PI
             </div>
         </div>
     </div>
 
     <div id="home" class="section active">
-        <h3 id="h-title">أحدث المحلات المعتمدة</h3>
+        <h3 style="text-align:center;">تجار Ecosystem المعتمدين</h3>
         <div class="card">
             <strong>Pi Chain Mall</strong>
-            <p style="color: green; font-size: 14px;"><i class="fa fa-check-circle"></i> مشروع رسمي في Ecosystem</p>
+            <p style="color: green;"><i class="fa fa-check-circle"></i> مشروع رسمي</p>
             <button class="main-btn">عرض التفاصيل</button>
         </div>
     </div>
 
     <div id="merchants" class="section">
-        <h3 id="m-title">قائمة التجار الموثوقين</h3>
-        <div class="card">جاري جلب بيانات التجار...</div>
+        <h3>قائمة التجار الموثوقين</h3>
+        <div class="card">جاري تحديث البيانات...</div>
     </div>
 
-        <div id="stake" class="section">
-        <h3 style="color:var(--p); text-align:center;"><i class="fa fa-coins"></i> حاسبة الاستيكنج الذكية</h3>
-        
-        <div class="card" style="border-right: 5px solid #ffd700; background: #fff;">
-            <p style="font-size: 14px; color: #555;">أدخل بيانات حجز عملاتك لحساب المكافآت:</p>
-            
-            <label style="display:block; margin-top:10px; font-weight:bold;">كمية الباي (π):</label>
-            <input type="number" id="p_amount" placeholder="مثال: 1000" style="width:100%; padding:12px; margin:8px 0; border-radius:10px; border:1px solid #ddd;">
-            
-            
-            <label style="display:block; margin-top:10px; font-weight:bold;">مدة الحجز (تشجيعية):</label>
-<select id="p_years" style="width:100%; padding:12px; margin:8px 0; border-radius:10px; border:1px solid #ddd; background:white; font-weight:bold; color:var(--p);">
-    <option value="0.5">🗓️ 6 أشهر (عائد +25%)</option>
-    <option value="1">🚀 سنة واحدة (عائد +100%)</option>
-    <option value="3">💎 3 سنوات (عائد +200%)</option>
-</select>
-        
-           function smartCalc() {
-        let amount = document.getElementById('p_amount').value;
-        let duration = document.getElementById('p_years').value;
-        
-        if(amount > 0) {
-            // حساب الربح بناءً على المدد الرسمية لـ Pi لتشجيع المستخدمين
-            let bonusRate = 0;
-            if(duration == "0.5") bonusRate = 0.25; // عائد 25% لـ 6 شهور
-            if(duration == "1") bonusRate = 1.00;   // عائد 100% لسنة
-            if(duration == "3") bonusRate = 2.00;   // عائد 200% لـ 3 سنوات
-            
-            let profit = amount * bonusRate;
-            let total = parseFloat(amount) + profit;
-            
-            document.getElementById('total_pi').innerText = total.toFixed(2);
-            document.getElementById('smart_res').style.display = 'block';
-            
-            // تمرير الشاشة للنتيجة ليرى المستخدم أرباحه فوراً
-            document.getElementById('smart_res').scrollIntoView({ behavior: 'smooth' });
-        } else {
-            alert("من فضلك أدخلي كمية الـ Pi أولاً");
-        }
-    }
-
-    function setAlarm() {
-        alert("تم تفعيل جرس التنبيه! 🔔\nسنقوم بتذكيرك فور انتهاء مدة الحجز الخاصة بك لضمان سحب أرباحك في وقتها.");
-    }
-</script>
-</body>
-        </html>
-        <div class="card" style="background: #fffbe6; border-right: 5px solid #ffa000; margin-top:20px;">
-            <h4 style="margin-top:0; color:#e65100;"><i class="fa fa-chart-line"></i> لماذا الاستيكنج مهم لمحفظتك؟</h4>
-            <ul style="padding-right:20px; font-size:14px; line-height:1.7; color:#444;">
-                <li><b>مكافآت التعدين:</b> تزيد سرعة تعدينك بنسبة قد تصل لـ 200% حسب مدة الحجز.</li>
-                <li><b>حماية العملة:</b> الحجز يقلل العرض المتاح، مما يساعد في استقرار سعر Pi مستقبلاً.</li>
-                <li><b>الانضباط المالي:</b> يمنعك من بيع عملاتك في البداية بأسعار رخيصة قبل وصولها لقيمتها الحقيقية.</li>
+    <div id="stake" class="section">
+        <h3 style="text-align:center; color:var(--p);"><i class="fa fa-coins"></i> حاسبة الاستيكنج الذكية</h3>
+        <div class="card" style="border-right-color: gold;">
+            <label>كمية الباي (π):</label>
+            <input type="number" id="p_amount" placeholder="مثال: 1000">
+            <label>مدة الحجز (للتشجيع):</label>
+            <select id="p_years">
+                <option value="0.5">🗓️ 6 أشهر (عائد +25%)</option>
+                <option value="1">🚀 سنة واحدة (عائد +100%)</option>
+                <option value="3">💎 3 سنوات (عائد +200%)</option>
+            </select>
+            <button class="main-btn" onclick="smartCalc()">احسب الأرباح</button>
+            <div id="smart_res" style="margin-top:15px; text-align:center; display:none; padding:15px; background:#f0ebf8; border-radius:12px;">
+                <p>الرصيد المتوقع بعد المدة:</p>
+                <b id="total_pi" style="font-size:24px; color:var(--p);"></b> <span style="color:var(--p);">π</span><br>
+                <button class="main-btn" style="background:#4caf50; width:auto; padding:8px 20px;" onclick="setAlarm()">
+                    <i class="fa fa-bell"></i> نبهني عند الانتهاء
+                </button>
+            </div>
+        </div>
+        <div class="card" style="background:#fffbe6; border-right-color:#ffa000;">
+            <h4 style="margin:0;"><i class="fa fa-lightbulb"></i> لماذا الاستيكنج مهم؟</h4>
+            <ul style="padding-right:20px; font-size:13px; line-height:1.6;">
+                <li>زيادة سرعة التعدين بنسبة تصل لـ 200%.</li>
+                <li>دعم استقرار سعر العملة في السوق.</li>
+                <li>حماية رصيدك من الصرف المتسرع.</li>
             </ul>
-            <p style="font-size:12px; color:#888; font-style:italic; text-align:center;">"ثقة ودليل الباي - رفيقك في رحلة الماينت"</p>
         </div>
     </div>
-    <script>
-    // ضعي هذه الدالة (Function) داخل منطقة الـ <script> في أسفل الملف
-    function smartCalc() {
-        let amount = document.getElementById('p_amount').value;
-        let years = document.getElementById('p_years').value;
-        
-        if(amount > 0) {
-            // معادلة تقديرية للأرباح بناءً على المدة
-            let multiplier = (years == 3) ? 1.5 : (years == 1 ? 1.2 : 1.05);
-            let total = amount * multiplier;
-            
-            document.getElementById('total_pi').innerText = total.toFixed(2);
-            document.getElementById('smart_res').style.display = 'block';
-            
-            // تمرير الشاشة للنتيجة بسلاسة
-            document.getElementById('smart_res').scrollIntoView({ behavior: 'smooth' });
-        } else {
-            alert("يرجى إدخال كمية Pi أولاً");
-        }
-    }
-
-    function setAlarm() {
-        alert("تم تفعيل جرس التنبيه! 🔔\nسنقوم بإرسال إشعار تذكيري لك فور انتهاء مدة الحجز لضمان متابعة أرباحك.");
-    }
-    </script>
 
     <div id="report" class="section">
-        <h3 id="r-title" style="color: red;">إبلاغ عن نصاب</h3>
-        <textarea placeholder="اكتب تفاصيل الإبلاغ هنا..."></textarea>
-        <button class="main-btn" style="background: #e74c3c;">إرسال البلاغ</button>
+        <h3 style="color:red;">إبلاغ عن محتال</h3>
+        <textarea placeholder="ضع رابط الحساب أو تفاصيل النصاب..."></textarea>
+        <button class="main-btn" style="background:red;">إرسال بلاغ</button>
     </div>
 
     <div id="add" class="section">
-        <h3 id="a-title">إضافة متجرك الخاص</h3>
+        <h3>إضافة متجر جديد</h3>
         <input type="text" placeholder="اسم المتجر">
-        <input type="text" placeholder="المدينة">
         <button class="main-btn">تقديم الطلب</button>
     </div>
 
     <div class="footer">
-        <div class="f-item" onclick="go('report', this)"><i class="fa fa-bullhorn"></i><span id="n1">إبلاغ</span></div>
-        <div class="f-item" onclick="go('stake', this)"><i class="fa fa-calculator"></i><span id="n2">استيكنج</span></div>
-        <div class="f-item" onclick="go('merchants', this)"><i class="fa fa-store"></i><span id="n3">التجار</span></div>
-        <div class="f-item active" onclick="go('home', this)"><i class="fa fa-house"></i><span id="n4">الرئيسية</span></div>
+        <div class="f-item" onclick="go('report', this)"><i class="fa fa-bullhorn"></i><span>إبلاغ</span></div>
+        <div class="f-item" onclick="go('stake', this)"><i class="fa fa-calculator"></i><span>استيكنج</span></div>
+        <div class="f-item" onclick="go('merchants', this)"><i class="fa fa-store"></i><span>التجار</span></div>
+        <div class="f-item active" onclick="go('home', this)"><i class="fa fa-house"></i><span>الرئيسية</span></div>
     </div>
 
     <script>
@@ -179,24 +113,18 @@
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
             if(el) el.classList.add('active');
         }
-
-        function calculate() {
-            let v = document.getElementById('piInput').value;
-            if(v) document.getElementById('res').innerText = "العائد المتوقع: " + (v * 0.12).toFixed(2) + " π";
+        function smartCalc() {
+            let amount = document.getElementById('p_amount').value;
+            let duration = document.getElementById('p_years').value;
+            if(amount > 0) {
+                let bonus = (duration == "0.5") ? 0.25 : (duration == "1" ? 1.0 : 2.0);
+                let total = parseFloat(amount) + (amount * bonus);
+                document.getElementById('total_pi').innerText = total.toFixed(2);
+                document.getElementById('smart_res').style.display = 'block';
+            }
         }
-
-        let isAr = true;
-        function toggleLang() {
-            isAr = !isAr;
-            document.dir = isAr ? 'rtl' : 'ltr';
-            document.getElementById('main-t').innerText = isAr ? 'ثقة ودليل الباي' : 'Trust Pi Guide';
-            document.getElementById('n1').innerText = isAr ? 'إبلاغ' : 'Report';
-            document.getElementById('n2').innerText = isAr ? 'استيكنج' : 'Staking';
-            document.getElementById('n3').innerText = isAr ? 'التجار' : 'Stores';
-            document.getElementById('n4').innerText = isAr ? 'الرئيسية' : 'Home';
-            // تنبيه بسيط للتأكد من العمل
-            console.log("Language changed to: " + (isAr ? 'Arabic' : 'English'));
-        }
+        function setAlarm() { alert("تم تفعيل جرس التنبيه بنجاح! 🔔"); }
+        function toggleLang() { alert("سيتم إضافة اللغات قريباً"); }
     </script>
 </body>
-            </html>
+</html>
