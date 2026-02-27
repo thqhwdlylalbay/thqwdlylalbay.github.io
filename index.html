@@ -6,76 +6,107 @@
     <title>ثقة ودليل الباي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --p: #673ab7; --bg: #f4f7f6; }
-        body { font-family: sans-serif; margin: 0; background: var(--bg); padding-bottom: 70px; }
-        .header { background: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .section { display: none; padding: 20px; }
+        :root { --p: #673ab7; --bg: #f4f7f6; --gold: #ffd700; }
+        body { font-family: sans-serif; margin: 0; background: var(--bg); padding-bottom: 80px; }
+        
+        /* هيدر يجمع بين اللوجو والأيقونات */
+        .header { background: #fff; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        
+        .header-right { display: flex; align-items: center; gap: 10px; }
+        .logo-circle { width: 45px; height: 45px; background: var(--p); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border: 2px solid var(--gold); overflow: hidden; }
+        .logo-circle img { width: 100%; height: 100%; object-fit: cover; }
+
+        .header-left { display: flex; gap: 8px; }
+        .head-btn { background: #f0ebf8; border: none; width: 38px; height: 38px; border-radius: 50%; color: var(--p); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        .section { display: none; padding: 20px; animation: fadeIn 0.3s; }
         .section.active { display: block; }
-        .card { background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 10px 0; }
-        .f-item { flex: 1; text-align: center; color: #888; cursor: pointer; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-right: 5px solid var(--p); }
+        
+        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 12px; }
         .f-item.active { color: var(--p); font-weight: bold; }
-        .f-item i { display: block; font-size: 20px; }
-        button { background: var(--p); color: #fff; border: none; padding: 12px; width: 100%; border-radius: 8px; cursor: pointer; }
+        .f-item i { display: block; font-size: 22px; margin-bottom: 3px; }
+        
+        button.main-btn { background: var(--p); color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <div style="width:45px; height:45px; background:var(--p); border-radius:50%; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:bold;">PI</div>
-        <div style="text-align:right"><b>ثقة ودليل الباي</b></div>
+        <div class="header-left">
+            <button class="head-btn" onclick="alert('Language: Arabic')"><i class="fa fa-globe"></i></button>
+            <button class="head-btn" onclick="go('add')"><i class="fa fa-plus"></i></button>
+        </div>
+        
+        <div class="header-right">
+            <div style="text-align: right; margin-right: 10px;">
+                <div style="font-weight: bold; color: #333;">ثقة ودليل الباي</div>
+                <div style="font-size: 10px; color: #888;">دليل موثق لمجتمع Pi</div>
+            </div>
+            <div class="logo-circle">
+                <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" onerror="this.innerHTML='PI'">
+            </div>
+        </div>
     </div>
 
     <div id="home" class="section active">
-        <h3>تجار Ecosystem المعتمدين</h3>
+        <h3 style="text-align: center;">تجار Ecosystem المعتمدين</h3>
         <div class="card">
             <strong>Pi Chain Mall</strong>
-            <p style="color:green">✔ مشروع رسمي</p>
-            <button onclick="alert('سيتم فتح تفاصيل المتجر قريباً')">عرض التفاصيل</button>
+            <p style="color: green;"><i class="fa fa-check-circle"></i> مشروع رسمي (Mainnet)</p>
+            <button class="main-btn" onclick="alert('تفاصيل المتجر قريباً')">عرض التفاصيل</button>
         </div>
     </div>
 
     <div id="merchants" class="section">
         <h3>قائمة التجار</h3>
-        <p>جاري تحديث القائمة...</p>
+        <div class="card">جاري تحديث قاعدة البيانات...</div>
     </div>
 
     <div id="stake" class="section">
-        <h3>حاسبة الاستيكنج</h3>
-        <input type="number" id="piAmount" placeholder="أدخل كمية π" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px;">
-        <button onclick="calc()">احسب الربح</button>
-        <p id="res" style="text-align:center; font-weight:bold; color:var(--p); margin-top:10px;"></p>
+        <h3>حاسبة الاستيكنج الذكية</h3>
+        <p>أدخل الكمية لحساب العائد المتوقع:</p>
+        <input type="number" id="pi" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px;">
+        <button class="main-btn" onclick="calc()">احسب الآن</button>
+        <h4 id="res" style="text-align: center; color: var(--p);"></h4>
     </div>
 
     <div id="report" class="section">
         <h3>إبلاغ عن محتال</h3>
-        <textarea placeholder="تفاصيل البلاغ..." style="width:100%; height:100px; padding:10px; border-radius:8px; border:1px solid #ddd;"></textarea>
-        <button style="background:red; margin-top:10px;">إرسال بلاغ</button>
+        <p>ساعدنا في حماية المجتمع:</p>
+        <textarea placeholder="ضع رابط الحساب أو تفاصيل النصب..." style="width: 100%; height: 100px; border-radius: 8px; border: 1px solid #ddd; padding: 10px;"></textarea>
+        <button class="main-btn" style="background: #e91e63; margin-top: 10px;">إرسال البلاغ</button>
+    </div>
+
+    <div id="add" class="section">
+        <h3>إضافة متجرك</h3>
+        <p>سجل بياناتك ليتم مراجعتها واعتمادها:</p>
+        <input type="text" placeholder="اسم المحل">
+        <input type="text" placeholder="الدولة / المدينة">
+        <button class="main-btn">إرسال للطلب</button>
     </div>
 
     <div class="footer">
         <div class="f-item" onclick="go('report', this)"><i class="fa fa-bullhorn"></i><span>إبلاغ</span></div>
         <div class="f-item" onclick="go('stake', this)"><i class="fa fa-calculator"></i><span>استيكنج</span></div>
         <div class="f-item" onclick="go('merchants', this)"><i class="fa fa-store"></i><span>التجار</span></div>
-        <div class="f-item active" onclick="go('home', this)"><i class="fa fa-home"></i><span>الرئيسية</span></div>
+        <div class="f-item active" onclick="go('home', this)"><i class="fa fa-house"></i><span>الرئيسية</span></div>
     </div>
 
     <script>
-        // وظيفة التنقل بين الأزرار
         function go(id, el) {
-            // إخفاء كل الأقسام
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            // إظهار القسم المختار
             document.getElementById(id).classList.add('active');
-            // تغيير لون الأيقونة النشطة
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
-            el.classList.add('active');
+            if(el) el.classList.add('active');
         }
-
         function calc() {
-            let val = document.getElementById('piAmount').value;
-            if(val) document.getElementById('res').innerText = "الربح المتوقع: " + (val * 0.12).toFixed(2) + " π";
+            let v = document.getElementById('pi').value;
+            if(v) document.getElementById('res').innerText = "العائد المتوقع: " + (v * 0.12).toFixed(2) + " π";
         }
     </script>
 </body>
-                                                                </html>
+    </html>
