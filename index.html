@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; --wpp: #25d366; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; transition: 0.3s; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .head-left { display: flex; gap: 10px; }
         .head-btn { background: #f0ebf8; border: none; width: 40px; height: 40px; border-radius: 50%; color: var(--p); cursor: pointer; display: flex; align-items: center; justify-content: center; }
@@ -17,8 +17,7 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-right: 5px solid var(--p); }
         .main-btn { background: var(--p); color: #fff; border: none; padding: 14px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .wa-btn { background: var(--wpp); color: white; text-decoration: none; padding: 15px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; margin-top: 10px; transition: 0.3s; }
-        .wa-btn:active { transform: scale(0.95); }
+        .wa-btn { background: var(--wpp); color: white; text-decoration: none; padding: 15px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; margin-top: 10px; }
         .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
@@ -73,8 +72,8 @@
     <div id="report" class="section">
         <h3 id="r-title" style="color:red; text-align:center;">إبلاغ عن محتال</h3>
         <div class="card" style="text-align:center;">
-            <p id="r-desc">لحماية خصوصيتك، سيتم فتح محادثة مباشرة مع الإدارة لتقديم بلاغك بشكل سري وموثق.</p>
-            <a href="https://wa.me/201220469415?text=أريد_الإبلاغ_عن_محتال" class="wa-btn" id="r-btn">
+            <p id="r-desc">لحماية خصوصيتك، سيتم فتح محادثة آمنة مع الإدارة لتقديم بلاغك.</p>
+            <a href="https://wa.me/201220469415?text=أريد_الإبلاغ_عن_محتال" class="wa-btn">
                 <i class="fab fa-whatsapp"></i> <span id="r-txt">مراسلة قسم البلاغات</span>
             </a>
         </div>
@@ -83,8 +82,8 @@
     <div id="add" class="section">
         <h3 id="a-title" style="text-align:center;">إضافة متجر جديد</h3>
         <div class="card" style="text-align:center;">
-            <p id="a-desc">هل لديك متجر يقبل الباي؟ تواصل معنا لتصنيف متجرك ضمن القائمة الموثوقة لدينا.</p>
-            <a href="https://wa.me/201220469415?text=طلب_إضافة_متجر_جديد_للدليل" class="wa-btn" id="a-btn" style="background:var(--p);">
+            <p id="a-desc">تواصل معنا لتصنيف متجرك ضمن القائمة الموثوقة لدينا.</p>
+            <a href="https://wa.me/201220469415?text=طلب_إضافة_متجر_جديد_للدليل" class="wa-btn" style="background:var(--p);">
                 <i class="fab fa-whatsapp"></i> <span id="a-txt">تقديم طلب الإضافة</span>
             </a>
         </div>
@@ -92,7 +91,7 @@
 
     <div id="merchants" class="section">
         <h3 id="m-title">قائمة التجار الموثوقين</h3>
-        <div class="card">جاري تحديث القائمة بالتعاون مع المجتمع...</div>
+        <div class="card" id="m-wait">جاري تحديث القائمة بالتعاون مع المجتمع...</div>
     </div>
 
     <div class="footer">
@@ -116,18 +115,44 @@
             isAr = !isAr;
             document.dir = isAr ? 'rtl' : 'ltr';
             const d = {
-                ar: { title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", home: "الرئيسية", merch: "التجار", stake: "استيكنج", report: "إبلاغ", r_txt: "مراسلة قسم البلاغات", a_txt: "تقديم طلب الإضافة" },
-                en: { title: "Trust & Pi Guide", desc: "Verified Pi Guide", home: "Home", merch: "Stores", stake: "Staking", report: "Report", r_txt: "Contact Fraud Dept", a_txt: "Submit Store Request" }
+                ar: { 
+                    title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", home: "الرئيسية", merch: "التجار", stake: "استيكنج", report: "إبلاغ",
+                    h_title: "تجار Ecosystem المعتمدين", h_status: "مشروع رسمي موثق", h_welcome: "أهلاً بك في منصة ثقة لحماية رصيدك.",
+                    s_title: "حاسبة الاستيكنج الذكية", s_btn: "احسب الأرباح", s_res: "الرصيد المتوقع:",
+                    r_title: "إبلاغ عن محتال", r_desc: "لحماية خصوصيتك، سيتم فتح محادثة آمنة مع الإدارة لتقديم بلاغك.", r_txt: "مراسلة قسم البلاغات",
+                    a_title: "إضافة متجر جديد", a_desc: "تواصل معنا لتصنيف متجرك ضمن القائمة الموثوقة لدينا.", a_txt: "تقديم طلب الإضافة", m_title: "قائمة التجار الموثوقين", m_wait: "جاري تحديث القائمة..."
+                },
+                en: { 
+                    title: "Trust & Pi Guide", desc: "Verified Pi Guide", home: "Home", merch: "Stores", stake: "Staking", report: "Report",
+                    h_title: "Verified Ecosystem Stores", h_status: "Official Verified Project", h_welcome: "Welcome to Trust platform to protect your balance.",
+                    s_title: "Smart Staking Calculator", s_btn: "Calculate Profits", s_res: "Expected Balance:",
+                    r_title: "Report a Fraudster", r_desc: "For your privacy, a secure chat will open with the admin.", r_txt: "Contact Fraud Dept",
+                    a_title: "Add New Store", a_desc: "Contact us to list your store in our trusted directory.", a_txt: "Submit Store Request", m_title: "Verified Stores List", m_wait: "Updating list soon..."
+                }
             };
             const c = isAr ? d.ar : d.en;
+            
+            // تطبيق الترجمة الشاملة
             document.getElementById('app-title').innerText = c.title;
             document.getElementById('app-desc').innerText = c.desc;
             document.getElementById('n-home').innerText = c.home;
             document.getElementById('n-merch').innerText = c.merch;
             document.getElementById('n-stake').innerText = c.stake;
             document.getElementById('n-report').innerText = c.report;
+            document.getElementById('h-title').innerText = c.h_title;
+            document.getElementById('h-status').innerText = c.h_status;
+            document.getElementById('h-welcome').innerText = c.h_welcome;
+            document.getElementById('s-title').innerText = c.s_title;
+            document.getElementById('s-btn').innerText = c.s_btn;
+            document.getElementById('s-res-text').innerText = c.s_res;
+            document.getElementById('r-title').innerText = c.r_title;
+            document.getElementById('r-desc').innerText = c.r_desc;
             document.getElementById('r-txt').innerText = c.r_txt;
+            document.getElementById('a-title').innerText = c.a_title;
+            document.getElementById('a-desc').innerText = c.a_desc;
             document.getElementById('a-txt').innerText = c.a_txt;
+            document.getElementById('m-title').innerText = c.m_title;
+            document.getElementById('m-wait').innerText = c.m_wait;
         }
 
         function smartCalc() {
