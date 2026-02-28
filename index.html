@@ -6,23 +6,24 @@
     <title>ثقة ودليل الباي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; transition: all 0.3s; }
+        :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; --wpp: #25d366; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .head-left { display: flex; gap: 10px; }
         .head-btn { background: #f0ebf8; border: none; width: 40px; height: 40px; border-radius: 50%; color: var(--p); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .logo-box { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .logo-box { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         .section { display: none; padding: 20px; animation: fadeIn 0.3s; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-right: 5px solid var(--p); }
         .main-btn { background: var(--p); color: #fff; border: none; padding: 14px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; }
+        .wa-btn { background: var(--wpp); color: white; text-decoration: none; padding: 15px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; margin-top: 10px; transition: 0.3s; }
+        .wa-btn:active { transform: scale(0.95); }
+        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
-        label { font-weight: bold; display: block; margin-top: 10px; font-size: 14px; }
-        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
@@ -42,70 +43,56 @@
     </div>
 
     <div id="home" class="section active">
-        <h3 id="h-main-title" style="text-align:center;">تجار Ecosystem المعتمدين</h3>
+        <h3 id="h-title" style="text-align:center;">تجار Ecosystem المعتمدين</h3>
         <div class="card">
             <strong>Pi Chain Mall</strong>
             <p id="h-status" style="color: green;"><i class="fa fa-check-circle"></i> مشروع رسمي موثق</p>
-            <button class="main-btn" id="h-btn">عرض التفاصيل</button>
+        </div>
+        <div class="card" style="border-right-color: #2196f3;">
+            <p id="h-welcome">أهلاً بك في منصة "ثقة"، وجهتك الأولى للتأكد من مصداقية التجار وحماية رصيدك.</p>
         </div>
     </div>
 
     <div id="stake" class="section">
         <h3 id="s-title" style="text-align:center; color:var(--p);"><i class="fa fa-coins"></i> حاسبة الاستيكنج الذكية</h3>
-        <div class="card" style="border-right-color: gold;">
-            <label id="s-label-amt">كمية الباي (π):</label>
-            <input type="number" id="p_amount" placeholder="1000">
-            <label id="s-label-dur">مدة الحجز (لتشجيعك):</label>
+        <div class="card">
+            <input type="number" id="p_amount" placeholder="كمية الباي">
             <select id="p_years">
-                <option value="0.5">🗓️ 6 أشهر (عائد +25%)</option>
-                <option value="1">🚀 سنة واحدة (عائد +100%)</option>
-                <option value="3">💎 3 سنوات (عائد +200%)</option>
+                <option value="0.5">🗓️ 6 أشهر (+25%)</option>
+                <option value="1">🚀 سنة واحدة (+100%)</option>
+                <option value="3">💎 3 سنوات (+200%)</option>
             </select>
-            <button class="main-btn" onclick="smartCalc()" id="s-btn-calc">احسب الأرباح</button>
+            <button class="main-btn" onclick="smartCalc()" id="s-btn">احسب الأرباح</button>
             <div id="smart_res" style="margin-top:15px; text-align:center; display:none; padding:15px; background:#f0ebf8; border-radius:12px;">
-                <p id="s-res-text">الرصيد بعد المدة:</p>
-                <b id="total_pi" style="font-size:24px; color:var(--p);"></b> <span>π</span><br>
-                <button class="main-btn" id="s-btn-bell" style="background:#4caf50; width:auto; padding:8px 20px;" onclick="setAlarm()">نبهني</button>
+                <p id="s-res-text">الرصيد المتوقع:</p>
+                <b id="total_pi" style="font-size:24px; color:var(--p);"></b> <span>π</span>
             </div>
-        </div>
-        <div class="card" style="background:#fffbe6; border-right-color:#ffa000;">
-            <h4 id="s-why-title" style="margin:0;"><i class="fa fa-lightbulb"></i> لماذا الاستيكنج مهم؟</h4>
-            <ul style="padding-right:20px; font-size:13px; line-height:1.6;">
-                <li id="s-li-1">زيادة سرعة التعدين بنسبة تصل لـ 200%</li>
-                <li id="s-li-2">دعم استقرار سعر العملة في السوق</li>
-                <li id="s-li-3">حماية رصيدك من الصرف المتسرع</li>
-            </ul>
         </div>
     </div>
 
     <div id="report" class="section">
         <h3 id="r-title" style="color:red; text-align:center;">إبلاغ عن محتال</h3>
-        <div class="card">
-            <label id="r-q1">من هو الشخص أو المتجر المحتال؟</label>
-            <input type="text" id="r_who" placeholder="اسم الحساب أو الرابط">
-            <label id="r-q2">ما نوع المحاولة؟ (نصب، بيع وهمي، سرقة بيانات)</label>
-            <select id="r_type">
-                <option>بيع وهمي</option>
-                <option>سرقة كلمات مرور</option>
-                <option>تطبيق غير آمن</option>
-            </select>
-            <label id="r-q3">تفاصيل ما حدث:</label>
-            <textarea id="r_desc" placeholder="اشرح لنا بالتفصيل..."></textarea>
-            <button class="main-btn" style="background:red;" onclick="sendReport()" id="r-btn">إرسال البلاغ فوراً</button>
+        <div class="card" style="text-align:center;">
+            <p id="r-desc">لحماية خصوصيتك، سيتم فتح محادثة مباشرة مع الإدارة لتقديم بلاغك بشكل سري وموثق.</p>
+            <a href="https://wa.me/201220469415?text=أريد_الإبلاغ_عن_محتال" class="wa-btn" id="r-btn">
+                <i class="fab fa-whatsapp"></i> <span id="r-txt">مراسلة قسم البلاغات</span>
+            </a>
         </div>
     </div>
 
     <div id="add" class="section">
-        <h3 id="a-title">إضافة متجر جديد</h3>
-        <div class="card">
-            <input type="text" placeholder="اسم المتجر">
-            <button class="main-btn" id="a-btn">تقديم الطلب</button>
+        <h3 id="a-title" style="text-align:center;">إضافة متجر جديد</h3>
+        <div class="card" style="text-align:center;">
+            <p id="a-desc">هل لديك متجر يقبل الباي؟ تواصل معنا لتصنيف متجرك ضمن القائمة الموثوقة لدينا.</p>
+            <a href="https://wa.me/201220469415?text=طلب_إضافة_متجر_جديد_للدليل" class="wa-btn" id="a-btn" style="background:var(--p);">
+                <i class="fab fa-whatsapp"></i> <span id="a-txt">تقديم طلب الإضافة</span>
+            </a>
         </div>
     </div>
 
     <div id="merchants" class="section">
         <h3 id="m-title">قائمة التجار الموثوقين</h3>
-        <div class="card" id="m-wait">جاري تحديث القائمة...</div>
+        <div class="card">جاري تحديث القائمة بالتعاون مع المجتمع...</div>
     </div>
 
     <div class="footer">
@@ -117,53 +104,6 @@
 
     <script>
         let isAr = true;
-        function changeLang() {
-            isAr = !isAr;
-            document.dir = isAr ? 'rtl' : 'ltr';
-            const dict = {
-                ar: {
-                    title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", home: "الرئيسية", merch: "التجار", stake: "استيكنج", report: "إبلاغ",
-                    h_title: "تجار Ecosystem المعتمدين", h_status: "مشروع رسمي موثق", h_btn: "عرض التفاصيل",
-                    s_title: "حاسبة الاستيكنج الذكية", s_amt: "كمية الباي (π):", s_dur: "مدة الحجز (لتشجيعك):", s_calc: "احسب الأرباح", s_res: "الرصيد بعد المدة:", s_bell: "نبهني",
-                    s_why: "لماذا الاستيكنج مهم؟", s_l1: "زيادة سرعة التعدين بنسبة 200%", s_l2: "دعم استقرار سعر العملة", s_l3: "حماية رصيدك من الصرف",
-                    r_title: "إبلاغ عن محتال", r_q1: "من هو الشخص المحتال؟", r_q2: "نوع المحاولة؟", r_q3: "تفاصيل ما حدث:", r_btn: "إرسال البلاغ"
-                },
-                en: {
-                    title: "Trust & Pi Guide", desc: "Verified Pi Guide", home: "Home", merch: "Stores", stake: "Staking", report: "Report",
-                    h_title: "Verified Ecosystem Merchants", h_status: "Official Verified Project", h_btn: "View Details",
-                    s_title: "Smart Staking Calculator", s_amt: "Pi Amount (π):", s_dur: "Lock-up Duration:", s_calc: "Calculate", s_res: "Total Balance:", s_bell: "Notify Me",
-                    s_why: "Why Staking is Important?", s_l1: "Mining speed up to 200%", s_l2: "Supports coin price stability", s_l3: "Protects your balance",
-                    r_title: "Report a Fraudster", r_q1: "Who is the fraudster?", r_q2: "Scam type?", r_q3: "Incident details:", r_btn: "Send Report"
-                }
-            };
-            const c = isAr ? dict.ar : dict.en;
-            // تطبيق الترجمة على كل قطعة في الصفحة
-            document.getElementById('app-title').innerText = c.title;
-            document.getElementById('app-desc').innerText = c.desc;
-            document.getElementById('n-home').innerText = c.home;
-            document.getElementById('n-merch').innerText = c.merch;
-            document.getElementById('n-stake').innerText = c.stake;
-            document.getElementById('n-report').innerText = c.report;
-            document.getElementById('h-main-title').innerText = c.h_title;
-            document.getElementById('h-status').innerText = c.h_status;
-            document.getElementById('h-btn').innerText = c.h_btn;
-            document.getElementById('s-title').innerText = c.s_title;
-            document.getElementById('s-label-amt').innerText = c.s_amt;
-            document.getElementById('s-label-dur').innerText = c.s_dur;
-            document.getElementById('s-btn-calc').innerText = c.s_calc;
-            document.getElementById('s-res-text').innerText = c.s_res;
-            document.getElementById('s-btn-bell').innerText = c.s_bell;
-            document.getElementById('s-why-title').innerText = c.s_why;
-            document.getElementById('s-li-1').innerText = c.s_l1;
-            document.getElementById('s-li-2').innerText = c.s_l2;
-            document.getElementById('s-li-3').innerText = c.s_l3;
-            document.getElementById('r-title').innerText = c.r_title;
-            document.getElementById('r-q1').innerText = c.r_q1;
-            document.getElementById('r-q2').innerText = c.r_q2;
-            document.getElementById('r-q3').innerText = c.r_q3;
-            document.getElementById('r-btn').innerText = c.r_btn;
-        }
-
         function go(id, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
@@ -172,17 +112,33 @@
             window.scrollTo(0,0);
         }
 
+        function changeLang() {
+            isAr = !isAr;
+            document.dir = isAr ? 'rtl' : 'ltr';
+            const d = {
+                ar: { title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", home: "الرئيسية", merch: "التجار", stake: "استيكنج", report: "إبلاغ", r_txt: "مراسلة قسم البلاغات", a_txt: "تقديم طلب الإضافة" },
+                en: { title: "Trust & Pi Guide", desc: "Verified Pi Guide", home: "Home", merch: "Stores", stake: "Staking", report: "Report", r_txt: "Contact Fraud Dept", a_txt: "Submit Store Request" }
+            };
+            const c = isAr ? d.ar : d.en;
+            document.getElementById('app-title').innerText = c.title;
+            document.getElementById('app-desc').innerText = c.desc;
+            document.getElementById('n-home').innerText = c.home;
+            document.getElementById('n-merch').innerText = c.merch;
+            document.getElementById('n-stake').innerText = c.stake;
+            document.getElementById('n-report').innerText = c.report;
+            document.getElementById('r-txt').innerText = c.r_txt;
+            document.getElementById('a-txt').innerText = c.a_txt;
+        }
+
         function smartCalc() {
             let a = document.getElementById('p_amount').value;
-            let d = document.getElementById('p_years').value;
+            let dur = document.getElementById('p_years').value;
             if(a > 0) {
-                let r = (d == "0.5") ? 0.25 : (d == "1" ? 1.0 : 2.0);
+                let r = (dur == "0.5") ? 0.25 : (dur == "1" ? 1.0 : 2.0);
                 document.getElementById('total_pi').innerText = (parseFloat(a) + (a*r)).toLocaleString();
                 document.getElementById('smart_res').style.display = 'block';
             }
         }
-        function sendReport() { alert(isAr ? "شكراً! تم استلام بلاغك للمراجعة." : "Thanks! Report received."); }
-        function setAlarm() { alert("🔔 Done!"); }
     </script>
 </body>
-                </html>
+    </html>
