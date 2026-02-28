@@ -7,30 +7,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; --wpp: #25d366; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; transition: 0.3s; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        .head-left { display: flex; gap: 10px; }
-        .head-btn { background: #f0ebf8; border: none; width: 40px; height: 40px; border-radius: 50%; color: var(--p); cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .logo-box { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         .section { display: none; padding: 20px; animation: fadeIn 0.3s; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-right: 5px solid var(--p); }
-        .main-btn { background: var(--p); color: #fff; border: none; padding: 14px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .wa-btn { background: var(--wpp); color: white; text-decoration: none; padding: 15px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; margin-top: 10px; }
-        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        
+        /* تصميم الشريط الكبير للتجار */
+        .merchant-bar { 
+            background: #fff; border-radius: 15px; padding: 18px; margin-bottom: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-right: 6px solid var(--p);
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; text-decoration: none; color: inherit; transition: 0.2s;
+        }
+        .merchant-bar:active { transform: scale(0.98); background: #f9f6ff; }
+        .m-info b { font-size: 17px; display: block; margin-bottom: 4px; }
+        .rating { color: #ff9800; font-size: 14px; margin-top: 5px; }
+        .tag { background: #f0ebf8; color: var(--p); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
+        
+        .main-btn { background: var(--p); color: #fff; border: none; padding: 14px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; }
+        .wa-btn { background: var(--wpp); color: white; text-decoration: none; padding: 15px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; }
+        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; }
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <div class="head-left">
-            <button class="head-btn" onclick="changeLang()"><i class="fa fa-globe"></i></button>
-            <button class="head-btn" onclick="go('add')"><i class="fa fa-plus"></i></button>
+            <button class="head-btn" style="background:none; border:none; font-size:20px; color:var(--p);" onclick="changeLang()"><i class="fa fa-globe"></i></button>
         </div>
         <div class="head-right" style="display:flex; align-items:center; gap:10px;">
             <div style="text-align: right;">
@@ -42,56 +50,83 @@
     </div>
 
     <div id="home" class="section active">
-        <h3 id="h-title" style="text-align:center;">تجار Ecosystem المعتمدين</h3>
-        <div class="card">
-            <strong>Pi Chain Mall</strong>
-            <p id="h-status" style="color: green;"><i class="fa fa-check-circle"></i> مشروع رسمي موثق</p>
-        </div>
-        <div class="card" style="border-right-color: #2196f3;">
-            <p id="h-welcome">أهلاً بك في منصة "ثقة"، وجهتك الأولى للتأكد من مصداقية التجار وحماية رصيدك.</p>
+        <h3 id="h-title" style="text-align:center;">مرحباً بك في منصة ثقة</h3>
+        <div class="merchant-bar" style="border-right-color: #2196f3;">
+            <div class="m-info">
+                <b id="h-welcome">دليل التجار المعتمدين</b>
+                <p style="font-size:12px; color:#666; margin:0;" id="h-sub">اضغط على زر التجار بالأسفل لاستكشاف السوق.</p>
+            </div>
+            <i class="fa fa-chevron-left" style="color:#ccc;"></i>
         </div>
     </div>
 
-    <div id="stake" class="section">
-        <h3 id="s-title" style="text-align:center; color:var(--p);"><i class="fa fa-coins"></i> حاسبة الاستيكنج الذكية</h3>
-        <div class="card">
-            <input type="number" id="p_amount" placeholder="كمية الباي">
-            <select id="p_years">
-                <option value="0.5">🗓️ 6 أشهر (+25%)</option>
-                <option value="1">🚀 سنة واحدة (+100%)</option>
-                <option value="3">💎 3 سنوات (+200%)</option>
-            </select>
-            <button class="main-btn" onclick="smartCalc()" id="s-btn">احسب الأرباح</button>
-            <div id="smart_res" style="margin-top:15px; text-align:center; display:none; padding:15px; background:#f0ebf8; border-radius:12px;">
-                <p id="s-res-text">الرصيد المتوقع:</p>
-                <b id="total_pi" style="font-size:24px; color:var(--p);"></b> <span>π</span>
+    <div id="merchants" class="section">
+        <h3 id="m-title" style="text-align:center;">تجار Ecosystem المعتمدين</h3>
+        
+        <a href="https://pip-apps.pichainmall.com" class="merchant-bar">
+            <div class="m-info">
+                <strong>Pi Chain Mall</strong>
+                <div class="rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i>
+                    <span style="color:#888; font-size:12px; margin-right:5px;">(4.8)</span>
+                </div>
+                <p id="m1-desc" style="font-size:12px; color:#777; margin-top:5px;">أكبر سوق تجاري عالمي للسلع.</p>
             </div>
-        </div>
+            <span class="tag" id="t1">رسمي</span>
+        </a>
+
+        <a href="https://workforcepool.com" class="merchant-bar" style="border-right-color: #2196f3;">
+            <div class="m-info">
+                <strong>Pi Workforce Pool</strong>
+                <div class="rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i>
+                    <span style="color:#888; font-size:12px; margin-right:5px;">(4.0)</span>
+                </div>
+                <p id="m2-desc" style="font-size:12px; color:#777; margin-top:5px;">منصة الخدمات والوظائف المصغرة.</p>
+            </div>
+            <span class="tag" id="t2">خدمات</span>
+        </a>
+
+        <a href="https://www.pigoat.com" class="merchant-bar" style="border-right-color: #ff9800;">
+            <div class="m-info">
+                <strong>Pigoat</strong>
+                <div class="rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                    <span style="color:#888; font-size:12px; margin-right:5px;">(5.0)</span>
+                </div>
+                <p id="m3-desc" style="font-size:12px; color:#777; margin-top:5px;">سوق تجاري لبيع المنتجات الموثقة.</p>
+            </div>
+            <span class="tag" id="t3">سوق</span>
+        </a>
     </div>
 
     <div id="report" class="section">
         <h3 id="r-title" style="color:red; text-align:center;">إبلاغ عن محتال</h3>
-        <div class="card" style="text-align:center;">
-            <p id="r-desc">لحماية خصوصيتك، سيتم فتح محادثة آمنة مع الإدارة لتقديم بلاغك.</p>
-            <a href="https://wa.me/201220469415?text=أريد_الإبلاغ_عن_محتال" class="wa-btn">
+        <div class="merchant-bar" style="border-right-color: red; flex-direction: column; align-items: flex-start;">
+            <p id="r-desc" style="font-size:14px;">لحماية خصوصيتك، سيتم فتح محادثة آمنة مع الإدارة لتقديم بلاغك.</p>
+            <a href="https://wa.me/201220469415?text=أريد_الإبلاغ_عن_محتال" class="wa-btn" style="width:100%; box-sizing:border-box;">
                 <i class="fab fa-whatsapp"></i> <span id="r-txt">مراسلة قسم البلاغات</span>
             </a>
         </div>
     </div>
 
-    <div id="add" class="section">
-        <h3 id="a-title" style="text-align:center;">إضافة متجر جديد</h3>
-        <div class="card" style="text-align:center;">
-            <p id="a-desc">تواصل معنا لتصنيف متجرك ضمن القائمة الموثوقة لدينا.</p>
-            <a href="https://wa.me/201220469415?text=طلب_إضافة_متجر_جديد_للدليل" class="wa-btn" style="background:var(--p);">
-                <i class="fab fa-whatsapp"></i> <span id="a-txt">تقديم طلب الإضافة</span>
-            </a>
+    <div id="stake" class="section">
+        <h3 id="s-title" style="text-align:center;">حاسبة الاستيكنج الذكية</h3>
+        <div class="merchant-bar">
+            <div style="width:100%">
+                <input type="number" id="p_amount" placeholder="كمية الباي" style="width:100%; padding:12px; margin-bottom:10px; border-radius:10px; border:1px solid #ddd;">
+                <select id="p_years" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd;">
+                    <option value="0.5">🗓️ 6 أشهر (+25%)</option>
+                    <option value="1">🚀 سنة واحدة (+100%)</option>
+                    <option value="3">💎 3 سنوات (+200%)</option>
+                </select>
+                <button class="main-btn" onclick="smartCalc()" style="margin-top:10px;" id="s-btn">احسب الأرباح</button>
+                <div id="smart_res" style="margin-top:15px; text-align:center; display:none; padding:15px; background:#f0ebf8; border-radius:12px;">
+                    <p id="s-res-text">الرصيد المتوقع:</p>
+                    <b id="total_pi" style="font-size:24px; color:var(--p);"></b> <span>π</span>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div id="merchants" class="section">
-        <h3 id="m-title">قائمة التجار الموثوقين</h3>
-        <div class="card" id="m-wait">جاري تحديث القائمة بالتعاون مع المجتمع...</div>
     </div>
 
     <div class="footer">
@@ -108,51 +143,30 @@
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
             if(el) el.classList.add('active');
-            window.scrollTo(0,0);
         }
 
         function changeLang() {
             isAr = !isAr;
             document.dir = isAr ? 'rtl' : 'ltr';
             const d = {
-                ar: { 
-                    title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", home: "الرئيسية", merch: "التجار", stake: "استيكنج", report: "إبلاغ",
-                    h_title: "تجار Ecosystem المعتمدين", h_status: "مشروع رسمي موثق", h_welcome: "أهلاً بك في منصة ثقة لحماية رصيدك.",
-                    s_title: "حاسبة الاستيكنج الذكية", s_btn: "احسب الأرباح", s_res: "الرصيد المتوقع:",
-                    r_title: "إبلاغ عن محتال", r_desc: "لحماية خصوصيتك، سيتم فتح محادثة آمنة مع الإدارة لتقديم بلاغك.", r_txt: "مراسلة قسم البلاغات",
-                    a_title: "إضافة متجر جديد", a_desc: "تواصل معنا لتصنيف متجرك ضمن القائمة الموثوقة لدينا.", a_txt: "تقديم طلب الإضافة", m_title: "قائمة التجار الموثوقين", m_wait: "جاري تحديث القائمة..."
-                },
-                en: { 
-                    title: "Trust & Pi Guide", desc: "Verified Pi Guide", home: "Home", merch: "Stores", stake: "Staking", report: "Report",
-                    h_title: "Verified Ecosystem Stores", h_status: "Official Verified Project", h_welcome: "Welcome to Trust platform to protect your balance.",
-                    s_title: "Smart Staking Calculator", s_btn: "Calculate Profits", s_res: "Expected Balance:",
-                    r_title: "Report a Fraudster", r_desc: "For your privacy, a secure chat will open with the admin.", r_txt: "Contact Fraud Dept",
-                    a_title: "Add New Store", a_desc: "Contact us to list your store in our trusted directory.", a_txt: "Submit Store Request", m_title: "Verified Stores List", m_wait: "Updating list soon..."
-                }
+                ar: { title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", home: "الرئيسية", merch: "التجار", stake: "استيكنج", report: "إبلاغ", r_txt: "مراسلة قسم البلاغات", m1: "أكبر سوق تجاري عالمي للسلع.", m2: "منصة الخدمات والوظائف المصغرة.", m3: "سوق تجاري لبيع المنتجات الموثقة.", s_btn: "احسب الأرباح", t1: "رسمي", t2: "خدمات", t3: "سوق" },
+                en: { title: "Trust & Pi Guide", desc: "Verified Pi Guide", home: "Home", merch: "Stores", stake: "Staking", report: "Report", r_txt: "Contact Fraud Dept", m1: "Largest global goods marketplace.", m2: "Services and micro-jobs platform.", m3: "Verified marketplace for various goods.", s_btn: "Calculate", t1: "Official", t2: "Services", t3: "Market" }
             };
             const c = isAr ? d.ar : d.en;
-            
-            // تطبيق الترجمة الشاملة
             document.getElementById('app-title').innerText = c.title;
             document.getElementById('app-desc').innerText = c.desc;
             document.getElementById('n-home').innerText = c.home;
             document.getElementById('n-merch').innerText = c.merch;
             document.getElementById('n-stake').innerText = c.stake;
             document.getElementById('n-report').innerText = c.report;
-            document.getElementById('h-title').innerText = c.h_title;
-            document.getElementById('h-status').innerText = c.h_status;
-            document.getElementById('h-welcome').innerText = c.h_welcome;
-            document.getElementById('s-title').innerText = c.s_title;
-            document.getElementById('s-btn').innerText = c.s_btn;
-            document.getElementById('s-res-text').innerText = c.s_res;
-            document.getElementById('r-title').innerText = c.r_title;
-            document.getElementById('r-desc').innerText = c.r_desc;
             document.getElementById('r-txt').innerText = c.r_txt;
-            document.getElementById('a-title').innerText = c.a_title;
-            document.getElementById('a-desc').innerText = c.a_desc;
-            document.getElementById('a-txt').innerText = c.a_txt;
-            document.getElementById('m-title').innerText = c.m_title;
-            document.getElementById('m-wait').innerText = c.m_wait;
+            document.getElementById('m1-desc').innerText = c.m1;
+            document.getElementById('m2-desc').innerText = c.m2;
+            document.getElementById('m3-desc').innerText = c.m3;
+            document.getElementById('s-btn').innerText = c.s_btn;
+            document.getElementById('t1').innerText = c.t1;
+            document.getElementById('t2').innerText = c.t2;
+            document.getElementById('t3').innerText = c.t3;
         }
 
         function smartCalc() {
@@ -166,4 +180,4 @@
         }
     </script>
 </body>
-    </html>
+        </html>
