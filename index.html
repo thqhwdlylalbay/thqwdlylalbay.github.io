@@ -24,12 +24,13 @@
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <button style="background:none; border:none; font-size:20px; color:var(--p);" onclick="changeLang()"><i class="fa fa-globe"></i></button>
+        <button style="background:none; border:none; font-size:22px; color:var(--p); cursor:pointer;" onclick="changeLang()"><i class="fa fa-globe"></i></button>
         <div style="display:flex; align-items:center; gap:10px;">
             <div style="text-align: right;">
                 <b id="app-title">ثقة ودليل الباي</b><br>
@@ -54,7 +55,7 @@
             </div>
         </div>
 
-        <h4 id="h-top-m">التجار الموثقون</h4>
+        <h4 id="h-top-m">أعلى تقييم محلي</h4>
         <div class="card-bar" style="border-right-color: #25d366;">
             <div style="display:flex; justify-content:space-between;">
                 <strong>ركن الباي المصري</strong>
@@ -66,7 +67,7 @@
     </div>
 
     <div id="merchants" class="section">
-        <h3 id="m-title" style="text-align:center;">دليل النظام البيئي (Ecosystem)</h3>
+        <h3 id="m-title" style="text-align:center;">دليل النظام البيئي</h3>
         
         <a href="https://pip-apps.pichainmall.com" class="card-bar">
             <div style="display:flex; justify-content:space-between;">
@@ -88,11 +89,27 @@
     </div>
 
     <div id="stake" class="section">
-        <h3 id="s-title" style="text-align:center;">حاسبة الاستيكنج</h3>
+        <h3 id="s-title" style="text-align:center;">حاسبة الاستيكنج الذكية</h3>
         <div class="card-bar">
-            <input type="number" id="p_amount" placeholder="الكمية" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #ddd;">
-            <button onclick="smartCalc()" style="width:100%; background:var(--p); color:#fff; border:none; padding:12px; border-radius:8px;" id="s-btn">احسب الأرباح</button>
-            <div id="smart_res" style="display:none; text-align:center; margin-top:15px; font-weight:bold; color:var(--p);"></div>
+            <label id="l-amount">كمية الباي:</label>
+            <input type="number" id="p_amount" placeholder="0.00">
+            
+            <label id="l-years">مدة القفل:</label>
+            <select id="p_years">
+                <option value="0.5">6 أشهر (+25%)</option>
+                <option value="1">سنة واحدة (+100%)</option>
+                <option value="3">3 سنوات (+200%)</option>
+            </select>
+            
+            <button onclick="smartCalc()" style="width:100%; background:var(--p); color:#fff; border:none; padding:12px; border-radius:8px; cursor:pointer; font-weight:bold;" id="s-btn">احسب الأرباح الآن</button>
+            
+            <div id="smart_res" style="display:none; text-align:center; margin-top:15px; padding:15px; background:#f0ebf8; border-radius:10px;">
+                <span id="s-res-label">الرصيد الكلي المتوقع:</span><br>
+                <b id="total_val" style="font-size:22px; color:var(--p);"></b> <span style="color:var(--p);">π</span>
+            </div>
+        </div>
+        <div class="tip-box" style="margin-top:10px;">
+            <i class="fa fa-lightbulb" style="color:#ffa000;"></i> <span id="s-tip">نصيحة: الاستيكنج طويل المدى يزيد من سرعة التعدين الأساسية.</span>
         </div>
     </div>
 
@@ -100,8 +117,8 @@
         <h3 style="text-align:center; color:var(--red);" id="r-title">إبلاغ عن محتال</h3>
         <div class="card-bar" style="border-right-color:var(--red); text-align:center;">
             <p id="r-desc">تواصل معنا عبر واتساب لتقديم تفاصيل الواقعة بشكل سري.</p>
-            <a href="https://wa.me/201220469415?text=بلاغ_جديد" style="text-decoration:none; background:var(--wpp); color:#fff; padding:15px; border-radius:10px; display:block;">
-                <i class="fab fa-whatsapp"></i> <span id="r-btn-txt">مراسلة البلاغات</span>
+            <a href="https://wa.me/201220469415?text=بلاغ_جديد" style="text-decoration:none; background:var(--wpp); color:#fff; padding:15px; border-radius:10px; display:block; font-weight:bold;">
+                <i class="fab fa-whatsapp"></i> <span id="r-btn-txt">مراسلة قسم البلاغات</span>
             </a>
         </div>
     </div>
@@ -110,7 +127,7 @@
         <h3 style="text-align:center;" id="a-title">إضافة متجرك للدليل</h3>
         <div class="card-bar" style="text-align:center;">
             <p id="a-desc">هل أنت تاجر؟ انضم للقائمة الموثقة لزيادة مبيعاتك بالباي.</p>
-            <a href="https://wa.me/201220469415?text=طلب_إضافة_تاجر" style="text-decoration:none; background:var(--p); color:#fff; padding:15px; border-radius:10px; display:block;">
+            <a href="https://wa.me/201220469415?text=طلب_إضافة_تاجر" style="text-decoration:none; background:var(--p); color:#fff; padding:15px; border-radius:10px; display:block; font-weight:bold;">
                 <i class="fab fa-whatsapp"></i> <span id="a-btn-txt">ارسل بيانات متجرك</span>
             </a>
         </div>
@@ -125,6 +142,7 @@
 
     <script>
         let isAr = true;
+
         function go(id, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
@@ -134,11 +152,15 @@
         }
 
         function smartCalc() {
-            let a = document.getElementById('p_amount').value;
-            if(a > 0) {
-                let res = parseFloat(a) * 2; // مثال لربح 100%
-                document.getElementById('smart_res').innerText = "الرصيد المتوقع: " + res.toLocaleString() + " π";
+            const amount = document.getElementById('p_amount').value;
+            const years = document.getElementById('p_years').value;
+            if(amount > 0) {
+                let bonus = (years == "0.5") ? 0.25 : (years == "1" ? 1.0 : 2.0);
+                let total = parseFloat(amount) + (amount * bonus);
+                document.getElementById('total_val').innerText = total.toLocaleString();
                 document.getElementById('smart_res').style.display = 'block';
+            } else {
+                alert(isAr ? "يرجى إدخال كمية صحيحة" : "Please enter a valid amount");
             }
         }
 
@@ -146,16 +168,41 @@
             isAr = !isAr;
             document.dir = isAr ? 'rtl' : 'ltr';
             const d = {
-                ar: { title: "ثقة ودليل الباي", home: "الرئيسية", merch: "التجار", r_title: "إبلاغ عن محتال", a_title: "إضافة متجرك" },
-                en: { title: "Trust & Pi Guide", home: "Home", merch: "Stores", r_title: "Report Scammer", a_title: "Add Store" }
+                ar: { 
+                    title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", home: "الرئيسية", merch: "التجار", stake: "استيكنج", report: "إبلاغ",
+                    h_tip_h: "نصيحة الأمان:", h_tip_p: "لا تشارك كلمات السر (Passphrase) أبداً.",
+                    btn_add: "أضف متجرك", btn_calc: "حاسبة الأرباح", h_top_m: "أعلى تقييم محلي",
+                    l_amount: "كمية الباي:", l_years: "مدة القفل:", s_btn: "احسب الأرباح الآن", s_res: "الرصيد الكلي المتوقع:",
+                    r_title: "إبلاغ عن محتال", r_btn: "مراسلة قسم البلاغات", a_title: "إضافة متجرك"
+                },
+                en: { 
+                    title: "Trust & Pi Guide", desc: "Verified Pi Directory", home: "Home", merch: "Stores", stake: "Staking", report: "Report",
+                    h_tip_h: "Security Tip:", h_tip_p: "Never share your Passphrase with anyone.",
+                    btn_add: "Add Store", btn_calc: "Staking Calc", h_top_m: "Top Local Rated",
+                    l_amount: "Pi Amount:", l_years: "Lockup Period:", s_btn: "Calculate Now", s_res: "Total Expected Balance:",
+                    r_title: "Report Scammer", r_btn: "Contact Fraud Dept", a_title: "Add Your Store"
+                }
             };
             const c = isAr ? d.ar : d.en;
             document.getElementById('app-title').innerText = c.title;
+            document.getElementById('app-desc').innerText = c.desc;
             document.getElementById('n-home').innerText = c.home;
             document.getElementById('n-merch').innerText = c.merch;
+            document.getElementById('n-stake').innerText = c.stake;
+            document.getElementById('n-report').innerText = c.report;
+            document.getElementById('h-tip-h').innerText = c.h_tip_h;
+            document.getElementById('h-tip-p').innerText = c.h_tip_p;
+            document.getElementById('btn-add').innerText = c.btn_add;
+            document.getElementById('btn-calc').innerText = c.btn_calc;
+            document.getElementById('h-top-m').innerText = c.h_top_m;
+            document.getElementById('l-amount').innerText = c.l_amount;
+            document.getElementById('l-years').innerText = c.l_years;
+            document.getElementById('s-btn').innerText = c.s_btn;
+            document.getElementById('s-res-label').innerText = c.s_res;
             document.getElementById('r-title').innerText = c.r_title;
+            document.getElementById('r-btn-txt').innerText = c.r_btn;
             document.getElementById('a-title').innerText = c.a_title;
         }
     </script>
 </body>
-                                                                                                                                            </html>
+    </html>
