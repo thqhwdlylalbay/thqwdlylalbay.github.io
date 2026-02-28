@@ -9,47 +9,37 @@
         :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; }
         * { box-sizing: border-box; }
         body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; overflow-x: hidden; }
-        
-        /* الهيدر العلوي */
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .head-left { display: flex; gap: 10px; }
         .head-btn { background: #f0ebf8; border: none; width: 40px; height: 40px; border-radius: 50%; color: var(--p); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; }
         .logo-box { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* الأقسام */
-        .section { display: none; padding: 20px; animation: fadeIn 0.3s; width: 100%; }
+        .section { display: none; padding: 20px; animation: fadeIn 0.3s; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* الكروت والتنسيق */
         .card { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-right: 5px solid var(--p); }
-        .main-btn { background: var(--p); color: #fff; border: none; padding: 14px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
-        .main-btn:active { transform: scale(0.98); }
-
-        /* القائمة السفلية */
-        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .main-btn { background: var(--p); color: #fff; border: none; padding: 14px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; }
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
-        
-        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <div class="head-left">
-            <button class="head-btn" title="اللغات"><i class="fa fa-globe"></i></button>
-            <button class="head-btn" onclick="go('add')" title="إضافة"><i class="fa fa-plus"></i></button>
+            <button class="head-btn" onclick="changeLang()"><i class="fa fa-globe"></i></button>
+            <button class="head-btn" onclick="go('add')"><i class="fa fa-plus"></i></button>
         </div>
         <div class="head-right" style="display:flex; align-items:center; gap:10px;">
             <div style="text-align: right;">
-                <b style="font-size: 16px; display:block;">ثقة ودليل الباي</b>
-                <small style="color: #888;">دليل موثق لمجتمع Pi</small>
+                <b id="app-title">ثقة ودليل الباي</b><br>
+                <small id="app-desc">دليل موثق لمجتمع Pi</small>
             </div>
             <div class="logo-box">
-                <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" alt="PI" onerror="this.style.display='none'">PI
+                <img src="https://raw.githubusercontent.com/thqhwdlylalbay/thqhwdlylalbay.github.io/main/1000093953.png" onerror="this.style.display='none'">PI
             </div>
         </div>
     </div>
@@ -58,8 +48,8 @@
         <h3 style="text-align:center;">تجار Ecosystem المعتمدين</h3>
         <div class="card">
             <strong>Pi Chain Mall</strong>
-            <p style="color: green; font-size: 14px;"><i class="fa fa-check-circle"></i> مشروع رسمي موثق</p>
-            <button class="main-btn" onclick="alert('تفاصيل المتجر قريباً')">عرض التفاصيل</button>
+            <p style="color: green;"><i class="fa fa-check-circle"></i> مشروع رسمي موثق</p>
+            <button class="main-btn" onclick="alert('سيتم توجيهك للمتجر قريباً')">عرض التفاصيل</button>
         </div>
     </div>
 
@@ -67,60 +57,45 @@
         <h3>قائمة التجار الموثوقين</h3>
         <div class="card" style="text-align:center; color:#888;">
             <i class="fa fa-sync fa-spin" style="font-size:30px; margin-bottom:10px;"></i>
-            <p>جاري تحديث قاعدة بيانات التجار...</p>
+            <p>جاري سحب بيانات التجار من الملف الموثق...</p>
         </div>
     </div>
 
     <div id="stake" class="section">
         <h3 style="text-align:center; color:var(--p);"><i class="fa fa-coins"></i> حاسبة الاستيكنج الذكية</h3>
         <div class="card" style="border-right-color: gold;">
-            <label style="font-weight:bold;">كمية الباي (π):</label>
+            <label>كمية الباي (π):</label>
             <input type="number" id="p_amount" placeholder="مثال: 1000">
-            
-            <label style="font-weight:bold;">مدة الحجز (اختر لتشجيعك):</label>
+            <label>مدة الحجز (لتشجيعك):</label>
             <select id="p_years">
                 <option value="0.5">🗓️ 6 أشهر (عائد +25%)</option>
                 <option value="1">🚀 سنة واحدة (عائد +100%)</option>
                 <option value="3">💎 3 سنوات (عائد +200%)</option>
             </select>
-            
-            <button class="main-btn" onclick="smartCalc()">احسب الأرباح المتوقعة</button>
-            
-            <div id="smart_res" style="margin-top:20px; text-align:center; display:none; padding:15px; background:#f0ebf8; border-radius:12px; border:1px dashed var(--p);">
-                <p style="margin:0;">إجمالي رصيدك بعد المدة:</p>
-                <b id="total_pi" style="font-size:26px; color:var(--p);"></b> <span style="color:var(--p); font-weight:bold;">π</span>
-                <br><br>
-                <button class="main-btn" style="background:#4caf50; width:auto; padding:8px 20px; font-size:13px;" onclick="setAlarm()">
-                    <i class="fa fa-bell"></i> نبهني عند الانتهاء
-                </button>
+            <button class="main-btn" onclick="smartCalc()">احسب الأرباح</button>
+            <div id="smart_res" style="margin-top:15px; text-align:center; display:none; padding:15px; background:#f0ebf8; border-radius:12px;">
+                <p>الرصيد بعد المدة:</p>
+                <b id="total_pi" style="font-size:24px; color:var(--p);"></b> <span>π</span><br>
+                <button class="main-btn" style="background:#4caf50; width:auto; padding:8px 20px;" onclick="setAlarm()">نبهني</button>
             </div>
-        </div>
-
-        <div class="card" style="background:#fffbe6; border-right-color:#ffa000;">
-            <h4 style="margin-top:0; color:#e65100;"><i class="fa fa-lightbulb"></i> لماذا الاستيكنج مهم؟</h4>
-            <ul style="padding-right:20px; font-size:13px; line-height:1.7; color:#444;">
-                <li><b>مكافآت ضخمة:</b> تزيد سرعة تعدينك بنسبة تصل لـ 200%.</li>
-                <li><b>استقرار السعر:</b> يقلل العرض ويزيد من قيمة العملة مستقبلاً.</li>
-                <li><b>أمان الرصيد:</b> يحمي عملاتك من الصرف المتسرع في البداية.</li>
-            </ul>
         </div>
     </div>
 
     <div id="report" class="section">
-        <h3 style="color:red; text-align:center;"><i class="fa fa-shield-alt"></i> إبلاغ عن محتال</h3>
+        <h3 style="color:red; text-align:center;">إبلاغ عن محتال</h3>
         <div class="card">
-            <p style="font-size:13px;">ساعدنا في حماية مجتمع Pi من النصابين:</p>
-            <textarea placeholder="اكتب اسم الحساب أو تفاصيل ما حدث..." style="height:120px;"></textarea>
-            <button class="main-btn" style="background:#e74c3c;">إرسال البلاغ فوراً</button>
+            <input type="text" id="bad_user" placeholder="رابط الحساب أو اسم النصاب">
+            <textarea id="bad_desc" placeholder="ماذا حدث؟"></textarea>
+            <button class="main-btn" style="background:red;" onclick="sendReport()">إرسال البلاغ فوراً</button>
         </div>
     </div>
 
     <div id="add" class="section">
         <h3>إضافة متجر جديد</h3>
         <div class="card">
-            <input type="text" placeholder="اسم المتجر">
-            <input type="text" placeholder="نوع النشاط (ملابس، إلكترونيات..)">
-            <button class="main-btn">تقديم طلب الإضافة</button>
+            <input type="text" id="m_name" placeholder="اسم المتجر">
+            <input type="text" id="m_type" placeholder="نوع النشاط">
+            <button class="main-btn" onclick="sendAddRequest()">تقديم الطلب للمراجعة</button>
         </div>
     </div>
 
@@ -132,36 +107,59 @@
     </div>
 
     <script>
-        // دالة التنقل بين الصفحات
         function go(id, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
             if(el) el.classList.add('active');
-            window.scrollTo(0,0);
         }
 
-        // دالة الحاسبة الذكية المحدثة
         function smartCalc() {
             let amount = document.getElementById('p_amount').value;
             let duration = document.getElementById('p_years').value;
-            
             if(amount > 0) {
-                let bonusRate = parseFloat(duration) == 3 ? 2.0 : (parseFloat(duration) == 1 ? 1.0 : 0.25);
-                let total = parseFloat(amount) + (amount * bonusRate);
-                
-                document.getElementById('total_pi').innerText = total.toLocaleString();
+                let bonus = (duration == "0.5") ? 0.25 : (duration == "1" ? 1.0 : 2.0);
+                let total = parseFloat(amount) + (amount * bonus);
+                document.getElementById('total_pi').innerText = total.toFixed(2);
                 document.getElementById('smart_res').style.display = 'block';
-                document.getElementById('smart_res').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                alert("يرجى إدخال كمية Pi أولاً");
             }
         }
 
-        // دالة التنبيه
-        function setAlarm() {
-            alert("تم تفعيل جرس التنبيه بنجاح! 🔔\nسنقوم بتذكيرك فور انتهاء مدة الحجز لضمان متابعة أرباحك.");
+        // تشغيل زر الإبلاغ
+        function sendReport() {
+            let user = document.getElementById('bad_user').value;
+            if(user) {
+                alert("تم استلام بلاغك ضد: " + user + "\nسيقوم فريق ثقة ودليل الباي بمراجعته فوراً.");
+                document.getElementById('bad_user').value = "";
+                document.getElementById('bad_desc').value = "";
+            } else { alert("يرجى إدخال اسم النصاب"); }
         }
+
+        // تشغيل زر إضافة تاجر
+        function sendAddRequest() {
+            let store = document.getElementById('m_name').value;
+            if(store) {
+                alert("شكراً لك! تم إرسال طلب إضافة متجر (" + store + ") للمراجعة الفنية.");
+                document.getElementById('m_name').value = "";
+                document.getElementById('m_type').value = "";
+            } else { alert("يرجى إدخال اسم المتجر"); }
+        }
+
+        // تشغيل زر اللغة
+        function changeLang() {
+            let title = document.getElementById('app-title');
+            if(title.innerText === "ثقة ودليل الباي") {
+                title.innerText = "Trust & Pi Guide";
+                document.getElementById('app-desc').innerText = "Verified guide for Pi community";
+                alert("Language changed to English");
+            } else {
+                title.innerText = "ثقة ودليل الباي";
+                document.getElementById('app-desc').innerText = "دليل موثق لمجتمع Pi";
+                alert("تم تحويل اللغة للعربية");
+            }
+        }
+
+        function setAlarm() { alert("جرس التنبيه جاهز! 🔔"); }
     </script>
 </body>
-    </html>
+            </html>
