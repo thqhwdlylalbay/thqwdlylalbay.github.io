@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثقة ودليل الباي - Trust & Pi Guide</title>
+    <title>ثقة ودليل الباي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; --red: #e91e63; --ora: #ff9800; --green: #25D366; }
@@ -42,10 +42,10 @@
     <div id="home" class="section active">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
             <div onclick="showPage('add_form', this)" style="background: var(--p); color:white; padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
-                <i class="fa fa-store" style="font-size:20px;"></i> <br><span id="t-b-add">أضف متجرك</span>
+                <i class="fa fa-store"></i> <br><span id="t-b-add">أضف متجرك</span>
             </div>
             <div onclick="showPage('stake', this)" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
-                <i class="fa fa-chart-line" style="font-size:20px;"></i> <br><span id="t-b-calc">احسب أرباحك</span>
+                <i class="fa fa-chart-line"></i> <br><span id="t-b-calc">احسب أرباحك</span>
             </div>
         </div>
         <h4 id="t-feat-h">تطبيقات المايننت الموثقة</h4>
@@ -66,13 +66,15 @@
         <a href="https://workforcepool.com" class="card-bar" style="border-right-color: #9c27b0;">
             <strong>Workforce Pool</strong><br><small id="t-v2">منصة الخدمات المصغرة والمهام.</small>
         </a>
+        <a href="https://pibartermall.com" class="card-bar" style="border-right-color: #ff9800;">
+            <strong>Pi Barter Mall</strong><br><small id="t-v3">تبادل السلع والمنتجات محلياً وعالمياً.</small>
+        </a>
     </div>
 
     <div id="stake" class="section">
         <h3 id="t-s-title" style="text-align:center;">مركز استثمار وأرباح Pi</h3>
         <div class="profit-box">
-            <i class="fa fa-gift" style="font-size:20px;"></i> 
-            <b id="t-s-promo">لماذا الاستيكنج (Stake)؟</b>
+            <i class="fa fa-gift"></i> <b id="t-s-promo">لماذا الاستيكنج (Stake)؟</b>
             <ul style="margin: 8px 0; padding-right: 20px;">
                 <li id="t-s-l1">أرباح صافية تضاف لرصيدك الحالي.</li>
                 <li id="t-s-l2">مضاعفة سرعة تعدينك اليومي فوراً.</li>
@@ -84,9 +86,9 @@
             <input type="number" id="p_amount" placeholder="مثلاً: 100">
             <label id="t-l-yrs">اختر خطة الأرباح:</label>
             <select id="p_years">
-                <option value="0.5" id="opt1">6 أشهر (أرباح +50%)</option>
-                <option value="2.0" id="opt2">سنة واحدة (أرباح +200%) 🔥</option>
-                <option value="5.0" id="opt3">3 سنوات (أرباح +500%) 🚀</option>
+                <option value="0.5">6 أشهر (أرباح +50%)</option>
+                <option value="2.0">سنة واحدة (أرباح +200%) 🔥</option>
+                <option value="5.0">3 سنوات (أرباح +500%) 🚀</option>
             </select>
             <button class="btn-main" onclick="calc()" id="t-s-btn">احسب أرباحي الآن</button>
             <div id="res_box" class="res-highlight" style="display:none; text-align:center;">
@@ -111,7 +113,7 @@
         <h3 id="t-r-title" style="text-align:center; color:var(--red);">مركز الأمان</h3>
         <div class="card-bar" style="border-right-color: var(--red); text-align:center;">
             <i class="fa fa-user-shield" style="font-size:45px; color:var(--red); margin-bottom:10px;"></i>
-            <p id="t-r-desc">ساعدنا في حماية المجتمع وأبلغ عن أي نصاب.</p>
+            <p id="t-r-desc">أبلغ عن أي نصاب لحماية المجتمع.</p>
             <a href="whatsapp://send?phone=201220469415&text=بلاغ_عن_محاولة_احتيال" class="btn-main" style="background:var(--red);">
                 <span id="t-r-btn">إرسال بلاغ واتساب</span>
             </a>
@@ -193,4 +195,4 @@
         }
     </script>
 </body>
-                                      </html>
+                                                                                                       </html>
