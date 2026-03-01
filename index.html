@@ -48,29 +48,31 @@
                 <i class="fa fa-chart-line"></i> <br><span id="t-b-calc">احسب أرباحك</span>
             </div>
         </div>
+
         <h4 id="t-feat-h">تطبيقات المايننت الموثقة</h4>
         <a href="https://fireside.pinet.com" class="card-bar" style="border-right-color: var(--ora);">
             <strong>Fireside Forum</strong><br>
             <small id="t-fire-d">اربح عملات Pi مقابل المحتوى المميز.</small>
         </a>
 
-        <h4 style="margin-top:25px;"><i class="fa fa-utensils"></i> مطاعم تقبل الدفع بـ Pi</h4>
-        
-        <div class="card-bar" style="border-right-color: #4caf50;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <strong>Pi Coffee & Pastries</strong>
-                <span style="color: #ffc107; font-size: 13px;"><i class="fa fa-star"></i> 4.8</span>
+        <h4 style="margin-top:25px; color:var(--red);"><i class="fa fa-shield-alt"></i> ركن الأمان والموثوقية</h4>
+        <div class="card-bar" style="border-right-color: var(--red); background: #fff5f5;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fa fa-exclamation-triangle" style="color:var(--red); font-size: 20px;"></i>
+                <strong id="t-safe-t">نصيحة للمحافظة على حسابك</strong>
             </div>
-            <small>أول مقهى عالمي يدعم رواد الباي (فرع فيتنام/أونلاين).</small>
-            <a href="https://www.pichainmall.com" style="display:block; margin-top:8px; color:var(--p); font-weight:bold; font-size:12px; text-decoration:none;">تصفح القائمة <i class="fa fa-external-link-alt"></i></a>
+            <p id="t-safe-d" style="font-size: 13px; color: #666; margin-top: 8px;">
+                لا تقم أبداً بإدخال "كلمة سر المحفظة" في أي موقع خارج متصفح Pi الرسمي. فريق العمل لن يطلبها منك أبداً.
+            </p>
         </div>
 
+        <h4 style="margin-top:25px;"><i class="fa fa-utensils"></i> مطاعم تقبل الدفع بـ Pi</h4>
         <div class="card-bar" style="border-right-color: #ff5722;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <strong>Pi Pizza Hub</strong>
                 <span style="color: #ffc107; font-size: 13px;"><i class="fa fa-star"></i> 4.6</span>
             </div>
-            <small>خدمات توصيل ووجبات سريعة تدعم نظام المقايضة.</small>
+            <small id="t-pizza-d">خدمات توصيل ووجبات سريعة تدعم نظام المقايضة.</small>
             <a href="https://pibartermall.com" style="display:block; margin-top:8px; color:var(--p); font-weight:bold; font-size:12px; text-decoration:none;">اطلب الآن <i class="fa fa-external-link-alt"></i></a>
         </div>
     </div>
@@ -176,7 +178,8 @@
                     res: "رصيدك الإجمالي المتوقع:", btn: "احسب أرباحي الآن", atitle: "سجل كتاجر موثق", 
                     adesc: "ارسل بيانات متجرك الآن ليظهر في الدليل العالمي.", abtn: "اضغط للمراسلة فوراً",
                     rtitle: "مركز الأمان", rdesc: "أبلغ عن أي نصاب لحماية المجتمع.", rbtn: "إرسال بلاغ واتساب",
-                    nhom: "الرئيسية", nver: "توثيق", nsta: "أرباح", nrep: "إبلاغ"
+                    nhom: "الرئيسية", nver: "توثيق", nsta: "أرباح", nrep: "إبلاغ",
+                    safeT: "نصيحة للمحافظة على حسابك", safeD: "لا تقم أبداً بإدخال كلمة سر المحفظة خارج متصفح Pi.", pizzaD: "خدمات توصيل ووجبات سريعة تدعم نظام المقايضة."
                 },
                 en: { 
                     title: "Trust & Pi Guide", desc: "Invest your Pi Safely", badd: "Add Store", bcalc: "Calc Profits", 
@@ -185,7 +188,8 @@
                     res: "Expected total balance:", btn: "Calculate My Profits", atitle: "Register Store", 
                     adesc: "Send your store info to join the global list.", abtn: "Message Now",
                     rtitle: "Security Center", rdesc: "Report scammers to protect the community.", rbtn: "Send WhatsApp Report",
-                    nhom: "Home", nver: "Verify", nsta: "Earnings", nrep: "Report"
+                    nhom: "Home", nver: "Verify", nsta: "Earnings", nrep: "Report",
+                    safeT: "Account Security Tip", safeD: "Never enter your passphrase outside the official Pi Browser.", pizzaD: "Delivery and fast food services supporting barter."
                 }
             };
             const t = isAr ? d.ar : d.en;
@@ -212,7 +216,10 @@
             document.getElementById('n-t-ver').innerText = t.nver;
             document.getElementById('n-t-sta').innerText = t.nsta;
             document.getElementById('n-t-rep').innerText = t.nrep;
+            document.getElementById('t-safe-t').innerText = t.safeT;
+            document.getElementById('t-safe-d').innerText = t.safeD;
+            document.getElementById('t-pizza-d').innerText = t.pizzaD;
         }
     </script>
 </body>
-                                                                           </html>
+    </html>
