@@ -7,163 +7,148 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; --red: #e91e63; --ora: #ff9800; --blue: #2196f3; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; overflow-x: hidden; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo-box { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        
         .section { display: none; padding: 15px; animation: fadeIn 0.3s; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
         .card-bar { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-right: 5px solid var(--p); text-decoration: none; color: inherit; display: block; }
-        .warn-box { background: #fff3e0; border: 1px solid var(--ora); padding: 10px; border-radius: 10px; margin-bottom: 15px; color: #e65100; font-size: 13px; }
-        
+        .warn-box { background: #fff3e0; border: 1px solid var(--ora); padding: 12px; border-radius: 12px; margin-bottom: 15px; color: #e65100; font-size: 13px; line-height: 1.5; }
         .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 10px 0; z-index: 1000; }
-        .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; }
+        .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
-        .f-item i { display: block; font-size: 20px; margin-bottom: 3px; }
-        .f-item span { font-size: 11px; }
-
-        .btn-main { width: 100%; background: var(--p); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; display: block; text-align: center; text-decoration: none; box-sizing: border-box; }
-        input, select { width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; }
+        .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
+        .btn-main { width: 100%; background: var(--p); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <i class="fa fa-shield-check" style="color:var(--p); font-size:20px;"></i>
+        <button style="background:none; border:none; font-size:24px; color:var(--p); cursor:pointer;" onclick="toggleLang()">
+            <i class="fa fa-globe"></i>
+        </button>
         <div style="display:flex; align-items:center; gap:8px;">
             <div style="text-align: right;">
-                <b>ثقة ودليل الباي</b><br>
-                <small>Trust & Pi Guide</small>
+                <b id="t-title">ثقة ودليل الباي</b><br>
+                <small id="t-desc">دليل موثق لمجتمع Pi</small>
             </div>
             <div class="logo-box">π</div>
         </div>
     </div>
 
     <div id="home" class="section active">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
-            <div onclick="showPage('add_store', document.getElementById('f-add'))" style="background:var(--p); color:white; padding:15px; border-radius:12px; text-align:center; cursor:pointer;">
-                <i class="fa fa-store"></i><br>أضف متجرك
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+            <div onclick="showPage('add_form', this)" style="background: var(--p); color:white; padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
+                <i class="fa fa-plus-circle"></i> <br><span id="t-b-add">أضف متجرك</span>
             </div>
-            <div onclick="showPage('stake_page', document.getElementById('f-stake'))" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:15px; border-radius:12px; text-align:center; cursor:pointer;">
-                <i class="fa fa-calculator"></i><br>الحاسبة
+            <div onclick="showPage('stake', this)" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
+                <i class="fa fa-calculator"></i> <br><span id="t-b-calc">الحاسبة</span>
             </div>
         </div>
-
-        <h4 style="margin-bottom:10px;">تطبيقات مقترحة</h4>
-        <a href="https://fireside.pinet.com" class="card-bar" style="border-right-color:var(--ora);">
-            <i class="fa fa-fire" style="color:var(--ora); float:left;"></i>
+        <h4 id="t-feat">تطبيقات مقترحة</h4>
+        <a href="https://fireside.pinet.com" class="card-bar" style="border-right-color: var(--ora);">
             <strong>Fireside Forum</strong><br>
-            <small>التواصل الاجتماعي الموثق بمبدأ الاستيكنج.</small>
-        </a>
-        <a href="https://www.pichainmall.com" class="card-bar" style="border-right-color:var(--blue);">
-            <i class="fa fa-shopping-cart" style="color:var(--blue); float:left;"></i>
-            <strong>Pi Chain Mall</strong><br>
-            <small>أكبر سوق عالمي لتبادل المنتجات بالعملة.</small>
+            <small id="t-v4">التواصل الاجتماعي الموثق.</small>
         </a>
     </div>
 
-    <div id="stake_page" class="section">
-        <h3 style="text-align:center;">حاسبة مكافآت التعدين</h3>
+    <div id="verify_list" class="section">
+        <h3 id="t-v-title" style="text-align:center;">دليل تطبيقات المايننت</h3>
+        <a href="https://www.pichainmall.com" class="card-bar">
+            <strong>Pi Chain Mall</strong><br><small id="t-v1">أكبر سوق تجاري عالمي.</small>
+        </a>
+        <a href="https://pibridge.org" class="card-bar" style="border-right-color: var(--blue);">
+            <strong>Pi Bridge</strong><br><small id="t-v-bridge">جسر نقل الأصول الموثق (مصلح).</small>
+        </a>
+        <a href="https://workforcepool.com" class="card-bar">
+            <strong>Workforce Pool</strong><br><small id="t-v2">منصة الخدمات والمهام.</small>
+        </a>
+    </div>
+
+    <div id="stake" class="section">
+        <h3 id="t-s-title" style="text-align:center;">حاسبة الاستيكنج</h3>
         <div class="warn-box">
-            <i class="fa fa-info-circle"></i> 
-            <b>تنبيه هام:</b> هذه الحاسبة تقريبية لفوائد القفل. لا تدخل كلمة سر محفظتك في أي تطبيق خارجي.
+            <i class="fa fa-shield-alt"></i> 
+            <b id="t-s-warn">نصائح الأمان:</b>
+            <ul style="margin: 5px 0; padding-right: 20px;" id="t-s-list">
+                <li>لا تدخل كلمة سر محفظتك في أي موقع للحساب.</li>
+                <li>الاستيكنج يزيد من معدل تعدينك المستقبلي.</li>
+                <li>تأكد من اختيار مدة تناسب خطتك المالية.</li>
+            </ul>
         </div>
         <div class="card-bar">
-            <label>كمية Pi المراد قفلها:</label>
-            <input type="number" id="amt" placeholder="أدخل الكمية">
-            <label>مدة القفل المختار:</label>
-            <select id="dur">
-                <option value="0.25">6 أشهر (+25% بونص)</option>
-                <option value="1.0">سنة واحدة (+100% بونص)</option>
-                <option value="2.0">3 سنوات (+200% بونص)</option>
+            <label id="t-l-amt">كمية Pi:</label>
+            <input type="number" id="p_amount" placeholder="0.00">
+            <label id="t-l-yrs">مدة القفل:</label>
+            <select id="p_years">
+                <option value="0.25">6 أشهر (+25%)</option>
+                <option value="1.0">سنة واحدة (+100%)</option>
+                <option value="2.0">3 سنوات (+200%)</option>
             </select>
-            <button class="btn-main" onclick="calculate()">احسب المجموع المتوقع</button>
-            <div id="res" style="display:none; text-align:center; margin-top:20px; background:#f0ebf7; padding:15px; border-radius:10px;">
-                <span style="color:#555;">المجموع بعد انتهاء المدة:</span><br>
-                <b style="font-size:24px; color:var(--p);" id="total"></b> <small>π</small>
+            <button class="btn-main" onclick="calc()" id="t-s-btn">احسب المكافأة</button>
+            <div id="res_box" style="display:none; text-align:center; margin-top:15px; color:var(--p); font-weight:bold;">
+                <span id="t-s-res-l">المجموع المتوقع:</span> <span id="total_v"></span> π
             </div>
         </div>
     </div>
 
-    <div id="verify_page" class="section">
-        <h3 style="text-align:center;">دليل التجار والتطبيقات الموثقة</h3>
-        <div class="card-bar">
-            <i class="fa fa-check-circle" style="color:var(--blue); float:left;"></i>
-            <strong>Pi Browser</strong><br>
-            <small>البوابة الرسمية لكل تطبيقات النظام البيئي.</small>
-        </div>
-        <a href="https://workforcepool.com" class="card-bar">
-            <i class="fa fa-tools" style="color:var(--p); float:left;"></i>
-            <strong>Workforce Pool</strong><br>
-            <small>منصة عالمية للتوظيف والعمل الحر بالباي.</small>
-        </a>
-        <a href="https://pibartermall.com" class="card-bar">
-            <i class="fa fa-exchange-alt" style="color:var(--ora); float:left;"></i>
-            <strong>Pi Barter Mall</strong><br>
-            <small>تبادل السلع والمنتجات بين الرواد.</small>
+    <div id="add_form" class="section">
+        <h3 id="t-a-title" style="text-align:center;">تسجيل تاجر جديد</h3>
+        <a href="https://wa.me/201220469415" class="card-bar" style="text-align:center;">
+            <p id="t-a-desc">تواصل معنا عبر الواتساب لإضافة بيانات متجرك.</p>
+            <span class="btn-main"><i class="fab fa-whatsapp"></i> مراسلة الإدارة</span>
         </a>
     </div>
 
-    <div id="report_page" class="section">
-        <h3 style="text-align:center; color:var(--red);">مركز الأمان والبلاغات</h3>
-        <div class="card-bar" style="border-right-color:var(--red); text-align:center;">
-            <i class="fa fa-bullhorn" style="font-size:40px; color:var(--red); margin-bottom:10px;"></i>
-            <p>هل اكتشفت متجراً وهمياً أو محاولة احتيال؟ ساعدنا في حماية الرواد وأبلغ فوراً.</p>
-            <a href="https://wa.me/201220469415?text=بلاغ_عن_احتيال" class="btn-main" style="background:var(--red);">
-                إرسال بلاغ أمان (واتساب)
-            </a>
-        </div>
-    </div>
-
-    <div id="add_store" class="section">
-        <h3 style="text-align:center;">سجل متجرك في الدليل</h3>
-        <div class="card-bar" style="text-align:center;">
-            <i class="fa fa-store-alt" style="font-size:40px; color:var(--p); margin-bottom:10px;"></i>
-            <p>انضم لقائمة التجار الموثوقين لدينا لزيادة مبيعاتك وثقة المستخدمين بك.</p>
-            <a href="https://wa.me/201220469415?text=طلب_توثيق_متجر_جديد" class="btn-main">
-                تواصل معنا لتسجيل بياناتك
-            </a>
-        </div>
+    <div id="report" class="section">
+        <h3 id="t-r-title" style="text-align:center; color:var(--red);">مركز الأمان</h3>
+        <a href="https://wa.me/201220469415" class="card-bar" style="border-right-color: var(--red); text-align:center;">
+            <p id="t-r-desc">أبلغ عن أي محاولة احتيال لحماية المجتمع.</p>
+            <span class="btn-main" style="background:var(--red);">فتح بلاغ</span>
+        </a>
     </div>
 
     <div class="footer">
-        <div class="f-item" onclick="showPage('report_page', this)"><i class="fa fa-bullhorn"></i><span>إبلاغ</span></div>
-        <div class="f-item" onclick="showPage('verify_page', this)"><i class="fa fa-medal"></i><span>توثيق</span></div>
-        <div id="f-stake" class="f-item" onclick="showPage('stake_page', this)"><i class="fa fa-calculator"></i><span>حاسبة</span></div>
-        <div id="f-add" class="f-item" style="display:none;"></div> <div class="f-item active" onclick="showPage('home', this)"><i class="fa fa-home"></i><span>الرئيسية</span></div>
+        <div class="f-item" id="n-rep" onclick="showPage('report', this)"><i class="fa fa-bullhorn"></i><span>إبلاغ</span></div>
+        <div class="f-item" id="n-ver" onclick="showPage('verify_list', this)"><i class="fa fa-medal"></i><span>توثيق</span></div>
+        <div class="f-item" id="n-sta" onclick="showPage('stake', this)"><i class="fa fa-calculator"></i><span>حاسبة</span></div>
+        <div class="f-item active" id="n-hom" onclick="showPage('home', this)"><i class="fa fa-house"></i><span>الرئيسية</span></div>
     </div>
 
     <script>
-        function showPage(pageId, element) {
-            // إخفاء كل الأقسام
+        let isAr = true;
+        function showPage(id, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            // إظهار القسم المطلوب
-            const targetPage = document.getElementById(pageId);
-            if(targetPage) targetPage.classList.add('active');
-            
-            // تحديث حالة الأزرار في القائمة السفلية
+            document.getElementById(id).classList.add('active');
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
-            if(element) element.classList.add('active');
-            
-            // العودة لأعلى الصفحة عند التنقل
-            window.scrollTo(0,0);
+            if(el) el.classList.add('active');
         }
-
-        function calculate() {
-            const amount = document.getElementById('amt').value;
-            const duration = document.getElementById('dur').value;
-            
-            if(amount > 0) {
-                // المعادلة: الكمية + (الكمية * نسبة البونص)
-                const result = parseFloat(amount) + (amount * duration);
-                document.getElementById('total').innerText = result.toLocaleString(undefined, {minimumFractionDigits: 2});
-                document.getElementById('res').style.display = 'block';
-            } else {
-                alert("من فضلك أدخل كمية باي صحيحة أولاً");
+        function calc() {
+            let amt = document.getElementById('p_amount').value;
+            let bonus = document.getElementById('p_years').value;
+            if(amt > 0) {
+                document.getElementById('total_v').innerText = (parseFloat(amt) + (amt * bonus)).toLocaleString();
+                document.getElementById('res_box').style.display = 'block';
             }
+        }
+        function toggleLang() {
+            isAr = !isAr;
+            document.dir = isAr ? 'rtl' : 'ltr';
+            const d = {
+                ar: { title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", badd: "أضف متجرك", bcalc: "الحاسبة", sinfo: "نصائح الأمان:", res: "المجموع المتوقع:", btn: "احسب المكافأة" },
+                en: { title: "Trust & Pi Guide", desc: "Verified Pi Directory", badd: "Add Store", bcalc: "Calculator", sinfo: "Safety Tips:", res: "Expected Total:", btn: "Calculate" }
+            };
+            const t = isAr ? d.ar : d.en;
+            document.getElementById('t-title').innerText = t.title;
+            document.getElementById('t-desc').innerText = t.desc;
+            document.getElementById('t-b-add').innerText = t.badd;
+            document.getElementById('t-b-calc').innerText = t.bcalc;
+            document.getElementById('t-s-warn').innerText = t.sinfo;
+            document.getElementById('t-s-res-l').innerText = t.res;
+            document.getElementById('t-s-btn').innerText = t.btn;
         }
     </script>
 </body>
-    </html>
+                                                                                                                              </html>
