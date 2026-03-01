@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -8,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; --wpp: #25d366; --red: #e91e63; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; transition: 0.3s; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo-box { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         .section { display: none; padding: 15px; animation: fadeIn 0.3s; }
@@ -18,12 +17,12 @@
         .grid-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .action-btn { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; }
         .action-btn i { font-size: 20px; color: var(--p); display: block; margin-bottom: 5px; }
-        .rating { color: #ff9800; font-size: 12px; margin: 5px 0; }
-        .tag { font-size: 10px; padding: 3px 8px; border-radius: 5px; font-weight: bold; float: left; }
         .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; }
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; font-size: 16px; }
+        .info-box { background: #e3f2fd; border-right: 5px solid #2196f3; padding: 10px; border-radius: 8px; font-size: 12px; margin-top: 15px; display: none; }
     </style>
 </head>
 <body>
@@ -32,8 +31,8 @@
         <button style="background:none; border:none; font-size:24px; color:var(--p); cursor:pointer;" onclick="toggleLang()"><i class="fa fa-globe"></i></button>
         <div style="display:flex; align-items:center; gap:10px;">
             <div style="text-align: right;">
-                <b id="t-app-title">ثقة ودليل الباي</b><br>
-                <small id="t-app-desc">دليل موثق لمجتمع Pi</small>
+                <b id="t-title">ثقة ودليل الباي</b><br>
+                <small id="t-desc">دليل موثق لمجتمع Pi</small>
             </div>
             <div class="logo-box">PI</div>
         </div>
@@ -48,78 +47,74 @@
                 <i class="fa fa-calculator"></i> <span id="t-btn-calc">حاسبة الأرباح</span>
             </div>
         </div>
-
         <h4 id="t-feat">تجار مقترحون</h4>
-        
         <a href="https://wa.me/201220469415" class="card-bar" style="border-right-color: #25d366;">
-            <span class="tag" style="background:#e8f5e9; color:#2e7d32;">مصر 🇪🇬</span>
-            <strong id="t-m1-n">ركن الباي المصري</strong>
-            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-            <p style="font-size:12px; color:#666;" id="t-m1-d">تواصل لطلب السلع وشحن الرصيد.</p>
-        </a>
-
-        <a href="https://pip-apps.pichainmall.com" class="card-bar" style="border-right-color: var(--gold);">
-            <span class="tag" style="background:#fff9c4; color:#fbc02d;">Global 🌐</span>
-            <strong id="t-m2-n">Pi Chain Mall</strong>
-            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-            <p style="font-size:12px; color:#666;" id="t-m2-d">السوق العالمي الرسمي لرواد باي.</p>
+            <strong>ركن الباي المصري</strong>
+            <p style="font-size:12px; color:#666;" id="t-m1-d">شحن رصيد وسلع استهلاكية.</p>
         </a>
     </div>
 
+    <div id="stake" class="section">
+        <h3 id="t-s-title" style="text-align:center;">حاسبة الاستيكنج الذكية</h3>
+        <div class="card-bar">
+            <label id="t-l-amt">كمية الباي (π):</label>
+            <input type="number" id="p_amount" placeholder="0.00">
+            
+            <label id="t-l-yrs">مدة القفل (المكافأة):</label>
+            <select id="p_years">
+                <option value="0.25" id="opt-6m">6 أشهر (+25%)</option>
+                <option value="1.0" id="opt-1y">سنة واحدة (+100%)</option>
+                <option value="2.0" id="opt-3y">3 سنوات (+200%)</option>
+            </select>
+            
+            <button onclick="smartCalc()" style="width:100%; background:var(--p); color:#fff; border:none; padding:15px; border-radius:10px; cursor:pointer; font-weight:bold;" id="t-s-btn">احسب الآن</button>
+            
+            <div id="smart_res" style="display:none; text-align:center; margin-top:20px; padding:15px; background:#f0ebf8; border-radius:10px;">
+                <span id="t-s-res-l">الرصيد الكلي المتوقع:</span> <b id="total_val" style="font-size:22px; color:var(--p);"></b> π
+            </div>
+        </div>
+
+        <div id="s-instructions" class="info-box" style="display:block;">
+            <i class="fa fa-info-circle"></i> <b id="t-i-h">تعليمات الاستيكنج:</b>
+            <ul style="margin:8px 0; padding-right:20px;">
+                <li id="t-i-1">القفل يزيد من معدل التعدين الأساسي الخاص بك.</li>
+                <li id="t-i-2">لا يمكنك سحب العملات المقفولة إلا بعد انتهاء المدة.</li>
+                <li id="t-i-3">نسبة الـ 200% متاحة فقط عند اختيار 3 سنوات.</li>
+                <li id="t-i-4">يفضل البدء بكميات صغيرة إذا كنت مبتدئاً.</li>
+            </ul>
+        </div>
+    </div>
+
     <div id="verify_list" class="section">
-        <h3 id="t-v-title" style="text-align:center;">دليل النخبة (Mainnet)</h3>
-        <p style="text-align:center; font-size:11px; color:#888;" id="t-v-sub">تطبيقات موثقة من App Studio</p>
-
-        <a href="https://pichainmall.com" class="card-bar" style="border-right-color: var(--gold);">
-            <i class="fa fa-medal" style="color:var(--gold); position:absolute; left:15px; top:15px;"></i>
+        <h3 id="t-v-title" style="text-align:center;">تطبيقات موثقة (Mainnet)</h3>
+        <a href="https://pichainmall.com" class="card-bar">
+            <i class="fa fa-medal" style="color:var(--gold); float:left;"></i>
             <strong>Pi Chain Mall</strong>
-            <div class="rating">الأعلى تقييماً عالمياً ★★★★★</div>
-            <small>Ecosystem App - Marketplace</small>
+            <small id="t-v1">السوق العالمي الرسمي</small>
         </a>
-
-        <a href="https://workforcepool.com" class="card-bar" style="border-right-color: #2196f3;">
-            <i class="fa fa-medal" style="color:var(--gold); position:absolute; left:15px; top:15px;"></i>
+        <a href="https://workforcepool.com" class="card-bar">
+            <i class="fa fa-medal" style="color:var(--gold); float:left;"></i>
             <strong>Pi Workforce Pool</strong>
-            <div class="rating">الأعلى تقييماً للخدمات ★★★★☆</div>
-            <small>Ecosystem App - Freelancing</small>
-        </a>
-
-        <a href="https://pibrowserviewer.com" class="card-bar" style="border-right-color: #4caf50;">
-            <i class="fa fa-medal" style="color:var(--gold); position:absolute; left:15px; top:15px;"></i>
-            <strong>Pi Barter Mall</strong>
-            <div class="rating">موثق مقايضة ★★★★☆</div>
-            <small>Ecosystem App - Barter</small>
+            <small id="t-v2">منصة الخدمات والعمل الحر</small>
         </a>
     </div>
 
     <div id="add_form" class="section">
-        <h3 id="t-a-title" style="text-align:center;">إرسال بيانات المتجر</h3>
+        <h3 id="t-a-title" style="text-align:center;">طلب إضافة تاجر</h3>
         <div class="card-bar" style="text-align:center;">
-            <p id="t-a-desc">من فضلك أرسل اسم المتجر، التخصص، والمنطقة لتوثيقه في دليلنا.</p>
-            <a href="https://wa.me/201220469415?text=طلب_إضافة_متجر_جديد" style="text-decoration:none; background:var(--p); color:#fff; padding:15px; border-radius:10px; display:block; font-weight:bold;">
-                <i class="fab fa-whatsapp"></i> <span id="t-a-btn">إرسال البيانات</span>
+            <p id="t-a-desc">أرسل بيانات متجرك (الاسم، النشاط، العنوان) عبر الواتساب للتوثيق.</p>
+            <a href="https://wa.me/201220469415?text=طلب_توثيق" style="text-decoration:none; background:var(--p); color:#fff; padding:15px; border-radius:10px; display:block;">
+                <i class="fab fa-whatsapp"></i> <span id="t-a-btn">مراسلة الإدارة</span>
             </a>
-        </div>
-    </div>
-
-    <div id="stake" class="section">
-        <h3 id="t-s-title" style="text-align:center;">حاسبة الاستيكنج</h3>
-        <div class="card-bar">
-            <label id="t-l-amt">كمية الباي:</label>
-            <input type="number" id="p_amount" placeholder="0.00" style="width:100%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ddd;">
-            <button onclick="smartCalc()" style="width:100%; background:var(--p); color:#fff; border:none; padding:15px; border-radius:10px; cursor:pointer;" id="t-s-btn">احسب المكافآت</button>
-            <div id="smart_res" style="display:none; text-align:center; margin-top:20px; font-weight:bold; color:var(--p);">
-                <span id="t-s-res-l">المجموع التقريبي:</span> <span id="total_val"></span> π
-            </div>
         </div>
     </div>
 
     <div id="report" class="section">
         <h3 id="t-r-title" style="text-align:center; color:var(--red);">مركز الأمان</h3>
-        <div class="card-bar" style="text-align:center; border-right-color:var(--red);">
-            <p id="t-r-desc">للإبلاغ عن محتال أو رابط مشبوه.</p>
+        <div class="card-bar" style="text-align:center;">
+            <p id="t-r-desc">أبلغ عن أي محاولة احتيال فوراً.</p>
             <a href="https://wa.me/201220469415" style="text-decoration:none; background:var(--wpp); color:#fff; padding:15px; border-radius:10px; display:block;">
-                <i class="fab fa-whatsapp"></i> <span id="t-r-btn">مراسلة الإدارة</span>
+                <i class="fab fa-whatsapp"></i> <span id="t-r-btn">فتح بلاغ</span>
             </a>
         </div>
     </div>
@@ -138,13 +133,14 @@
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
             if(el) el.classList.add('active');
-            window.scrollTo(0,0);
         }
 
         function smartCalc() {
-            let a = document.getElementById('p_amount').value;
-            if(a > 0) {
-                document.getElementById('total_val').innerText = (a * 2).toLocaleString();
+            let amt = document.getElementById('p_amount').value;
+            let bonus = document.getElementById('p_years').value;
+            if(amt > 0) {
+                let res = parseFloat(amt) + (amt * parseFloat(bonus));
+                document.getElementById('total_val').innerText = res.toLocaleString();
                 document.getElementById('smart_res').style.display = 'block';
             }
         }
@@ -152,33 +148,59 @@
         function toggleLang() {
             isAr = !isAr;
             document.dir = isAr ? 'rtl' : 'ltr';
-            const dict = {
+            const d = {
                 ar: {
                     title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", hom: "الرئيسية", sta: "حاسبة", rep: "إبلاغ", add: "توثيق",
-                    badd: "أضف متجرك", bcalc: "حاسبة الأرباح", vtitle: "دليل النخبة (Mainnet)", vsub: "تطبيقات موثقة من App Studio",
-                    atitle: "إرسال بيانات المتجر", adesc: "أرسل بيانات متجرك للتوثيق", abtn: "إرسال البيانات"
+                    badd: "أضف متجرك", bcalc: "حاسبة الأرباح", feat: "تجار مقترحون", m1d: "شحن رصيد وسلع استهلاكية.",
+                    stitle: "حاسبة الاستيكنج الذكية", amt: "كمية الباي (π):", yrs: "مدة القفل (المكافأة):", sbtn: "احسب الآن", sres: "الرصيد الكلي المتوقع:",
+                    o6: "6 أشهر (+25%)", o1: "سنة واحدة (+100%)", o3: "3 سنوات (+200%)",
+                    ih: "تعليمات الاستيكنج:", i1: "القفل يزيد من معدل التعدين الأساسي.", i2: "لا يمكنك سحب العملات حتى انتهاء المدة.", i3: "نسبة الـ 200% متاحة لـ 3 سنوات.", i4: "ابدأ بكميات صغيرة إذا كنت مبتدئاً.",
+                    vtitle: "تطبيقات موثقة (Mainnet)", v1: "السوق العالمي الرسمي", v2: "منصة الخدمات والعمل حر",
+                    atitle: "طلب إضافة تاجر", adesc: "أرسل بيانات متجرك للتوثيق.", abtn: "مراسلة الإدارة", rtitle: "مركز الأمان", rbtn: "فتح بلاغ"
                 },
                 en: {
                     title: "Trust & Pi Guide", desc: "Verified Pi Directory", hom: "Home", sta: "Calc", rep: "Report", add: "Verify",
-                    badd: "Add Store", bcalc: "Staking Calc", vtitle: "Elite Directory (Mainnet)", vsub: "Apps Verified by App Studio",
-                    atitle: "Submit Store Info", adesc: "Send your store details for verification", abtn: "Submit Now"
+                    badd: "Add Store", bcalc: "Profit Calc", feat: "Suggested Merchants", m1d: "Top up and consumer goods.",
+                    stitle: "Smart Staking Calculator", amt: "Pi Amount (π):", yrs: "Lock Duration (Reward):", sbtn: "Calculate Now", sres: "Total Expected Balance:",
+                    o6: "6 Months (+25%)", o1: "1 Year (+100%)", o3: "3 Years (+200%)",
+                    ih: "Staking Instructions:", i1: "Lockup increases your base mining rate.", i2: "Coins cannot be withdrawn until period ends.", i3: "200% bonus is for 3 years only.", i4: "Start with small amounts if you are new.",
+                    vtitle: "Verified Apps (Mainnet)", v1: "Official Global Marketplace", v2: "Services & Freelance Platform",
+                    atitle: "Merchant Request", adesc: "Send store details for verification.", abtn: "Contact Admin", rtitle: "Security Center", rbtn: "Open Report"
                 }
             };
-            const t = isAr ? dict.ar : dict.en;
-            document.getElementById('t-app-title').innerText = t.title;
-            document.getElementById('t-app-desc').innerText = t.desc;
+            const t = isAr ? d.ar : d.en;
+            document.getElementById('t-title').innerText = t.title;
+            document.getElementById('t-desc').innerText = t.desc;
             document.getElementById('t-n-hom').innerText = t.hom;
             document.getElementById('t-n-sta').innerText = t.sta;
             document.getElementById('t-n-rep').innerText = t.rep;
             document.getElementById('t-n-add').innerText = t.add;
             document.getElementById('t-btn-add').innerText = t.badd;
             document.getElementById('t-btn-calc').innerText = t.bcalc;
+            document.getElementById('t-feat').innerText = t.feat;
+            document.getElementById('t-m1-d').innerText = t.m1d;
+            document.getElementById('t-s-title').innerText = t.stitle;
+            document.getElementById('t-l-amt').innerText = t.amt;
+            document.getElementById('t-l-yrs').innerText = t.yrs;
+            document.getElementById('t-s-btn').innerText = t.sbtn;
+            document.getElementById('t-s-res-l').innerText = t.sres;
+            document.getElementById('opt-6m').innerText = t.o6;
+            document.getElementById('opt-1y').innerText = t.o1;
+            document.getElementById('opt-3y').innerText = t.o3;
+            document.getElementById('t-i-h').innerText = t.ih;
+            document.getElementById('t-i-1').innerText = t.i1;
+            document.getElementById('t-i-2').innerText = t.i2;
+            document.getElementById('t-i-3').innerText = t.i3;
+            document.getElementById('t-i-4').innerText = t.i4;
             document.getElementById('t-v-title').innerText = t.vtitle;
-            document.getElementById('t-v-sub').innerText = t.vsub;
+            document.getElementById('t-v1').innerText = t.v1;
+            document.getElementById('t-v2').innerText = t.v2;
             document.getElementById('t-a-title').innerText = t.atitle;
             document.getElementById('t-a-desc').innerText = t.adesc;
             document.getElementById('t-a-btn').innerText = t.abtn;
+            document.getElementById('t-r-title').innerText = t.rtitle;
+            document.getElementById('t-r-btn').innerText = t.rbtn;
         }
     </script>
 </body>
-            </html>
+                    </html>
