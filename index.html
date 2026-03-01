@@ -47,10 +47,10 @@
                 <i class="fa fa-calculator"></i> <br><span id="t-b-calc">الحاسبة</span>
             </div>
         </div>
-        <h4 id="t-feat">تطبيقات مقترحة</h4>
+        <h4 id="t-feat-h">تطبيقات مقترحة</h4>
         <a href="https://fireside.pinet.com" class="card-bar" style="border-right-color: var(--ora);">
-            <strong>Fireside Forum</strong><br>
-            <small id="t-v4">التواصل الاجتماعي الموثق.</small>
+            <strong id="t-fire-n">Fireside Forum</strong><br>
+            <small id="t-fire-d">التواصل الاجتماعي الموثق.</small>
         </a>
     </div>
 
@@ -60,10 +60,7 @@
             <strong>Pi Chain Mall</strong><br><small id="t-v1">أكبر سوق تجاري عالمي.</small>
         </a>
         <a href="https://pibridge.org" class="card-bar" style="border-right-color: var(--blue);">
-            <strong>Pi Bridge</strong><br><small id="t-v-bridge">جسر نقل الأصول الموثق (مصلح).</small>
-        </a>
-        <a href="https://workforcepool.com" class="card-bar">
-            <strong>Workforce Pool</strong><br><small id="t-v2">منصة الخدمات والمهام.</small>
+            <strong>Pi Bridge</strong><br><small id="t-v-bridge">جسر نقل الأصول الموثق.</small>
         </a>
     </div>
 
@@ -72,10 +69,9 @@
         <div class="warn-box">
             <i class="fa fa-shield-alt"></i> 
             <b id="t-s-warn">نصائح الأمان:</b>
-            <ul style="margin: 5px 0; padding-right: 20px;" id="t-s-list">
-                <li>لا تدخل كلمة سر محفظتك في أي موقع للحساب.</li>
-                <li>الاستيكنج يزيد من معدل تعدينك المستقبلي.</li>
-                <li>تأكد من اختيار مدة تناسب خطتك المالية.</li>
+            <ul style="margin: 5px 0; padding-right: 20px;">
+                <li id="t-s-l1">لا تدخل كلمة سر محفظتك في أي موقع للحساب.</li>
+                <li id="t-s-l2">الاستيكنج يزيد من معدل تعدينك المستقبلي.</li>
             </ul>
         </div>
         <div class="card-bar">
@@ -83,9 +79,9 @@
             <input type="number" id="p_amount" placeholder="0.00">
             <label id="t-l-yrs">مدة القفل:</label>
             <select id="p_years">
-                <option value="0.25">6 أشهر (+25%)</option>
-                <option value="1.0">سنة واحدة (+100%)</option>
-                <option value="2.0">3 سنوات (+200%)</option>
+                <option value="0.25" id="opt1">6 أشهر (+25%)</option>
+                <option value="1.0" id="opt2">سنة واحدة (+100%)</option>
+                <option value="2.0" id="opt3">3 سنوات (+200%)</option>
             </select>
             <button class="btn-main" onclick="calc()" id="t-s-btn">احسب المكافأة</button>
             <div id="res_box" style="display:none; text-align:center; margin-top:15px; color:var(--p); font-weight:bold;">
@@ -96,25 +92,29 @@
 
     <div id="add_form" class="section">
         <h3 id="t-a-title" style="text-align:center;">تسجيل تاجر جديد</h3>
-        <a href="https://wa.me/201220469415" class="card-bar" style="text-align:center;">
+        <div class="card-bar" style="text-align:center;">
             <p id="t-a-desc">تواصل معنا عبر الواتساب لإضافة بيانات متجرك.</p>
-            <span class="btn-main"><i class="fab fa-whatsapp"></i> مراسلة الإدارة</span>
-        </a>
+            <a href="https://api.whatsapp.com/send?phone=201220469415&text=طلب_توثيق_متجر" class="btn-main">
+                <i class="fab fa-whatsapp"></i> <span id="t-a-btn">مراسلة الإدارة</span>
+            </a>
+        </div>
     </div>
 
     <div id="report" class="section">
         <h3 id="t-r-title" style="text-align:center; color:var(--red);">مركز الأمان</h3>
-        <a href="https://wa.me/201220469415" class="card-bar" style="border-right-color: var(--red); text-align:center;">
+        <div class="card-bar" style="border-right-color: var(--red); text-align:center;">
             <p id="t-r-desc">أبلغ عن أي محاولة احتيال لحماية المجتمع.</p>
-            <span class="btn-main" style="background:var(--red);">فتح بلاغ</span>
-        </a>
+            <a href="https://api.whatsapp.com/send?phone=201220469415&text=بلاغ_عن_محاولة_احتيال" class="btn-main" style="background:var(--red);">
+                <span id="t-r-btn">فتح بلاغ</span>
+            </a>
+        </div>
     </div>
 
     <div class="footer">
-        <div class="f-item" id="n-rep" onclick="showPage('report', this)"><i class="fa fa-bullhorn"></i><span>إبلاغ</span></div>
-        <div class="f-item" id="n-ver" onclick="showPage('verify_list', this)"><i class="fa fa-medal"></i><span>توثيق</span></div>
-        <div class="f-item" id="n-sta" onclick="showPage('stake', this)"><i class="fa fa-calculator"></i><span>حاسبة</span></div>
-        <div class="f-item active" id="n-hom" onclick="showPage('home', this)"><i class="fa fa-house"></i><span>الرئيسية</span></div>
+        <div class="f-item" id="n-rep" onclick="showPage('report', this)"><i class="fa fa-bullhorn"></i><span id="n-t-rep">إبلاغ</span></div>
+        <div class="f-item" id="n-ver" onclick="showPage('verify_list', this)"><i class="fa fa-medal"></i><span id="n-t-ver">توثيق</span></div>
+        <div class="f-item" id="n-sta" onclick="showPage('stake', this)"><i class="fa fa-calculator"></i><span id="n-t-sta">حاسبة</span></div>
+        <div class="f-item active" id="n-hom" onclick="showPage('home', this)"><i class="fa fa-house"></i><span id="n-t-hom">الرئيسية</span></div>
     </div>
 
     <script>
@@ -137,18 +137,47 @@
             isAr = !isAr;
             document.dir = isAr ? 'rtl' : 'ltr';
             const d = {
-                ar: { title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", badd: "أضف متجرك", bcalc: "الحاسبة", sinfo: "نصائح الأمان:", res: "المجموع المتوقع:", btn: "احسب المكافأة" },
-                en: { title: "Trust & Pi Guide", desc: "Verified Pi Directory", badd: "Add Store", bcalc: "Calculator", sinfo: "Safety Tips:", res: "Expected Total:", btn: "Calculate" }
+                ar: { 
+                    title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", badd: "أضف متجرك", bcalc: "الحاسبة", 
+                    feat: "تطبيقات مقترحة", vtitle: "دليل المايننت", stitle: "حاسبة الاستيكنج", swarn: "نصائح الأمان:",
+                    l1: "لا تدخل كلمة سر محفظتك أبداً.", l2: "الاستيكنج يزيد معدل تعدينك.", res: "المجموع المتوقع:", btn: "احسب المكافأة",
+                    atitle: "تسجيل تاجر", adesc: "تواصل عبر الواتساب لإضافة متجرك.", abtn: "مراسلة الإدارة",
+                    rtitle: "مركز الأمان", rdesc: "أبلغ عن أي محاولة احتيال.", rbtn: "فتح بلاغ",
+                    nhom: "الرئيسية", nver: "توثيق", nsta: "حاسبة", nrep: "إبلاغ"
+                },
+                en: { 
+                    title: "Trust & Pi Guide", desc: "Verified Pi Directory", badd: "Add Store", bcalc: "Calculator", 
+                    feat: "Suggested Apps", vtitle: "Mainnet Apps", stitle: "Staking Calc", swarn: "Safety Tips:",
+                    l1: "Never share your passphrase.", l2: "Staking boosts your mining rate.", res: "Expected Total:", btn: "Calculate",
+                    atitle: "Register Store", adesc: "Contact WhatsApp to add your store.", abtn: "Contact Admin",
+                    rtitle: "Security Center", rdesc: "Report any scam attempts.", rbtn: "Open Report",
+                    nhom: "Home", nver: "Verify", nsta: "Calc", nrep: "Report"
+                }
             };
             const t = isAr ? d.ar : d.en;
             document.getElementById('t-title').innerText = t.title;
             document.getElementById('t-desc').innerText = t.desc;
             document.getElementById('t-b-add').innerText = t.badd;
             document.getElementById('t-b-calc').innerText = t.bcalc;
-            document.getElementById('t-s-warn').innerText = t.sinfo;
+            document.getElementById('t-feat-h').innerText = t.feat;
+            document.getElementById('t-v-title').innerText = t.vtitle;
+            document.getElementById('t-s-title').innerText = t.stitle;
+            document.getElementById('t-s-warn').innerText = t.swarn;
+            document.getElementById('t-s-l1').innerText = t.l1;
+            document.getElementById('t-s-l2').innerText = t.l2;
             document.getElementById('t-s-res-l').innerText = t.res;
             document.getElementById('t-s-btn').innerText = t.btn;
+            document.getElementById('t-a-title').innerText = t.atitle;
+            document.getElementById('t-a-desc').innerText = t.adesc;
+            document.getElementById('t-a-btn').innerText = t.abtn;
+            document.getElementById('t-r-title').innerText = t.rtitle;
+            document.getElementById('t-r-desc').innerText = t.rdesc;
+            document.getElementById('t-r-btn').innerText = t.rbtn;
+            document.getElementById('n-t-hom').innerText = t.nhom;
+            document.getElementById('n-t-ver').innerText = t.nver;
+            document.getElementById('n-t-sta').innerText = t.nsta;
+            document.getElementById('n-t-rep').innerText = t.nrep;
         }
     </script>
 </body>
-                                                                                                                              </html>
+            </html>
