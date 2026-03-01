@@ -47,7 +47,7 @@
                 <i class="fa fa-chart-line"></i> <br><span id="t-b-calc">احسب أرباحك</span>
             </div>
         </div>
-        <h4 id="t-feat-h">تطبيقات المايننت الموثقة</h4>
+        <h4 id="t-feat-h">تطبيقات المايننت المميزة</h4>
         <a href="https://fireside.pinet.com" class="card-bar" style="border-right-color: var(--ora);">
             <strong>Fireside Forum</strong><br>
             <small id="t-fire-d">تواصل واربح Pi من منشوراتك.</small>
@@ -55,12 +55,30 @@
     </div>
 
     <div id="verify_list" class="section">
-        <h3 id="t-v-title" style="text-align:center;">دليل المشاريع الرسمية</h3>
-        <a href="https://www.pichainmall.com" class="card-bar">
-            <strong>Pi Chain Mall</strong><br><small id="t-v1">تسوق بمنتجات حقيقية مقابل Pi.</small>
+        <h3 id="t-v-title" style="text-align:center;">دليل المشاريع الرسمية (الروابط)</h3>
+        
+        <a href="https://www.pichainmall.com" class="card-bar" style="border-right-color: var(--blue);">
+            <i class="fa fa-shopping-bag" style="float:left; color:var(--blue);"></i>
+            <strong>Pi Chain Mall</strong><br>
+            <small id="t-v1">تسوق بمنتجات حقيقية مقابل Pi.</small>
         </a>
-        <a href="https://pibridge.org" class="card-bar" style="border-right-color: var(--blue);">
-            <strong>Pi Bridge</strong><br><small id="t-v-bridge">المنصة الرسمية لنقل الأصول.</small>
+
+        <a href="https://pibridge.org" class="card-bar" style="border-right-color: var(--gold);">
+            <i class="fa fa-bridge" style="float:left; color:var(--gold);"></i>
+            <strong>Pi Bridge</strong><br>
+            <small id="t-v-bridge">المنصة الرسمية لنقل الأصول.</small>
+        </a>
+
+        <a href="https://workforcepool.com" class="card-bar" style="border-right-color: var(--p);">
+            <i class="fa fa-users-cog" style="float:left; color:var(--p);"></i>
+            <strong>Workforce Pool</strong><br>
+            <small id="t-v2">سوق الخدمات والوظائف المصغر.</small>
+        </a>
+
+        <a href="https://pibartermall.com" class="card-bar" style="border-right-color: var(--ora);">
+            <i class="fa fa-exchange-alt" style="float:left; color:var(--ora);"></i>
+            <strong>Pi Barter Mall</strong><br>
+            <small id="t-v3">تبادل السلع محلياً وعالمياً.</small>
         </a>
     </div>
 
@@ -107,7 +125,7 @@
         <h3 id="t-r-title" style="text-align:center; color:var(--red);">بلاغات الأمان</h3>
         <div class="card-bar" style="border-right-color: var(--red); text-align:center;">
             <i class="fa fa-shield-virus" style="font-size:40px; color:var(--red); margin-bottom:10px;"></i>
-            <p id="t-r-desc">ساعدنا في حماية المجتمع وأبلغ عن أي نصاب.</p>
+            <p id="t-r-desc">أبلغ عن أي نصاب لحماية المجتمع.</p>
             <a href="whatsapp://send?phone=201220469415&text=بلاغ_عن_محتال" class="btn-main" style="background:var(--red);">
                 <span id="t-r-btn">إرسال بلاغ واتساب</span>
             </a>
@@ -128,6 +146,7 @@
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
             if(el) el.classList.add('active');
+            window.scrollTo(0,0);
         }
         function calc() {
             let amt = document.getElementById('p_amount').value;
@@ -136,7 +155,7 @@
                 let total = parseFloat(amt) + (amt * bonus);
                 document.getElementById('total_v').innerText = total.toLocaleString();
                 document.getElementById('res_box').style.display = 'block';
-            }
+            } else { alert("من فضلك أدخل كمية باي"); }
         }
         function toggleLang() {
             isAr = !isAr;
@@ -187,4 +206,4 @@
         }
     </script>
 </body>
-                                 </html>
+                </html>
