@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثقة ودليل الباي</title>
+    <title>ثقة ودليل الباي - Trust & Pi Guide</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; --red: #e91e63; --ora: #ff9800; --blue: #2196f3; }
+        :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; --red: #e91e63; --ora: #ff9800; --green: #25D366; }
         body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo-box { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
@@ -14,13 +14,14 @@
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .card-bar { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-right: 5px solid var(--p); text-decoration: none; color: inherit; display: block; }
-        .warn-box { background: #e8f5e9; border: 1px solid #2e7d32; padding: 12px; border-radius: 12px; margin-bottom: 15px; color: #1b5e20; font-size: 14px; line-height: 1.6; }
+        .profit-box { background: #e8f5e9; border: 1px solid #2e7d32; padding: 12px; border-radius: 12px; margin-bottom: 15px; color: #1b5e20; line-height: 1.6; }
         .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 10px 0; z-index: 1000; }
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
         .btn-main { width: 100%; background: var(--p); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; font-weight: bold; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; font-size: 16px; font-weight: bold; }
+        .res-highlight { background: #fff9c4; padding: 20px; border-radius: 15px; border: 2px solid var(--gold); margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -41,70 +42,55 @@
     <div id="home" class="section active">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
             <div onclick="showPage('add_form', this)" style="background: var(--p); color:white; padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
-                <i class="fa fa-store"></i> <br><span id="t-b-add">أضف متجرك</span>
+                <i class="fa fa-store" style="font-size:20px;"></i> <br><span id="t-b-add">أضف متجرك</span>
             </div>
             <div onclick="showPage('stake', this)" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
-                <i class="fa fa-chart-line"></i> <br><span id="t-b-calc">احسب أرباحك</span>
+                <i class="fa fa-chart-line" style="font-size:20px;"></i> <br><span id="t-b-calc">احسب أرباحك</span>
             </div>
         </div>
-        <h4 id="t-feat-h">تطبيقات المايننت المميزة</h4>
+        <h4 id="t-feat-h">تطبيقات المايننت الموثقة</h4>
         <a href="https://fireside.pinet.com" class="card-bar" style="border-right-color: var(--ora);">
             <strong>Fireside Forum</strong><br>
-            <small id="t-fire-d">تواصل واربح Pi من منشوراتك.</small>
+            <small id="t-fire-d">اربح عملات Pi مقابل المحتوى المميز.</small>
         </a>
     </div>
 
     <div id="verify_list" class="section">
-        <h3 id="t-v-title" style="text-align:center;">دليل المشاريع الرسمية (الروابط)</h3>
-        
-        <a href="https://www.pichainmall.com" class="card-bar" style="border-right-color: var(--blue);">
-            <i class="fa fa-shopping-bag" style="float:left; color:var(--blue);"></i>
-            <strong>Pi Chain Mall</strong><br>
-            <small id="t-v1">تسوق بمنتجات حقيقية مقابل Pi.</small>
+        <h3 id="t-v-title" style="text-align:center;">دليل المشاريع الرسمية</h3>
+        <a href="https://www.pichainmall.com" class="card-bar">
+            <strong>Pi Chain Mall</strong><br><small id="t-v1">أكبر سوق تجاري لشراء المنتجات بـ Pi.</small>
         </a>
-
-        <a href="https://pibridge.org" class="card-bar" style="border-right-color: var(--gold);">
-            <i class="fa fa-bridge" style="float:left; color:var(--gold);"></i>
-            <strong>Pi Bridge</strong><br>
-            <small id="t-v-bridge">المنصة الرسمية لنقل الأصول.</small>
+        <a href="https://pibridge.org" class="card-bar" style="border-right-color: #2196f3;">
+            <strong>Pi Bridge</strong><br><small id="t-v-bridge">جسر نقل الأصول والتبادل الموثق.</small>
         </a>
-
-        <a href="https://workforcepool.com" class="card-bar" style="border-right-color: var(--p);">
-            <i class="fa fa-users-cog" style="float:left; color:var(--p);"></i>
-            <strong>Workforce Pool</strong><br>
-            <small id="t-v2">سوق الخدمات والوظائف المصغر.</small>
-        </a>
-
-        <a href="https://pibartermall.com" class="card-bar" style="border-right-color: var(--ora);">
-            <i class="fa fa-exchange-alt" style="float:left; color:var(--ora);"></i>
-            <strong>Pi Barter Mall</strong><br>
-            <small id="t-v3">تبادل السلع محلياً وعالمياً.</small>
+        <a href="https://workforcepool.com" class="card-bar" style="border-right-color: #9c27b0;">
+            <strong>Workforce Pool</strong><br><small id="t-v2">منصة الخدمات المصغرة والمهام.</small>
         </a>
     </div>
 
     <div id="stake" class="section">
-        <h3 id="t-s-title" style="text-align:center;">مركز استثمار Pi</h3>
-        <div class="warn-box">
+        <h3 id="t-s-title" style="text-align:center;">مركز استثمار وأرباح Pi</h3>
+        <div class="profit-box">
             <i class="fa fa-gift" style="font-size:20px;"></i> 
-            <b id="t-s-promo">لماذا يجب عليك قفل عملاتك (Stake)؟</b>
+            <b id="t-s-promo">لماذا الاستيكنج (Stake)؟</b>
             <ul style="margin: 8px 0; padding-right: 20px;">
-                <li id="t-s-l1">ستحصل على <b>أرباح إضافية</b> من العملات فوق رصيدك الحالي.</li>
-                <li id="t-s-l2">سيتضاعف <b>معدل التعدين</b> الخاص بك فوراً وبشكل كبير.</li>
-                <li id="t-s-l3">تساهم في رفع قيمة عملة Pi في الأسواق العالمية.</li>
+                <li id="t-s-l1">أرباح صافية تضاف لرصيدك الحالي.</li>
+                <li id="t-s-l2">مضاعفة سرعة تعدينك اليومي فوراً.</li>
+                <li id="t-s-l3">دعم قيمة العملة واستقرارها عالمياً.</li>
             </ul>
         </div>
         <div class="card-bar">
-            <label id="t-l-amt">الكمية التي تريد استثمارها:</label>
+            <label id="t-l-amt">الكمية المراد استثمارها:</label>
             <input type="number" id="p_amount" placeholder="مثلاً: 100">
             <label id="t-l-yrs">اختر خطة الأرباح:</label>
             <select id="p_years">
-                <option value="0.5">6 أشهر (أرباح +50%)</option>
-                <option value="2.0">سنة واحدة (أرباح مضاعفة +200%) 🔥</option>
-                <option value="5.0">3 سنوات (أقصى ربح +500%) 🚀</option>
+                <option value="0.5" id="opt1">6 أشهر (أرباح +50%)</option>
+                <option value="2.0" id="opt2">سنة واحدة (أرباح +200%) 🔥</option>
+                <option value="5.0" id="opt3">3 سنوات (أرباح +500%) 🚀</option>
             </select>
-            <button class="btn-main" onclick="calc()" id="t-s-btn">احسب أرباحي الكلية</button>
-            <div id="res_box" style="display:none; text-align:center; margin-top:15px; background:#fff9c4; padding:20px; border-radius:15px; border:2px solid var(--gold);">
-                <span id="t-s-res-l" style="font-weight:bold; color:#444;">رصيدك المتوقع بعد المكافأة:</span><br>
+            <button class="btn-main" onclick="calc()" id="t-s-btn">احسب أرباحي الآن</button>
+            <div id="res_box" class="res-highlight" style="display:none; text-align:center;">
+                <span id="t-s-res-l" style="font-weight:bold; color:#555;">رصيدك الإجمالي المتوقع:</span><br>
                 <span id="total_v" style="font-size:28px; color:var(--p); font-weight:900;"></span> <b style="color:var(--p)">π</b>
             </div>
         </div>
@@ -113,20 +99,20 @@
     <div id="add_form" class="section">
         <h3 id="t-a-title" style="text-align:center;">سجل كتاجر موثق</h3>
         <div class="card-bar" style="text-align:center;">
-            <i class="fab fa-whatsapp" style="font-size:40px; color:#25D366; margin-bottom:10px;"></i>
+            <i class="fab fa-whatsapp" style="font-size:45px; color:var(--green); margin-bottom:10px;"></i>
             <p id="t-a-desc">ارسل بيانات متجرك الآن ليظهر في الدليل العالمي.</p>
-            <a href="whatsapp://send?phone=201220469415&text=أريد_تسجيل_متجري" class="btn-main" style="background:#25D366;">
-                 <span id="t-a-btn">اضغط هنا للمراسلة فوراً</span>
+            <a href="whatsapp://send?phone=201220469415&text=أريد_تسجيل_متجري" class="btn-main" style="background:var(--green);">
+                <span id="t-a-btn">اضغط للمراسلة فوراً</span>
             </a>
         </div>
     </div>
 
     <div id="report" class="section">
-        <h3 id="t-r-title" style="text-align:center; color:var(--red);">بلاغات الأمان</h3>
+        <h3 id="t-r-title" style="text-align:center; color:var(--red);">مركز الأمان</h3>
         <div class="card-bar" style="border-right-color: var(--red); text-align:center;">
-            <i class="fa fa-shield-virus" style="font-size:40px; color:var(--red); margin-bottom:10px;"></i>
-            <p id="t-r-desc">أبلغ عن أي نصاب لحماية المجتمع.</p>
-            <a href="whatsapp://send?phone=201220469415&text=بلاغ_عن_محتال" class="btn-main" style="background:var(--red);">
+            <i class="fa fa-user-shield" style="font-size:45px; color:var(--red); margin-bottom:10px;"></i>
+            <p id="t-r-desc">ساعدنا في حماية المجتمع وأبلغ عن أي نصاب.</p>
+            <a href="whatsapp://send?phone=201220469415&text=بلاغ_عن_محاولة_احتيال" class="btn-main" style="background:var(--red);">
                 <span id="t-r-btn">إرسال بلاغ واتساب</span>
             </a>
         </div>
@@ -163,20 +149,20 @@
             const d = {
                 ar: { 
                     title: "ثقة ودليل الباي", desc: "استثمر عملاتك بأمان", badd: "أضف متجرك", bcalc: "احسب أرباحك", 
-                    vtitle: "دليل المشاريع", stitle: "مركز استثمار Pi", promo: "لماذا يجب القفل (Stake)؟",
-                    l1: "ستحصل على أرباح إضافية من العملات.", l2: "سيتضاعف معدل التعدين فوراً.", l3: "رفع قيمة العملة عالمياً.",
-                    res: "رصيدك المتوقع بعد المكافأة:", btn: "احسب أرباحي الكلية",
-                    atitle: "سجل كتاجر", adesc: "ارسل بيانات متجرك لتظهر في الدليل.", abtn: "اضغط هنا للمراسلة فوراً",
-                    rtitle: "بلاغات الأمان", rdesc: "أبلغ عن أي نصاب لحماية المجتمع.", rbtn: "إرسال بلاغ واتساب",
+                    feat: "تطبيقات المايننت الموثقة", vtitle: "دليل المشاريع الرسمية", stitle: "مركز استثمار وأرباح Pi", promo: "لماذا الاستيكنج (Stake)؟",
+                    l1: "أرباح صافية تضاف لرصيدك الحالي.", l2: "مضاعفة سرعة تعدينك اليومي فوراً.", l3: "دعم قيمة العملة عالمياً.",
+                    res: "رصيدك الإجمالي المتوقع:", btn: "احسب أرباحي الآن", atitle: "سجل كتاجر موثق", 
+                    adesc: "ارسل بيانات متجرك الآن ليظهر في الدليل العالمي.", abtn: "اضغط للمراسلة فوراً",
+                    rtitle: "مركز الأمان", rdesc: "أبلغ عن أي نصاب لحماية المجتمع.", rbtn: "إرسال بلاغ واتساب",
                     nhom: "الرئيسية", nver: "توثيق", nsta: "أرباح", nrep: "إبلاغ"
                 },
                 en: { 
                     title: "Trust & Pi Guide", desc: "Invest your Pi Safely", badd: "Add Store", bcalc: "Calc Profits", 
-                    vtitle: "Project Directory", stitle: "Pi Investment Center", promo: "Why should you Stake?",
-                    l1: "Earn extra bonus coins on your balance.", l2: "Instantly boost your mining rate.", l3: "Increase Pi market value globally.",
-                    res: "Expected balance after bonus:", btn: "Calculate Total Profits",
-                    atitle: "Merchant Registry", adesc: "Send your store info to join the list.", abtn: "Message Now",
-                    rtitle: "Security Reports", rdesc: "Report scammers to keep us safe.", rbtn: "Send WhatsApp Report",
+                    feat: "Verified Mainnet Apps", vtitle: "Official Projects Directory", stitle: "Pi Investment Center", promo: "Why Staking?",
+                    l1: "Get net profits added to your balance.", l2: "Instantly double your mining rate.", l3: "Support Pi value globally.",
+                    res: "Expected total balance:", btn: "Calculate My Profits", atitle: "Register Store", 
+                    adesc: "Send your store info to join the global list.", abtn: "Message Now",
+                    rtitle: "Security Center", rdesc: "Report scammers to protect the community.", rbtn: "Send WhatsApp Report",
                     nhom: "Home", nver: "Verify", nsta: "Earnings", nrep: "Report"
                 }
             };
@@ -185,6 +171,7 @@
             document.getElementById('t-desc').innerText = t.desc;
             document.getElementById('t-b-add').innerText = t.badd;
             document.getElementById('t-b-calc').innerText = t.bcalc;
+            document.getElementById('t-feat-h').innerText = t.feat;
             document.getElementById('t-v-title').innerText = t.vtitle;
             document.getElementById('t-s-title').innerText = t.stitle;
             document.getElementById('t-s-promo').innerText = t.promo;
@@ -206,4 +193,4 @@
         }
     </script>
 </body>
-                </html>
+                                      </html>
