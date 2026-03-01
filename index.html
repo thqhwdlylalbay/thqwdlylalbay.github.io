@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; --red: #e91e63; --ora: #ff9800; --blue: #2196f3; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; overflow-x: hidden; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo-box { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         
@@ -31,7 +31,7 @@
 <body>
 
     <div class="header">
-        <i class="fa fa-bars" style="color:var(--p); font-size:20px;"></i>
+        <i class="fa fa-shield-check" style="color:var(--p); font-size:20px;"></i>
         <div style="display:flex; align-items:center; gap:8px;">
             <div style="text-align: right;">
                 <b>ثقة ودليل الباي</b><br>
@@ -43,79 +43,87 @@
 
     <div id="home" class="section active">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
-            <div onclick="showPage('add_store')" style="background:var(--p); color:white; padding:15px; border-radius:12px; text-align:center;">
-                <i class="fa fa-plus-circle"></i><br>أضف متجرك
+            <div onclick="showPage('add_store', document.getElementById('f-add'))" style="background:var(--p); color:white; padding:15px; border-radius:12px; text-align:center; cursor:pointer;">
+                <i class="fa fa-store"></i><br>أضف متجرك
             </div>
-            <div onclick="showPage('stake_page')" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:15px; border-radius:12px; text-align:center;">
+            <div onclick="showPage('stake_page', document.getElementById('f-stake'))" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:15px; border-radius:12px; text-align:center; cursor:pointer;">
                 <i class="fa fa-calculator"></i><br>الحاسبة
             </div>
         </div>
 
-        <h4>تطبيقات مقترحة</h4>
+        <h4 style="margin-bottom:10px;">تطبيقات مقترحة</h4>
         <a href="https://fireside.pinet.com" class="card-bar" style="border-right-color:var(--ora);">
+            <i class="fa fa-fire" style="color:var(--ora); float:left;"></i>
             <strong>Fireside Forum</strong><br>
-            <small>منصة التواصل الاجتماعي الموثقة.</small>
+            <small>التواصل الاجتماعي الموثق بمبدأ الاستيكنج.</small>
         </a>
         <a href="https://www.pichainmall.com" class="card-bar" style="border-right-color:var(--blue);">
+            <i class="fa fa-shopping-cart" style="color:var(--blue); float:left;"></i>
             <strong>Pi Chain Mall</strong><br>
-            <small>تسوق عالمي باستخدام عملة Pi.</small>
+            <small>أكبر سوق عالمي لتبادل المنتجات بالعملة.</small>
         </a>
     </div>
 
     <div id="stake_page" class="section">
-        <h3 style="text-align:center;">حاسبة مكافآت الاستيكنج</h3>
+        <h3 style="text-align:center;">حاسبة مكافآت التعدين</h3>
         <div class="warn-box">
-            <i class="fa fa-shield-alt"></i> 
-            <b>تنبيه أمان:</b> التعليمات أهم من الحساب! لا تعطي "كلمة سر المحفظة" لأي شخص أو موقع.
+            <i class="fa fa-info-circle"></i> 
+            <b>تنبيه هام:</b> هذه الحاسبة تقريبية لفوائد القفل. لا تدخل كلمة سر محفظتك في أي تطبيق خارجي.
         </div>
         <div class="card-bar">
-            <label>كمية Pi المجمدة:</label>
-            <input type="number" id="amt" placeholder="0.00">
-            <label>مدة القفل:</label>
+            <label>كمية Pi المراد قفلها:</label>
+            <input type="number" id="amt" placeholder="أدخل الكمية">
+            <label>مدة القفل المختار:</label>
             <select id="dur">
-                <option value="0.25">6 أشهر (+25%)</option>
-                <option value="1.0">سنة واحدة (+100%)</option>
-                <option value="2.0">3 سنوات (+200%)</option>
+                <option value="0.25">6 أشهر (+25% بونص)</option>
+                <option value="1.0">سنة واحدة (+100% بونص)</option>
+                <option value="2.0">3 سنوات (+200% بونص)</option>
             </select>
-            <button class="btn-main" onclick="calculate()">احسب المكافأة</button>
-            <div id="res" style="display:none; text-align:center; margin-top:15px; color:var(--p); font-size:18px;">
-                المجموع الكلي: <b id="total"></b> π
+            <button class="btn-main" onclick="calculate()">احسب المجموع المتوقع</button>
+            <div id="res" style="display:none; text-align:center; margin-top:20px; background:#f0ebf7; padding:15px; border-radius:10px;">
+                <span style="color:#555;">المجموع بعد انتهاء المدة:</span><br>
+                <b style="font-size:24px; color:var(--p);" id="total"></b> <small>π</small>
             </div>
         </div>
     </div>
 
     <div id="verify_page" class="section">
-        <h3 style="text-align:center;">تطبيقات المايننت الموثقة</h3>
+        <h3 style="text-align:center;">دليل التجار والتطبيقات الموثقة</h3>
         <div class="card-bar">
+            <i class="fa fa-check-circle" style="color:var(--blue); float:left;"></i>
             <strong>Pi Browser</strong><br>
-            <small>المتصفح الرسمي للشبكة.</small>
+            <small>البوابة الرسمية لكل تطبيقات النظام البيئي.</small>
         </div>
         <a href="https://workforcepool.com" class="card-bar">
+            <i class="fa fa-tools" style="color:var(--p); float:left;"></i>
             <strong>Workforce Pool</strong><br>
-            <small>سوق الخدمات والمهام المصغر.</small>
+            <small>منصة عالمية للتوظيف والعمل الحر بالباي.</small>
         </a>
-        <div class="card-bar">
-            <strong>Pi Bridge</strong><br>
-            <small>جسر نقل الأصول الموثق.</small>
-        </div>
+        <a href="https://pibartermall.com" class="card-bar">
+            <i class="fa fa-exchange-alt" style="color:var(--ora); float:left;"></i>
+            <strong>Pi Barter Mall</strong><br>
+            <small>تبادل السلع والمنتجات بين الرواد.</small>
+        </a>
     </div>
 
     <div id="report_page" class="section">
-        <h3 style="text-align:center; color:var(--red);">مركز مكافحة الاحتيال</h3>
-        <div class="warn-box" style="border-color:var(--red); color:var(--red);">
-            إذا تعرضت للاحتيال أو وجدت متجر وهمي، أبلغنا فوراً.
+        <h3 style="text-align:center; color:var(--red);">مركز الأمان والبلاغات</h3>
+        <div class="card-bar" style="border-right-color:var(--red); text-align:center;">
+            <i class="fa fa-bullhorn" style="font-size:40px; color:var(--red); margin-bottom:10px;"></i>
+            <p>هل اكتشفت متجراً وهمياً أو محاولة احتيال؟ ساعدنا في حماية الرواد وأبلغ فوراً.</p>
+            <a href="https://wa.me/201220469415?text=بلاغ_عن_احتيال" class="btn-main" style="background:var(--red);">
+                إرسال بلاغ أمان (واتساب)
+            </a>
         </div>
-        <a href="https://wa.me/201220469415" class="btn-main" style="background:var(--red);">
-            <i class="fab fa-whatsapp"></i> إبلاغ عن محتال الآن
-        </a>
     </div>
 
     <div id="add_store" class="section">
-        <h3 style="text-align:center;">توثيق متجر جديد</h3>
-        <div class="card-bar">
-            <p>لتسجيل متجرك في الدليل، يرجى إرسال (اسم المتجر - النشاط - الموقع) للإدارة.</p>
-            <a href="https://wa.me/201220469415" class="btn-main">
-                <i class="fab fa-whatsapp"></i> مراسلة الإدارة (واتساب)
+        <h3 style="text-align:center;">سجل متجرك في الدليل</h3>
+        <div class="card-bar" style="text-align:center;">
+            <i class="fa fa-store-alt" style="font-size:40px; color:var(--p); margin-bottom:10px;"></i>
+            <p>انضم لقائمة التجار الموثوقين لدينا لزيادة مبيعاتك وثقة المستخدمين بك.</p>
+            <a href="https://wa.me/201220469415?text=طلب_توثيق_متجر_جديد" class="btn-main">
+                تواصل معنا لتسجيل بياناتك
             </a>
         </div>
     </div>
@@ -123,31 +131,37 @@
     <div class="footer">
         <div class="f-item" onclick="showPage('report_page', this)"><i class="fa fa-bullhorn"></i><span>إبلاغ</span></div>
         <div class="f-item" onclick="showPage('verify_page', this)"><i class="fa fa-medal"></i><span>توثيق</span></div>
-        <div class="f-item" onclick="showPage('stake_page', this)"><i class="fa fa-calculator"></i><span>حاسبة</span></div>
-        <div class="f-item active" onclick="showPage('home', this)"><i class="fa fa-home"></i><span>الرئيسية</span></div>
+        <div id="f-stake" class="f-item" onclick="showPage('stake_page', this)"><i class="fa fa-calculator"></i><span>حاسبة</span></div>
+        <div id="f-add" class="f-item" style="display:none;"></div> <div class="f-item active" onclick="showPage('home', this)"><i class="fa fa-home"></i><span>الرئيسية</span></div>
     </div>
 
     <script>
         function showPage(pageId, element) {
-            // إخفاء كل الصفحات
+            // إخفاء كل الأقسام
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            // إظهار الصفحة المطلوبة
-            document.getElementById(pageId).classList.add('active');
+            // إظهار القسم المطلوب
+            const targetPage = document.getElementById(pageId);
+            if(targetPage) targetPage.classList.add('active');
             
-            // تحديث شكل القائمة السفلية
+            // تحديث حالة الأزرار في القائمة السفلية
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
             if(element) element.classList.add('active');
+            
+            // العودة لأعلى الصفحة عند التنقل
+            window.scrollTo(0,0);
         }
 
         function calculate() {
             const amount = document.getElementById('amt').value;
             const duration = document.getElementById('dur').value;
+            
             if(amount > 0) {
+                // المعادلة: الكمية + (الكمية * نسبة البونص)
                 const result = parseFloat(amount) + (amount * duration);
-                document.getElementById('total').innerText = result.toLocaleString();
+                document.getElementById('total').innerText = result.toLocaleString(undefined, {minimumFractionDigits: 2});
                 document.getElementById('res').style.display = 'block';
             } else {
-                alert("يرجى إدخال كمية صحيحة");
+                alert("من فضلك أدخل كمية باي صحيحة أولاً");
             }
         }
     </script>
