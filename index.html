@@ -8,19 +8,19 @@
     <style>
         :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; --blue: #2196f3; --red: #e91e63; }
         body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
-        .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; }
         .logo-box { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         .section { display: none; padding: 15px; animation: fadeIn 0.3s; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .card-bar { background: #fff; border-radius: 18px; padding: 18px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border-right: 6px solid var(--p); text-decoration: none; color: inherit; display: block; position: relative; }
-        .verify-badge { color: var(--blue); position: absolute; left: 15px; top: 20px; font-size: 18px; }
+        .info-box { background: #fff3e0; border: 1px solid #ffe0b2; padding: 12px; border-radius: 12px; margin-bottom: 15px; color: #e65100; font-size: 13px; line-height: 1.6; }
         .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; z-index: 1000; }
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
-        .btn-main { width: 100%; background: var(--p); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; display: block; text-align: center; text-decoration: none; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
+        .btn-calc { background: var(--p); color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; }
+        input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; }
     </style>
 </head>
 <body>
@@ -37,81 +37,80 @@
     </div>
 
     <div id="home" class="section active">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px;">
-            <div onclick="go('add_form')" style="background: var(--p); color:white; padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+            <div onclick="go('add_form')" style="background:var(--p); color:white; padding:15px; border-radius:12px; text-align:center;">
                 <i class="fa fa-plus-circle"></i> <br><span id="t-b-add">أضف متجرك</span>
             </div>
-            <div onclick="go('stake')" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
+            <div onclick="go('stake')" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:15px; border-radius:12px; text-align:center;">
                 <i class="fa fa-calculator"></i> <br><span id="t-b-calc">الحاسبة</span>
             </div>
         </div>
         
-        <h4 id="t-feat">تجار مقترحون</h4>
+        <h4 id="t-feat">تطبيقات النخبة المقترحة</h4>
         
-        <a href="https://wa.me/201220469415" class="card-bar" style="border-right-color: #25d366;">
-            <i class="fa fa-check-circle verify-badge"></i>
-            <div style="font-size:10px; color:#2e7d32;">Local Store 🇪🇬</div>
-            <strong>ركن الباي المصري</strong>
-            <p style="font-size:12px; color:#666;" id="t-m1">خدمات محلية وسلع استهلاكية موثقة.</p>
+        <a href="https://fireside.pinet.com" class="card-bar" style="border-right-color: #ff9800;">
+            <i class="fa fa-check-circle" style="color:var(--blue); position:absolute; left:15px; top:20px;"></i>
+            <div style="font-size:10px; color:#ef6c00;">Social 💬</div>
+            <strong>Fireside Forum</strong>
+            <small id="t-v4" style="display:block; margin-top:5px; color:#666;">أول منصة اجتماعية موثقة على شبكة Pi.</small>
+        </a>
+
+        <a href="https://pitogo.app" class="card-bar" style="border-right-color: #00bcd4;">
+            <i class="fa fa-check-circle" style="color:var(--blue); position:absolute; left:15px; top:20px;"></i>
+            <div style="font-size:10px; color:#00838f;">Travel ✈️</div>
+            <strong>PiToGo (Travel)</strong>
+            <small id="t-v6" style="display:block; margin-top:5px; color:#666;">احجز رحلتك وفنادقك وادفع بالباي.</small>
         </a>
     </div>
 
     <div id="verify_list" class="section">
-        <h3 id="t-v-title" style="text-align:center;">تطبيقات المايننت الرسمية</h3>
-        
+        <h3 id="t-v-title" style="text-align:center;">دليل تطبيقات المايننت</h3>
         <a href="https://www.pichainmall.com" class="card-bar">
-            <i class="fa fa-check-circle verify-badge"></i>
-            <strong>Pi Chain Mall</strong>
-            <small id="t-v1">السوق العالمي الأكبر للسلع.</small>
+            <strong>Pi Chain Mall</strong><br>
+            <small id="t-v1">أكبر سوق تجاري عالمي.</small>
         </a>
-
         <a href="https://workforcepool.com" class="card-bar">
-            <i class="fa fa-check-circle verify-badge"></i>
-            <strong>Workforce Pool</strong>
+            <strong>Workforce Pool</strong><br>
             <small id="t-v2">منصة الخدمات والتوظيف.</small>
-        </a>
-
-        <a href="https://pibartermall.com" class="card-bar">
-            <i class="fa fa-check-circle verify-badge"></i>
-            <strong>Pi Barter Mall</strong>
-            <small id="t-v3">تبادل المنتجات عالمياً.</small>
         </a>
     </div>
 
     <div id="stake" class="section">
         <h3 id="t-s-title" style="text-align:center;">حاسبة الاستيكنج</h3>
-        <div class="card-bar">
-            <label id="t-l-amt">كمية الباي:</label>
-            <input type="number" id="p_amount" placeholder="0.00">
-            <label id="t-l-yrs">مدة القفل:</label>
-            <select id="p_years">
-                <option value="0.25" id="opt-6m">6 أشهر (+25%)</option>
-                <option value="1.0" id="opt-1y">سنة واحدة (+100%)</option>
-                <option value="2.0" id="opt-3y">3 سنوات (+200%)</option>
-            </select>
-            <button class="btn-main" onclick="calcStake()" id="t-s-btn">احسب الآن</button>
-            <div id="res_box" style="display:none; text-align:center; margin-top:15px; color:var(--p); font-weight:bold;">
-                <span id="t-s-res-l">المجموع المتوقع:</span> <span id="total_v"></span> π
-            </div>
+        
+        <div class="info-box">
+            <i class="fa fa-shield-halved"></i> 
+            <span id="t-s-info">تنبيه: التعليمات أهم من الحساب! لا تشارك كلمة سر محفظتك مع أي موقع يطلبها "كشرط" للحساب.</span>
         </div>
-    </div>
 
-    <div id="add_form" class="section">
-        <h3 id="t-a-title" style="text-align:center;">تسجيل تاجر جديد</h3>
-        <div class="card-bar" style="text-align:center;">
-            <p id="t-a-desc">أرسل بيانات متجرك (الاسم والنشاط) للتوثيق في الدليل.</p>
-            <a href="https://wa.me/201220469415?text=طلب_توثيق_تاجر_جديد" class="btn-main">
-                <i class="fab fa-whatsapp"></i> مراسلة الإدارة
-            </a>
+        <div class="card-bar">
+            <label id="t-l-amt">كمية Pi:</label>
+            <input type="number" id="p_amt" placeholder="0.00">
+            <label id="t-l-yrs">المدة:</label>
+            <select id="p_yrs">
+                <option value="0.25">6 أشهر (+25%)</option>
+                <option value="1.0">سنة واحدة (+100%)</option>
+                <option value="2.0">3 سنوات (+200%)</option>
+            </select>
+            <button class="btn-calc" onclick="calc()" id="t-s-btn">احسب المكافأة</button>
+            <p id="res" style="text-align:center; color:var(--p); font-weight:bold; margin-top:10px; display:none;">
+                <span id="t-s-res-l">المجموع:</span> <span id="v"></span> π
+            </p>
         </div>
     </div>
 
     <div id="report" class="section">
-        <h3 id="t-r-title" style="text-align:center; color:var(--red);">مركز الأمان</h3>
-        <div class="card-bar" style="text-align:center; border-right-color:var(--red);">
-            <p id="t-r-desc">ساعدنا في حماية المجتمع وأبلغ عن أي محتال.</p>
-            <a href="https://wa.me/201220469415?text=بلاغ_عن_محتال" class="btn-main" style="background:var(--red);">فتح بلاغ أمان</a>
-        </div>
+        <h3 style="color:var(--red); text-align:center;" id="t-r-title">مركز الأمان</h3>
+        <a href="https://wa.me/201220469415" class="card-bar" style="text-align:center; border-right-color:var(--red);">
+            <strong id="t-r-btn">أبلغ عن محتال</strong>
+        </a>
+    </div>
+
+    <div id="add_form" class="section">
+        <h3 style="text-align:center;" id="t-a-title">سجل متجرك</h3>
+        <a href="https://wa.me/201220469415" class="card-bar" style="text-align:center;">
+            <strong id="t-a-btn">إرسال البيانات للتوثيق</strong>
+        </a>
     </div>
 
     <div class="footer">
@@ -129,65 +128,33 @@
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
             if(el) el.classList.add('active');
         }
-
-        function calcStake() {
-            let amt = document.getElementById('p_amount').value;
-            let bonus = document.getElementById('p_years').value;
-            if(amt > 0) {
-                document.getElementById('total_v').innerText = (parseFloat(amt) + (amt * bonus)).toLocaleString();
-                document.getElementById('res_box').style.display = 'block';
+        function calc() {
+            let a = document.getElementById('p_amt').value;
+            let b = document.getElementById('p_yrs').value;
+            if(a > 0) {
+                document.getElementById('v').innerText = (parseFloat(a) + (a * b)).toLocaleString();
+                document.getElementById('res').style.display = 'block';
             }
         }
-
         function toggleLang() {
             isAr = !isAr;
             document.dir = isAr ? 'rtl' : 'ltr';
             const d = {
-                ar: {
-                    title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", badd: "أضف متجرك", bcalc: "الحاسبة", feat: "تجار مقترحون", m1: "خدمات محلية وسلع استهلاكية موثقة.",
-                    vtitle: "تطبيقات المايننت الرسمية", v1: "السوق العالمي الأكبر للسلع.", v2: "منصة الخدمات والتوظيف.", v3: "تبادل المنتجات عالمياً.",
-                    stitle: "حاسبة الاستيكنج", lamt: "كمية الباي:", lyrs: "مدة القفل:", sbtn: "احسب الآن", sres: "المجموع المتوقع:",
-                    o6: "6 أشهر (+25%)", o1: "سنة واحدة (+100%)", o3: "3 سنوات (+200%)",
-                    atitle: "تسجيل تاجر جديد", adesc: "أرسل بيانات متجرك للتوثيق في الدليل.", rtitle: "مركز الأمان", rdesc: "ساعدنا في حماية المجتمع وأبلغ عن أي محتال.",
-                    nhom: "الرئيسية", nsta: "حاسبة", nver: "توثيق", nrep: "إبلاغ"
-                },
-                en: {
-                    title: "Trust & Pi Guide", desc: "Verified Pi Directory", badd: "Add Store", bcalc: "Calculator", feat: "Suggested Merchants", m1: "Verified local services and goods.",
-                    vtitle: "Official Mainnet Apps", v1: "Largest global market.", v2: "Services & Jobs platform.", v3: "Global barter platform.",
-                    stitle: "Staking Calculator", lamt: "Pi Amount:", lyrs: "Lock Duration:", sbtn: "Calculate Now", sres: "Total Expected:",
-                    o6: "6 Months (+25%)", o1: "1 Year (+100%)", o3: "3 Years (+200%)",
-                    atitle: "Register New Store", adesc: "Submit store data for verification.", rtitle: "Security Center", rdesc: "Help protect the community and report scams.",
-                    nhom: "Home", nsta: "Calc", nver: "Verify", nrep: "Report"
-                }
+                ar: { title: "ثقة ودليل الباي", hom: "الرئيسية", sta: "حاسبة", ver: "توثيق", rep: "إبلاغ", sinfo: "تنبيه: التعليمات أهم من الحساب! لا تشارك سرك.", v4: "أول منصة اجتماعية موثقة.", v6: "احجز رحلتك وادفع بالباي.", bcalc: "الحاسبة", badd: "أضف متجرك" },
+                en: { title: "Trust & Pi Guide", hom: "Home", sta: "Calc", ver: "Verify", rep: "Report", sinfo: "Warning: Safety first! Never share your passphrase.", v4: "First verified social platform.", v6: "Book flights & pay with Pi.", bcalc: "Calculator", badd: "Add Store" }
             };
             const t = isAr ? d.ar : d.en;
             document.getElementById('t-title').innerText = t.title;
-            document.getElementById('t-desc').innerText = t.desc;
-            document.getElementById('t-b-add').innerText = t.badd;
+            document.getElementById('n-hom').innerText = t.hom;
+            document.getElementById('n-sta').innerText = t.sta;
+            document.getElementById('n-ver').innerText = t.ver;
+            document.getElementById('n-rep').innerText = t.rep;
+            document.getElementById('t-s-info').innerText = t.sinfo;
+            document.getElementById('t-v4').innerText = t.v4;
+            document.getElementById('t-v6').innerText = t.v6;
             document.getElementById('t-b-calc').innerText = t.bcalc;
-            document.getElementById('t-feat').innerText = t.feat;
-            document.getElementById('t-m1').innerText = t.m1;
-            document.getElementById('t-v-title').innerText = t.vtitle;
-            document.getElementById('t-v1').innerText = t.v1;
-            document.getElementById('t-v2').innerText = t.v2;
-            document.getElementById('t-v3').innerText = t.v3;
-            document.getElementById('t-s-title').innerText = t.stitle;
-            document.getElementById('t-l-amt').innerText = t.lamt;
-            document.getElementById('t-l-yrs').innerText = t.lyrs;
-            document.getElementById('t-s-btn').innerText = t.sbtn;
-            document.getElementById('t-s-res-l').innerText = t.sres;
-            document.getElementById('opt-6m').innerText = t.o6;
-            document.getElementById('opt-1y').innerText = t.o1;
-            document.getElementById('opt-3y').innerText = t.o3;
-            document.getElementById('t-a-title').innerText = t.atitle;
-            document.getElementById('t-a-desc').innerText = t.adesc;
-            document.getElementById('t-r-title').innerText = t.rtitle;
-            document.getElementById('t-r-desc').innerText = t.rdesc;
-            document.getElementById('n-hom').innerText = t.nhom;
-            document.getElementById('n-sta').innerText = t.nsta;
-            document.getElementById('n-ver').innerText = t.nver;
-            document.getElementById('n-rep').innerText = t.nrep;
+            document.getElementById('t-b-add').innerText = t.badd;
         }
     </script>
 </body>
-        </html>
+            </html>
