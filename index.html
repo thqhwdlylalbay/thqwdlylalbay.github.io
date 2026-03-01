@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -14,7 +15,6 @@
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .card-bar { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-right: 5px solid var(--p); text-decoration: none; color: inherit; display: block; position: relative; }
-        .tip-box { background: #fffbe6; border-right: 5px solid #ffa000; padding: 12px; border-radius: 10px; font-size: 13px; margin-bottom: 15px; }
         .grid-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .action-btn { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; }
         .action-btn i { font-size: 20px; color: var(--p); display: block; margin-bottom: 5px; }
@@ -24,7 +24,6 @@
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
-        input { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
@@ -41,14 +40,9 @@
     </div>
 
     <div id="home" class="section active">
-        <div class="tip-box">
-            <i class="fa fa-shield-halved"></i> <b id="t-tip-h">نصيحة الأمان:</b>
-            <p id="t-tip-p">لا تشارك كلمات السر (Passphrase) أبداً. الإدارة الرسمية لن تطلبها منك.</p>
-        </div>
-
         <div class="grid-btns">
-            <div class="action-btn" onclick="go('add')">
-                <i class="fa fa-medal"></i> <span id="t-btn-verify">دليل التوثيق</span>
+            <div class="action-btn" onclick="go('add_form')">
+                <i class="fa fa-store-alt"></i> <span id="t-btn-add">أضف متجرك</span>
             </div>
             <div class="action-btn" onclick="go('stake')">
                 <i class="fa fa-calculator"></i> <span id="t-btn-calc">حاسبة الأرباح</span>
@@ -61,47 +55,49 @@
             <span class="tag" style="background:#e8f5e9; color:#2e7d32;">مصر 🇪🇬</span>
             <strong id="t-m1-n">ركن الباي المصري</strong>
             <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-            <p style="font-size:12px; color:#666;" id="t-m1-d">سلع أساسية وشحن للمصريين.</p>
+            <p style="font-size:12px; color:#666;" id="t-m1-d">تواصل لطلب السلع وشحن الرصيد.</p>
         </a>
 
-        <a href="https://pip-apps.pichainmall.com" class="card-bar" style="border-right-color: #ffd700;">
+        <a href="https://pip-apps.pichainmall.com" class="card-bar" style="border-right-color: var(--gold);">
             <span class="tag" style="background:#fff9c4; color:#fbc02d;">Global 🌐</span>
             <strong id="t-m2-n">Pi Chain Mall</strong>
             <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-            <p style="font-size:12px; color:#666;" id="t-m2-d">أكبر متجر عالمي في باي.</p>
+            <p style="font-size:12px; color:#666;" id="t-m2-d">السوق العالمي الرسمي لرواد باي.</p>
         </a>
     </div>
 
-    <div id="add" class="section">
-        <h3 id="t-a-title" style="text-align:center;">دليل التجار الموثقين</h3>
-        <p style="font-size:12px; text-align:center; color:#666;" id="t-a-sub">قائمة التجار الأعلى تقييماً داخل النظام البيئي</p>
+    <div id="verify_list" class="section">
+        <h3 id="t-v-title" style="text-align:center;">دليل النخبة (Mainnet)</h3>
+        <p style="text-align:center; font-size:11px; color:#888;" id="t-v-sub">تطبيقات موثقة من App Studio</p>
 
-        <a href="https://pip-apps.pichainmall.com" class="card-bar" style="border-right-color: var(--gold);">
-            <i class="fa fa-check-circle" style="color:var(--p); position:absolute; left:15px; top:15px;"></i>
-            <strong>Pi Chain Mall (PCM)</strong>
-            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-            <small id="t-v1">تطبيق متكامل (Mainnet) - سلع عالمية</small>
+        <a href="https://pichainmall.com" class="card-bar" style="border-right-color: var(--gold);">
+            <i class="fa fa-medal" style="color:var(--gold); position:absolute; left:15px; top:15px;"></i>
+            <strong>Pi Chain Mall</strong>
+            <div class="rating">الأعلى تقييماً عالمياً ★★★★★</div>
+            <small>Ecosystem App - Marketplace</small>
         </a>
 
-        <a href="https://workforcepool.com" class="card-bar" style="border-right-color: #03a9f4;">
-            <i class="fa fa-check-circle" style="color:var(--p); position:absolute; left:15px; top:15px;"></i>
+        <a href="https://workforcepool.com" class="card-bar" style="border-right-color: #2196f3;">
+            <i class="fa fa-medal" style="color:var(--gold); position:absolute; left:15px; top:15px;"></i>
             <strong>Pi Workforce Pool</strong>
-            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i></div>
-            <small id="t-v2">منصة خدمات مصغرة وعمل حر</small>
+            <div class="rating">الأعلى تقييماً للخدمات ★★★★☆</div>
+            <small>Ecosystem App - Freelancing</small>
         </a>
 
-        <a href="https://wa.me/201220469415" class="card-bar" style="border-right-color: #25d366;">
-            <i class="fa fa-check-circle" style="color:var(--p); position:absolute; left:15px; top:15px;"></i>
-            <strong>Local Pi Egypt</strong>
-            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-            <small id="t-v3">توثيق محلي - تجار تجزئة في مصر</small>
+        <a href="https://pibrowserviewer.com" class="card-bar" style="border-right-color: #4caf50;">
+            <i class="fa fa-medal" style="color:var(--gold); position:absolute; left:15px; top:15px;"></i>
+            <strong>Pi Barter Mall</strong>
+            <div class="rating">موثق مقايضة ★★★★☆</div>
+            <small>Ecosystem App - Barter</small>
         </a>
+    </div>
 
-        <hr style="border:0; border-top:1px solid #eee; margin:20px 0;">
-        <div style="text-align:center;">
-            <p id="t-join">هل تريد توثيق متجرك؟</p>
-            <a href="https://wa.me/201220469415?text=طلب_توثيق" style="text-decoration:none; background:var(--p); color:#fff; padding:10px 20px; border-radius:20px; display:inline-block; font-size:14px;">
-                <i class="fab fa-whatsapp"></i> <span id="t-join-btn">تواصل معنا الآن</span>
+    <div id="add_form" class="section">
+        <h3 id="t-a-title" style="text-align:center;">إرسال بيانات المتجر</h3>
+        <div class="card-bar" style="text-align:center;">
+            <p id="t-a-desc">من فضلك أرسل اسم المتجر، التخصص، والمنطقة لتوثيقه في دليلنا.</p>
+            <a href="https://wa.me/201220469415?text=طلب_إضافة_متجر_جديد" style="text-decoration:none; background:var(--p); color:#fff; padding:15px; border-radius:10px; display:block; font-weight:bold;">
+                <i class="fab fa-whatsapp"></i> <span id="t-a-btn">إرسال البيانات</span>
             </a>
         </div>
     </div>
@@ -110,39 +106,33 @@
         <h3 id="t-s-title" style="text-align:center;">حاسبة الاستيكنج</h3>
         <div class="card-bar">
             <label id="t-l-amt">كمية الباي:</label>
-            <input type="number" id="p_amount" placeholder="0.00">
-            <label id="t-l-yrs">مدة القفل:</label>
-            <select id="p_years" style="width:100%; padding:12px; margin:8px 0; border-radius:10px; border:1px solid #ddd;">
-                <option value="0.25">6 أشهر (+25%)</option>
-                <option value="1">سنة واحدة (+100%)</option>
-                <option value="2">3 سنوات (+200%)</option>
-            </select>
-            <button onclick="smartCalc()" style="width:100%; background:var(--p); color:#fff; border:none; padding:15px; border-radius:10px; cursor:pointer; font-weight:bold;" id="t-s-btn">احسب المكافآت</button>
-            <div id="smart_res" style="display:none; text-align:center; margin-top:20px; padding:15px; background:#f0ebf8; border-radius:10px;">
-                <span id="t-s-res-l">الرصيد المتوقع:</span> <b id="total_val" style="font-size:22px; color:var(--p);"></b> π
+            <input type="number" id="p_amount" placeholder="0.00" style="width:100%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ddd;">
+            <button onclick="smartCalc()" style="width:100%; background:var(--p); color:#fff; border:none; padding:15px; border-radius:10px; cursor:pointer;" id="t-s-btn">احسب المكافآت</button>
+            <div id="smart_res" style="display:none; text-align:center; margin-top:20px; font-weight:bold; color:var(--p);">
+                <span id="t-s-res-l">المجموع التقريبي:</span> <span id="total_val"></span> π
             </div>
         </div>
     </div>
 
     <div id="report" class="section">
         <h3 id="t-r-title" style="text-align:center; color:var(--red);">مركز الأمان</h3>
-        <div class="card-bar" style="border-right-color:var(--red); text-align:center;">
-            <p id="t-r-desc">أبلغ عن أي محاولة احتيال لحماية المجتمع.</p>
-            <a href="https://wa.me/201220469415" style="text-decoration:none; background:var(--wpp); color:#fff; padding:15px; border-radius:10px; display:block; font-weight:bold;">
-                <i class="fab fa-whatsapp"></i> <span id="t-r-btn">مراسلة قسم البلاغات</span>
+        <div class="card-bar" style="text-align:center; border-right-color:var(--red);">
+            <p id="t-r-desc">للإبلاغ عن محتال أو رابط مشبوه.</p>
+            <a href="https://wa.me/201220469415" style="text-decoration:none; background:var(--wpp); color:#fff; padding:15px; border-radius:10px; display:block;">
+                <i class="fab fa-whatsapp"></i> <span id="t-r-btn">مراسلة الإدارة</span>
             </a>
         </div>
     </div>
 
     <div class="footer">
         <div class="f-item" onclick="go('report', this)"><i class="fa fa-bullhorn"></i><span id="t-n-rep">إبلاغ</span></div>
-        <div class="f-item" onclick="go('add', this)"><i class="fa fa-medal"></i><span id="t-n-add">توثيق</span></div>
+        <div class="f-item" onclick="go('verify_list', this)"><i class="fa fa-medal"></i><span id="t-n-add">توثيق</span></div>
         <div class="f-item" onclick="go('stake', this)"><i class="fa fa-calculator"></i><span id="t-n-sta">حاسبة</span></div>
         <div class="f-item active" onclick="go('home', this)"><i class="fa fa-house"></i><span id="t-n-hom">الرئيسية</span></div>
     </div>
 
     <script>
-        let currentLang = 'ar';
+        let isAr = true;
         function go(id, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
@@ -152,60 +142,43 @@
         }
 
         function smartCalc() {
-            const amount = document.getElementById('p_amount').value;
-            const bonus = document.getElementById('p_years').value;
-            if(amount > 0) {
-                let total = parseFloat(amount) + (amount * parseFloat(bonus));
-                document.getElementById('total_val').innerText = total.toLocaleString();
+            let a = document.getElementById('p_amount').value;
+            if(a > 0) {
+                document.getElementById('total_val').innerText = (a * 2).toLocaleString();
                 document.getElementById('smart_res').style.display = 'block';
             }
         }
 
         function toggleLang() {
-            currentLang = (currentLang === 'ar') ? 'en' : 'ar';
-            document.dir = (currentLang === 'ar') ? 'rtl' : 'ltr';
+            isAr = !isAr;
+            document.dir = isAr ? 'rtl' : 'ltr';
             const dict = {
                 ar: {
                     title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", hom: "الرئيسية", sta: "حاسبة", rep: "إبلاغ", add: "توثيق",
-                    vbtn: "دليل التوثيق", m1n: "ركن الباي المصري", m1d: "سلع أساسية وشحن للمصريين.", m2n: "Pi Chain Mall", m2d: "أكبر متجر عالمي في باي.",
-                    atitle: "دليل التجار الموثقين", asub: "قائمة التجار الأعلى تقييماً داخل النظام البيئي",
-                    v1: "تطبيق متكامل (Mainnet) - سلع عالمية", v2: "منصة خدمات مصغرة وعمل حر", v3: "توثيق محلي - تجار تجزئة في مصر",
-                    join: "هل تريد توثيق متجرك؟", jbtn: "تواصل معنا الآن",
-                    sbtn: "احسب المكافآت", amt: "كمية الباي:", yrs: "مدة القفل:", rtitle: "مركز الأمان"
+                    badd: "أضف متجرك", bcalc: "حاسبة الأرباح", vtitle: "دليل النخبة (Mainnet)", vsub: "تطبيقات موثقة من App Studio",
+                    atitle: "إرسال بيانات المتجر", adesc: "أرسل بيانات متجرك للتوثيق", abtn: "إرسال البيانات"
                 },
                 en: {
                     title: "Trust & Pi Guide", desc: "Verified Pi Directory", hom: "Home", sta: "Calc", rep: "Report", add: "Verify",
-                    vbtn: "Verify Directory", m1n: "Egypt Pi Corner", m1d: "Basic goods for Egyptians.", m2n: "Pi Chain Mall", m2d: "Largest global Pi mall.",
-                    atitle: "Verified Merchants List", asub: "Top-rated merchants in the ecosystem",
-                    v1: "Full App (Mainnet) - Global Goods", v2: "Micro-services & Freelance platform", v3: "Local Verification - Retailers in Egypt",
-                    join: "Want to verify your store?", jbtn: "Contact Us Now",
-                    sbtn: "Calculate Rewards", amt: "Pi Amount:", yrs: "Lock Period:", rtitle: "Security Center"
+                    badd: "Add Store", bcalc: "Staking Calc", vtitle: "Elite Directory (Mainnet)", vsub: "Apps Verified by App Studio",
+                    atitle: "Submit Store Info", adesc: "Send your store details for verification", abtn: "Submit Now"
                 }
             };
-            const t = dict[currentLang];
+            const t = isAr ? dict.ar : dict.en;
             document.getElementById('t-app-title').innerText = t.title;
             document.getElementById('t-app-desc').innerText = t.desc;
             document.getElementById('t-n-hom').innerText = t.hom;
             document.getElementById('t-n-sta').innerText = t.sta;
             document.getElementById('t-n-rep').innerText = t.rep;
             document.getElementById('t-n-add').innerText = t.add;
-            document.getElementById('t-btn-verify').innerText = t.vbtn;
-            document.getElementById('t-m1-n').innerText = t.m1n;
-            document.getElementById('t-m1-d').innerText = t.m1d;
-            document.getElementById('t-m2-n').innerText = t.m2n;
-            document.getElementById('t-m2-d').innerText = t.m2d;
+            document.getElementById('t-btn-add').innerText = t.badd;
+            document.getElementById('t-btn-calc').innerText = t.bcalc;
+            document.getElementById('t-v-title').innerText = t.vtitle;
+            document.getElementById('t-v-sub').innerText = t.vsub;
             document.getElementById('t-a-title').innerText = t.atitle;
-            document.getElementById('t-a-sub').innerText = t.asub;
-            document.getElementById('t-v1').innerText = t.v1;
-            document.getElementById('t-v2').innerText = t.v2;
-            document.getElementById('t-v3').innerText = t.v3;
-            document.getElementById('t-join').innerText = t.join;
-            document.getElementById('t-join-btn').innerText = t.jbtn;
-            document.getElementById('t-s-btn').innerText = t.sbtn;
-            document.getElementById('t-l-amt').innerText = t.amt;
-            document.getElementById('t-l-yrs').innerText = t.yrs;
-            document.getElementById('t-r-title').innerText = t.rtitle;
+            document.getElementById('t-a-desc').innerText = t.adesc;
+            document.getElementById('t-a-btn').innerText = t.abtn;
         }
     </script>
 </body>
-    </html>
+            </html>
