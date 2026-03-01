@@ -14,13 +14,13 @@
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .card-bar { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-right: 5px solid var(--p); text-decoration: none; color: inherit; display: block; }
-        .warn-box { background: #fff3e0; border: 1px solid var(--ora); padding: 12px; border-radius: 12px; margin-bottom: 15px; color: #e65100; font-size: 13px; line-height: 1.5; }
+        .warn-box { background: #e8f5e9; border: 1px solid #2e7d32; padding: 12px; border-radius: 12px; margin-bottom: 15px; color: #1b5e20; font-size: 14px; line-height: 1.6; }
         .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 10px 0; z-index: 1000; }
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
         .btn-main { width: 100%; background: var(--p); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -32,7 +32,7 @@
         <div style="display:flex; align-items:center; gap:8px;">
             <div style="text-align: right;">
                 <b id="t-title">ثقة ودليل الباي</b><br>
-                <small id="t-desc">دليل موثق لمجتمع Pi</small>
+                <small id="t-desc">استثمر عملاتك بأمان</small>
             </div>
             <div class="logo-box">π</div>
         </div>
@@ -41,71 +41,75 @@
     <div id="home" class="section active">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
             <div onclick="showPage('add_form', this)" style="background: var(--p); color:white; padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
-                <i class="fa fa-plus-circle"></i> <br><span id="t-b-add">أضف متجرك</span>
+                <i class="fa fa-store"></i> <br><span id="t-b-add">أضف متجرك</span>
             </div>
             <div onclick="showPage('stake', this)" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
-                <i class="fa fa-calculator"></i> <br><span id="t-b-calc">الحاسبة</span>
+                <i class="fa fa-chart-line"></i> <br><span id="t-b-calc">احسب أرباحك</span>
             </div>
         </div>
-        <h4 id="t-feat-h">تطبيقات مقترحة</h4>
+        <h4 id="t-feat-h">تطبيقات المايننت الموثقة</h4>
         <a href="https://fireside.pinet.com" class="card-bar" style="border-right-color: var(--ora);">
-            <strong id="t-fire-n">Fireside Forum</strong><br>
-            <small id="t-fire-d">التواصل الاجتماعي الموثق.</small>
+            <strong>Fireside Forum</strong><br>
+            <small id="t-fire-d">تواصل واربح Pi من منشوراتك.</small>
         </a>
     </div>
 
     <div id="verify_list" class="section">
-        <h3 id="t-v-title" style="text-align:center;">دليل تطبيقات المايننت</h3>
+        <h3 id="t-v-title" style="text-align:center;">دليل المشاريع الرسمية</h3>
         <a href="https://www.pichainmall.com" class="card-bar">
-            <strong>Pi Chain Mall</strong><br><small id="t-v1">أكبر سوق تجاري عالمي.</small>
+            <strong>Pi Chain Mall</strong><br><small id="t-v1">تسوق بمنتجات حقيقية مقابل Pi.</small>
         </a>
         <a href="https://pibridge.org" class="card-bar" style="border-right-color: var(--blue);">
-            <strong>Pi Bridge</strong><br><small id="t-v-bridge">جسر نقل الأصول الموثق.</small>
+            <strong>Pi Bridge</strong><br><small id="t-v-bridge">المنصة الرسمية لنقل الأصول.</small>
         </a>
     </div>
 
     <div id="stake" class="section">
-        <h3 id="t-s-title" style="text-align:center;">حاسبة الاستيكنج</h3>
+        <h3 id="t-s-title" style="text-align:center;">مركز استثمار Pi</h3>
         <div class="warn-box">
-            <i class="fa fa-shield-alt"></i> 
-            <b id="t-s-warn">نصائح الأمان:</b>
-            <ul style="margin: 5px 0; padding-right: 20px;">
-                <li id="t-s-l1">لا تدخل كلمة سر محفظتك في أي موقع للحساب.</li>
-                <li id="t-s-l2">الاستيكنج يزيد من معدل تعدينك المستقبلي.</li>
+            <i class="fa fa-gift" style="font-size:20px;"></i> 
+            <b id="t-s-promo">لماذا يجب عليك قفل عملاتك (Stake)؟</b>
+            <ul style="margin: 8px 0; padding-right: 20px;">
+                <li id="t-s-l1">ستحصل على <b>أرباح إضافية</b> من العملات فوق رصيدك الحالي.</li>
+                <li id="t-s-l2">سيتضاعف <b>معدل التعدين</b> الخاص بك فوراً وبشكل كبير.</li>
+                <li id="t-s-l3">تساهم في رفع قيمة عملة Pi في الأسواق العالمية.</li>
             </ul>
         </div>
         <div class="card-bar">
-            <label id="t-l-amt">كمية Pi:</label>
-            <input type="number" id="p_amount" placeholder="0.00">
-            <label id="t-l-yrs">مدة القفل:</label>
+            <label id="t-l-amt">الكمية التي تريد استثمارها:</label>
+            <input type="number" id="p_amount" placeholder="مثلاً: 100">
+            <label id="t-l-yrs">اختر خطة الأرباح:</label>
             <select id="p_years">
-                <option value="0.25" id="opt1">6 أشهر (+25%)</option>
-                <option value="1.0" id="opt2">سنة واحدة (+100%)</option>
-                <option value="2.0" id="opt3">3 سنوات (+200%)</option>
+                <option value="0.5">6 أشهر (أرباح +50%)</option>
+                <option value="2.0">سنة واحدة (أرباح مضاعفة +200%) 🔥</option>
+                <option value="5.0">3 سنوات (أقصى ربح +500%) 🚀</option>
             </select>
-            <button class="btn-main" onclick="calc()" id="t-s-btn">احسب المكافأة</button>
-            <div id="res_box" style="display:none; text-align:center; margin-top:15px; color:var(--p); font-weight:bold;">
-                <span id="t-s-res-l">المجموع المتوقع:</span> <span id="total_v"></span> π
+            <button class="btn-main" onclick="calc()" id="t-s-btn">احسب أرباحي الكلية</button>
+            <div id="res_box" style="display:none; text-align:center; margin-top:15px; background:#fff9c4; padding:20px; border-radius:15px; border:2px solid var(--gold);">
+                <span id="t-s-res-l" style="font-weight:bold; color:#444;">رصيدك المتوقع بعد المكافأة:</span><br>
+                <span id="total_v" style="font-size:28px; color:var(--p); font-weight:900;"></span> <b style="color:var(--p)">π</b>
             </div>
         </div>
     </div>
 
     <div id="add_form" class="section">
-        <h3 id="t-a-title" style="text-align:center;">تسجيل تاجر جديد</h3>
+        <h3 id="t-a-title" style="text-align:center;">سجل كتاجر موثق</h3>
         <div class="card-bar" style="text-align:center;">
-            <p id="t-a-desc">تواصل معنا عبر الواتساب لإضافة بيانات متجرك.</p>
-            <a href="https://api.whatsapp.com/send?phone=201220469415&text=طلب_توثيق_متجر" class="btn-main">
-                <i class="fab fa-whatsapp"></i> <span id="t-a-btn">مراسلة الإدارة</span>
+            <i class="fab fa-whatsapp" style="font-size:40px; color:#25D366; margin-bottom:10px;"></i>
+            <p id="t-a-desc">ارسل بيانات متجرك الآن ليظهر في الدليل العالمي.</p>
+            <a href="whatsapp://send?phone=201220469415&text=أريد_تسجيل_متجري" class="btn-main" style="background:#25D366;">
+                 <span id="t-a-btn">اضغط هنا للمراسلة فوراً</span>
             </a>
         </div>
     </div>
 
     <div id="report" class="section">
-        <h3 id="t-r-title" style="text-align:center; color:var(--red);">مركز الأمان</h3>
+        <h3 id="t-r-title" style="text-align:center; color:var(--red);">بلاغات الأمان</h3>
         <div class="card-bar" style="border-right-color: var(--red); text-align:center;">
-            <p id="t-r-desc">أبلغ عن أي محاولة احتيال لحماية المجتمع.</p>
-            <a href="https://api.whatsapp.com/send?phone=201220469415&text=بلاغ_عن_محاولة_احتيال" class="btn-main" style="background:var(--red);">
-                <span id="t-r-btn">فتح بلاغ</span>
+            <i class="fa fa-shield-virus" style="font-size:40px; color:var(--red); margin-bottom:10px;"></i>
+            <p id="t-r-desc">ساعدنا في حماية المجتمع وأبلغ عن أي نصاب.</p>
+            <a href="whatsapp://send?phone=201220469415&text=بلاغ_عن_محتال" class="btn-main" style="background:var(--red);">
+                <span id="t-r-btn">إرسال بلاغ واتساب</span>
             </a>
         </div>
     </div>
@@ -113,7 +117,7 @@
     <div class="footer">
         <div class="f-item" id="n-rep" onclick="showPage('report', this)"><i class="fa fa-bullhorn"></i><span id="n-t-rep">إبلاغ</span></div>
         <div class="f-item" id="n-ver" onclick="showPage('verify_list', this)"><i class="fa fa-medal"></i><span id="n-t-ver">توثيق</span></div>
-        <div class="f-item" id="n-sta" onclick="showPage('stake', this)"><i class="fa fa-calculator"></i><span id="n-t-sta">حاسبة</span></div>
+        <div class="f-item" id="n-sta" onclick="showPage('stake', this)"><i class="fa fa-chart-pie"></i><span id="n-t-sta">أرباح</span></div>
         <div class="f-item active" id="n-hom" onclick="showPage('home', this)"><i class="fa fa-house"></i><span id="n-t-hom">الرئيسية</span></div>
     </div>
 
@@ -129,7 +133,8 @@
             let amt = document.getElementById('p_amount').value;
             let bonus = document.getElementById('p_years').value;
             if(amt > 0) {
-                document.getElementById('total_v').innerText = (parseFloat(amt) + (amt * bonus)).toLocaleString();
+                let total = parseFloat(amt) + (amt * bonus);
+                document.getElementById('total_v').innerText = total.toLocaleString();
                 document.getElementById('res_box').style.display = 'block';
             }
         }
@@ -138,20 +143,22 @@
             document.dir = isAr ? 'rtl' : 'ltr';
             const d = {
                 ar: { 
-                    title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", badd: "أضف متجرك", bcalc: "الحاسبة", 
-                    feat: "تطبيقات مقترحة", vtitle: "دليل المايننت", stitle: "حاسبة الاستيكنج", swarn: "نصائح الأمان:",
-                    l1: "لا تدخل كلمة سر محفظتك أبداً.", l2: "الاستيكنج يزيد معدل تعدينك.", res: "المجموع المتوقع:", btn: "احسب المكافأة",
-                    atitle: "تسجيل تاجر", adesc: "تواصل عبر الواتساب لإضافة متجرك.", abtn: "مراسلة الإدارة",
-                    rtitle: "مركز الأمان", rdesc: "أبلغ عن أي محاولة احتيال.", rbtn: "فتح بلاغ",
-                    nhom: "الرئيسية", nver: "توثيق", nsta: "حاسبة", nrep: "إبلاغ"
+                    title: "ثقة ودليل الباي", desc: "استثمر عملاتك بأمان", badd: "أضف متجرك", bcalc: "احسب أرباحك", 
+                    vtitle: "دليل المشاريع", stitle: "مركز استثمار Pi", promo: "لماذا يجب القفل (Stake)؟",
+                    l1: "ستحصل على أرباح إضافية من العملات.", l2: "سيتضاعف معدل التعدين فوراً.", l3: "رفع قيمة العملة عالمياً.",
+                    res: "رصيدك المتوقع بعد المكافأة:", btn: "احسب أرباحي الكلية",
+                    atitle: "سجل كتاجر", adesc: "ارسل بيانات متجرك لتظهر في الدليل.", abtn: "اضغط هنا للمراسلة فوراً",
+                    rtitle: "بلاغات الأمان", rdesc: "أبلغ عن أي نصاب لحماية المجتمع.", rbtn: "إرسال بلاغ واتساب",
+                    nhom: "الرئيسية", nver: "توثيق", nsta: "أرباح", nrep: "إبلاغ"
                 },
                 en: { 
-                    title: "Trust & Pi Guide", desc: "Verified Pi Directory", badd: "Add Store", bcalc: "Calculator", 
-                    feat: "Suggested Apps", vtitle: "Mainnet Apps", stitle: "Staking Calc", swarn: "Safety Tips:",
-                    l1: "Never share your passphrase.", l2: "Staking boosts your mining rate.", res: "Expected Total:", btn: "Calculate",
-                    atitle: "Register Store", adesc: "Contact WhatsApp to add your store.", abtn: "Contact Admin",
-                    rtitle: "Security Center", rdesc: "Report any scam attempts.", rbtn: "Open Report",
-                    nhom: "Home", nver: "Verify", nsta: "Calc", nrep: "Report"
+                    title: "Trust & Pi Guide", desc: "Invest your Pi Safely", badd: "Add Store", bcalc: "Calc Profits", 
+                    vtitle: "Project Directory", stitle: "Pi Investment Center", promo: "Why should you Stake?",
+                    l1: "Earn extra bonus coins on your balance.", l2: "Instantly boost your mining rate.", l3: "Increase Pi market value globally.",
+                    res: "Expected balance after bonus:", btn: "Calculate Total Profits",
+                    atitle: "Merchant Registry", adesc: "Send your store info to join the list.", abtn: "Message Now",
+                    rtitle: "Security Reports", rdesc: "Report scammers to keep us safe.", rbtn: "Send WhatsApp Report",
+                    nhom: "Home", nver: "Verify", nsta: "Earnings", nrep: "Report"
                 }
             };
             const t = isAr ? d.ar : d.en;
@@ -159,12 +166,12 @@
             document.getElementById('t-desc').innerText = t.desc;
             document.getElementById('t-b-add').innerText = t.badd;
             document.getElementById('t-b-calc').innerText = t.bcalc;
-            document.getElementById('t-feat-h').innerText = t.feat;
             document.getElementById('t-v-title').innerText = t.vtitle;
             document.getElementById('t-s-title').innerText = t.stitle;
-            document.getElementById('t-s-warn').innerText = t.swarn;
+            document.getElementById('t-s-promo').innerText = t.promo;
             document.getElementById('t-s-l1').innerText = t.l1;
             document.getElementById('t-s-l2').innerText = t.l2;
+            document.getElementById('t-s-l3').innerText = t.l3;
             document.getElementById('t-s-res-l').innerText = t.res;
             document.getElementById('t-s-btn').innerText = t.btn;
             document.getElementById('t-a-title').innerText = t.atitle;
@@ -180,4 +187,4 @@
         }
     </script>
 </body>
-            </html>
+                                 </html>
