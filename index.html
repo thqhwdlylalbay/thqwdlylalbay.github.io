@@ -7,30 +7,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --p: #673ab7; --bg: #f8f9fc; --gold: #ffd700; --wpp: #25d366; --red: #e91e63; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; transition: 0.3s; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo-box { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         .section { display: none; padding: 15px; animation: fadeIn 0.3s; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .card-bar { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-right: 5px solid var(--p); text-decoration: none; color: inherit; display: block; }
-        .tip-box { background: #fffbe6; border-right: 5px solid #ffa000; padding: 10px; border-radius: 10px; font-size: 13px; margin-bottom: 15px; }
+        .card-bar { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-right: 5px solid var(--p); text-decoration: none; color: inherit; display: block; transition: 0.2s; }
+        .card-bar:active { transform: scale(0.98); }
+        .tip-box { background: #fffbe6; border-right: 5px solid #ffa000; padding: 12px; border-radius: 10px; font-size: 13px; margin-bottom: 15px; line-height: 1.6; }
         .grid-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .action-btn { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; }
         .action-btn i { font-size: 20px; color: var(--p); display: block; margin-bottom: 5px; }
         .rating { color: #ff9800; font-size: 12px; margin: 5px 0; }
-        .tag { font-size: 10px; padding: 3px 8px; border-radius: 5px; font-weight: bold; }
+        .tag { font-size: 10px; padding: 3px 8px; border-radius: 5px; font-weight: bold; float: left; }
         .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 12px 0; }
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; font-size: 16px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <button style="background:none; border:none; font-size:22px; color:var(--p); cursor:pointer;" onclick="changeLang()"><i class="fa fa-globe"></i></button>
+        <button style="background:none; border:none; font-size:24px; color:var(--p); cursor:pointer;" onclick="toggleLang()"><i class="fa fa-globe"></i></button>
         <div style="display:flex; align-items:center; gap:10px;">
             <div style="text-align: right;">
                 <b id="app-title">ثقة ودليل الباي</b><br>
@@ -43,7 +44,7 @@
     <div id="home" class="section active">
         <div class="tip-box">
             <i class="fa fa-shield-halved"></i> <b id="h-tip-h">نصيحة الأمان:</b>
-            <p id="h-tip-p">لا تشارك كلمات السر (Passphrase) أبداً، نحن لا نطلبها منك.</p>
+            <p id="h-tip-p">لا تشارك كلمات السر (Passphrase) أبداً. الإدارة الرسمية لن تطلب منك بيانات محفظتك تحت أي ظرف.</p>
         </div>
 
         <div class="grid-btns">
@@ -58,77 +59,95 @@
         <h4 id="h-featured">تجار اليوم الموثقون</h4>
         
         <div class="card-bar" style="border-right-color: #25d366;">
-            <div style="display:flex; justify-content:space-between;">
-                <strong>ركن الباي المصري</strong>
-                <span class="tag" style="background:#e8f5e9; color:#2e7d32;">مصر 🇪🇬</span>
-            </div>
+            <span class="tag" style="background:#e8f5e9; color:#2e7d32;">مصر 🇪🇬</span>
+            <strong>ركن الباي المصري</strong>
             <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-            <p style="font-size:12px; color:#666;">سلع استهلاكية وخدمات دفع محلية متوفرة الآن.</p>
+            <p style="font-size:12px; color:#666;" id="m1-desc">يوفر السلع الأساسية وخدمات الشحن للمصريين.</p>
+        </div>
+
+        <div class="card-bar" style="border-right-color: #03a9f4;">
+            <span class="tag" style="background:#e1f5fe; color:#01579b;">الخليج 🇸🇦</span>
+            <strong>سوق الخليج الرقمي</strong>
+            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i></div>
+            <p style="font-size:12px; color:#666;" id="m2-desc">متخصص في بطاقات الهدايا والخدمات الإلكترونية.</p>
         </div>
 
         <a href="https://pip-apps.pichainmall.com" class="card-bar" style="border-right-color: #ffd700;">
-            <div style="display:flex; justify-content:space-between;">
-                <strong>Pi Chain Mall</strong>
-                <span class="tag" style="background:#fff9c4; color:#fbc02d;">عالمي 🌐</span>
-            </div>
+            <span class="tag" style="background:#fff9c4; color:#fbc02d;">Global 🌐</span>
+            <strong>Pi Chain Mall</strong>
             <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-            <p style="font-size:12px; color:#666;">تسوق الآن من أكبر مول تجاري داخل شبكة باي.</p>
+            <p style="font-size:12px; color:#666;" id="m3-desc">أكبر متجر عالمي مدمج داخل متصفح باي.</p>
         </a>
+
+        <div class="card-bar" style="border-right-color: #ff5722;">
+            <span class="tag" style="background:#fbe9e7; color:#bf360c;">المغرب 🇲🇦</span>
+            <strong>متجر باي المغرب</strong>
+            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i></div>
+            <p style="font-size:12px; color:#666;" id="m4-desc">مقايضة المنتجات المحلية والملابس مقابل Pi.</p>
+        </div>
     </div>
 
     <div id="stake" class="section">
-        <h3 id="s-title" style="text-align:center;">حاسبات الأرباح الذكية</h3>
-        
+        <h3 id="s-title" style="text-align:center;">حاسبة الاستيكنج الذكية</h3>
         <div class="card-bar">
-            <h5 style="margin:0 0 10px;">١. حاسبة المكافآت الأساسية</h5>
-            <label id="l-amount">كمية الباي:</label>
-            <input type="number" id="p_amount" placeholder="0.00">
-            <label id="l-years">مدة القفل:</label>
+            <label id="l-amount">كمية الباي المراد قفلها:</label>
+            <input type="number" id="p_amount" placeholder="مثال: 100">
+            
+            <label id="l-years">اختر مدة القفل:</label>
             <select id="p_years">
-                <option value="0.5">6 أشهر (+25%)</option>
-                <option value="1">سنة واحدة (+100%)</option>
-                <option value="3">3 سنوات (+200%)</option>
+                <option value="0.5">6 أشهر (عائد +25%)</option>
+                <option value="1">سنة واحدة (عائد +100%)</option>
+                <option value="3">3 سنوات (عائد +200%)</option>
             </select>
-            <button onclick="smartCalc()" style="width:100%; background:var(--p); color:#fff; border:none; padding:12px; border-radius:8px; cursor:pointer; font-weight:bold;" id="s-btn">احسب المكافأة</button>
-            <div id="smart_res" style="display:none; text-align:center; margin-top:15px; padding:15px; background:#f0ebf8; border-radius:10px;">
-                <span id="s-res-label">الرصيد المتوقع:</span> <b id="total_val" style="font-size:20px; color:var(--p);"></b> π
+            
+            <button onclick="smartCalc()" style="width:100%; background:var(--p); color:#fff; border:none; padding:15px; border-radius:10px; cursor:pointer; font-weight:bold; font-size:16px;" id="s-btn">احسب المكافآت</button>
+            
+            <div id="smart_res" style="display:none; text-align:center; margin-top:20px; padding:20px; background:#f0ebf8; border-radius:12px; border:1px solid var(--p);">
+                <span id="s-res-label">الرصيد الكلي المتوقع بعد القفل:</span><br>
+                <b id="total_val" style="font-size:28px; color:var(--p);"></b> <span style="font-weight:bold; color:var(--p);">π</span>
             </div>
         </div>
 
-        <div class="tip-box">
-            <i class="fa fa-lightbulb"></i> <span id="s-tip">تذكر: القفل لمدة 3 سنوات يمنحك أعلى معدل تعدين ممكن.</span>
+        <div class="tip-box" style="margin-top:15px;">
+            <i class="fa fa-circle-info" style="color:var(--p);"></i> <b id="s-info-h">كيف تعمل الحاسبة؟</b>
+            <ul id="s-info-list" style="margin:10px 0; padding-right:20px; font-size:12px;">
+                <li>القفل لمدة 6 أشهر يزيد رصيدك بنسبة الربع.</li>
+                <li>القفل لمدة سنة يضاعف كمية المكافآت الأساسية (100%).</li>
+                <li>القفل لمدة 3 سنوات يعطيك أعلى نسبة وهي ضعفي الكمية (200%).</li>
+                <li>هذه الأرقام تقريبية وتعتمد على معدل تعدينك الأساسي.</li>
+            </ul>
         </div>
     </div>
 
     <div id="report" class="section">
-        <h3 style="text-align:center; color:var(--red);" id="r-title">مركز البلاغات</h3>
+        <h3 id="r-title" style="text-align:center; color:var(--red);">مركز الأمان والبلاغات</h3>
         <div class="card-bar" style="border-right-color:var(--red); text-align:center;">
-            <p id="r-desc">حماية المجتمع هي أولويتنا. تواصل معنا للإبلاغ عن أي نشاط مشبوه.</p>
-            <a href="https://wa.me/201220469415?text=بلاغ_جديد" style="text-decoration:none; background:var(--wpp); color:#fff; padding:15px; border-radius:10px; display:block; font-weight:bold;">
-                <i class="fab fa-whatsapp"></i> <span id="r-btn-txt">فتح واتساب للبلاغات</span>
+            <p id="r-desc">نحن نساعدك في استعادة حقك وتحذير الآخرين. الإبلاغ يتم بسرية تامة.</p>
+            <a href="https://wa.me/201220469415?text=بلاغ_جديد_عن_محتال" style="text-decoration:none; background:var(--wpp); color:#fff; padding:15px; border-radius:10px; display:block; font-weight:bold;">
+                <i class="fab fa-whatsapp"></i> <span id="r-btn-txt">مراسلة قسم البلاغات</span>
             </a>
         </div>
     </div>
 
     <div id="add" class="section">
-        <h3 style="text-align:center;" id="a-title">توثيق المتاجر</h3>
+        <h3 id="a-title" style="text-align:center;">سجل متجرك في الدليل</h3>
         <div class="card-bar" style="text-align:center;">
-            <p id="a-desc">هل تملك محلاً أو مطعماً يقبل الباي؟ انضم لأكثر من ١٠٠ تاجر موثق في دليلنا العربي.</p>
-            <a href="https://wa.me/201220469415?text=طلب_إضافة_تاجر" style="text-decoration:none; background:var(--p); color:#fff; padding:15px; border-radius:10px; display:block; font-weight:bold;">
-                <i class="fab fa-whatsapp"></i> <span id="a-btn-txt">سجل متجرك الآن</span>
+            <p id="a-desc">هل تملك نشاطاً تجارياً؟ ساهم في نمو مجتمع الباي العربي واحصل على زبائن جدد.</p>
+            <a href="https://wa.me/201220469415?text=طلب_توثيق_متجر_جديد" style="text-decoration:none; background:var(--p); color:#fff; padding:15px; border-radius:10px; display:block; font-weight:bold;">
+                <i class="fab fa-whatsapp"></i> <span id="a-btn-txt">إرسال بيانات التوثيق</span>
             </a>
         </div>
     </div>
 
     <div class="footer">
         <div class="f-item" onclick="go('report', this)"><i class="fa fa-bullhorn"></i><span id="n-report">إبلاغ</span></div>
-        <div class="f-item" onclick="go('add', this)"><i class="fa fa-store"></i><span id="n-add">توثيق</span></div>
+        <div class="f-item" onclick="go('add', this)"><i class="fa fa-store-alt"></i><span id="n-add">توثيق</span></div>
         <div class="f-item" onclick="go('stake', this)"><i class="fa fa-calculator"></i><span id="n-stake">حاسبة</span></div>
         <div class="f-item active" onclick="go('home', this)"><i class="fa fa-house"></i><span id="n-home">الرئيسية</span></div>
     </div>
 
     <script>
-        let isAr = true;
+        let currentLang = 'ar';
 
         function go(id, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -142,26 +161,57 @@
             const amount = document.getElementById('p_amount').value;
             const years = document.getElementById('p_years').value;
             if(amount > 0) {
-                let bonus = (years == "0.5") ? 0.25 : (years == "1" ? 1.0 : 2.0);
+                let bonus = parseFloat(years);
                 let total = parseFloat(amount) + (amount * bonus);
                 document.getElementById('total_val').innerText = total.toLocaleString();
                 document.getElementById('smart_res').style.display = 'block';
+            } else {
+                alert(currentLang === 'ar' ? "يرجى إدخال الكمية أولاً" : "Please enter the amount first");
             }
         }
 
-        function changeLang() {
-            isAr = !isAr;
-            document.dir = isAr ? 'rtl' : 'ltr';
-            const d = {
-                ar: { title: "ثقة ودليل الباي", home: "الرئيسية", stake: "حاسبة", report: "إبلاغ", add: "توثيق" },
-                en: { title: "Trust & Pi Guide", home: "Home", stake: "Calc", report: "Report", add: "Verify" }
+        function toggleLang() {
+            currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+            document.dir = (currentLang === 'ar') ? 'rtl' : 'ltr';
+            
+            const translations = {
+                ar: {
+                    title: "ثقة ودليل الباي", desc: "دليل موثق لمجتمع Pi", home: "الرئيسية", merch: "التجار", stake: "حاسبة", report: "إبلاغ", add: "توثيق",
+                    tip_h: "نصيحة الأمان:", tip_p: "لا تشارك كلمات السر (Passphrase) أبداً.", btn_add: "أضف متجرك", btn_calc: "حاسبة الأرباح",
+                    feat: "تجار اليوم الموثقون", m1: "يوفر السلع الأساسية وخدمات الشحن للمصريين.", m2: "متخصص في بطاقات الهدايا والخدمات الإلكترونية.",
+                    s_title: "حاسبة الاستيكنج الذكية", l_amt: "كمية الباي المراد قفلها:", l_yrs: "اختر مدة القفل:", s_btn: "احسب المكافآت",
+                    r_title: "مركز الأمان والبلاغات", r_btn: "مراسلة قسم البلاغات", a_title: "سجل متجرك في الدليل"
+                },
+                en: {
+                    title: "Trust & Pi Guide", desc: "Verified Pi Directory", home: "Home", merch: "Stores", stake: "Calculator", report: "Report", add: "Verify",
+                    tip_h: "Security Tip:", tip_p: "Never share your Passphrase with anyone.", btn_add: "Add Store", btn_calc: "Profit Calc",
+                    feat: "Today's Verified Merchants", m1: "Provides essential goods and shipping for Egyptians.", m2: "Specialized in gift cards and e-services.",
+                    s_title: "Smart Staking Calculator", l_amt: "Amount of Pi to lock:", l_yrs: "Choose lockup period:", s_btn: "Calculate Rewards",
+                    r_title: "Security & Report Center", r_btn: "Contact Fraud Dept", a_title: "Register Your Store"
+                }
             };
-            const c = isAr ? d.ar : d.en;
-            document.getElementById('app-title').innerText = c.title;
-            document.getElementById('n-home').innerText = c.home;
-            document.getElementById('n-stake').innerText = c.stake;
-            document.getElementById('n-report').innerText = c.report;
-            document.getElementById('n-add').innerText = c.add;
+
+            const t = translations[currentLang];
+            document.getElementById('app-title').innerText = t.title;
+            document.getElementById('app-desc').innerText = t.desc;
+            document.getElementById('n-home').innerText = t.home;
+            document.getElementById('n-stake').innerText = t.stake;
+            document.getElementById('n-report').innerText = t.report;
+            document.getElementById('n-add').innerText = t.add;
+            document.getElementById('h-tip-h').innerText = t.tip_h;
+            document.getElementById('h-tip-p').innerText = t.tip_p;
+            document.getElementById('btn-add').innerText = t.btn_add;
+            document.getElementById('btn-calc').innerText = t.btn_calc;
+            document.getElementById('h-featured').innerText = t.feat;
+            document.getElementById('m1-desc').innerText = t.m1;
+            document.getElementById('m2-desc').innerText = t.m2;
+            document.getElementById('s-title').innerText = t.s_title;
+            document.getElementById('l-amount').innerText = t.l_amt;
+            document.getElementById('l-years').innerText = t.l_yrs;
+            document.getElementById('s-btn').innerText = t.s_btn;
+            document.getElementById('r-title').innerText = t.r_title;
+            document.getElementById('r-btn-txt').innerText = t.r_btn;
+            document.getElementById('a-title').innerText = t.a_title;
         }
     </script>
 </body>
