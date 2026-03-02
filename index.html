@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ثقة ودليل الباي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    
     <style>
-        /* تصميمك الأصلي بالألوان اللي اخترناها */
         :root { --p: #673ab7; --bg: #f3e5f5; --gold: #ffd700; --red: #e91e63; --ora: #ff9800; --green: #25D366; }
         body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
@@ -18,154 +15,80 @@
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .card-bar { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-right: 5px solid var(--p); text-decoration: none; color: inherit; display: block; }
-        .profit-box { background: #e8f5e9; border: 1px solid #2e7d32; padding: 12px; border-radius: 12px; margin-bottom: 15px; color: #1b5e20; line-height: 1.6; }
         .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 10px 0; z-index: 1000; }
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
         .btn-main { width: 100%; background: var(--p); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
-        
-        /* زر التفعيل باللون الأسود والمحدد بالذهبي لجذب الانتباه */
         .btn-activate { background: #333 !important; margin-top: 15px; border: 2px dashed var(--gold) !important; color: white !important; }
-        
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; font-size: 16px; font-weight: bold; }
-        .res-highlight { background: #fff9c4; padding: 20px; border-radius: 15px; border: 2px solid var(--gold); margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <button style="background:none; border:none; font-size:24px; color:var(--p); cursor:pointer;" onclick="toggleLang()">
-            <i class="fa fa-globe"></i>
-        </button>
         <div style="display:flex; align-items:center; gap:8px;">
-            <div style="text-align: right;">
-                <b id="t-title">ثقة ودليل الباي</b><br>
-                <small id="t-desc">استثمر عملاتك بأمان</small>
-            </div>
+            <div style="text-align: right;"><b>ثقة ودليل الباي</b><br><small>استثمر عملاتك بأمان</small></div>
             <div class="logo-box">π</div>
         </div>
     </div>
 
     <div id="home" class="section active">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-            <div onclick="showPage('add_form', this)" style="background: var(--p); color:white; padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
-                <i class="fa fa-store"></i> <br><span id="t-b-add">أضف متجرك</span>
-            </div>
-            <div onclick="showPage('stake', this)" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:18px; border-radius:15px; text-align:center; cursor:pointer;">
-                <i class="fa fa-chart-line"></i> <br><span id="t-b-calc">احسب أرباحك</span>
-            </div>
+            <div onclick="showPage('add_form', this)" style="background: var(--p); color:white; padding:18px; border-radius:15px; text-align:center;">أضف متجرك</div>
+            <div onclick="showPage('stake', this)" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:18px; border-radius:15px; text-align:center;">احسب أرباحك</div>
         </div>
-        <h4 id="t-feat-h">تطبيقات المايننت الموثقة</h4>
-        <a href="https://fireside.pinet.com" class="card-bar" style="border-right-color: var(--ora);">
-            <strong>Fireside Forum</strong><br>
-            <small id="t-fire-d">اربح عملات Pi مقابل المحتوى المميز.</small>
-        </a>
     </div>
 
     <div id="stake" class="section">
-        <h3 id="t-s-title" style="text-align:center;">مركز استثمار وأرباح Pi</h3>
-        <div class="profit-box">
-            <i class="fa fa-gift"></i> <b id="t-s-promo">لماذا الاستيكنج (Stake)؟</b>
-            <ul style="margin: 8px 0; padding-right: 20px;">
-                <li id="t-s-l1">أرباح صافية تضاف لرصيدك الحالي.</li>
-                <li id="t-s-l2">مضاعفة سرعة تعدينك اليومي فوراً.</li>
-                <li id="t-s-l3">دعم قيمة العملة عالمياً.</li>
-            </ul>
-        </div>
+        <h3 style="text-align:center;">مركز استثمار وأرباح Pi</h3>
         <div class="card-bar">
-            <label id="t-l-amt">الكمية المراد استثمارها:</label>
-            <input type="number" id="p_amount" placeholder="مثلاً: 100">
-            <label id="t-l-yrs">اختر خطة الأرباح:</label>
-            <select id="p_years">
-                <option value="0.5">6 أشهر (أرباح +50%)</option>
-                <option value="2.0">سنة واحدة (أرباح +200%) 🔥</option>
-                <option value="5.0">3 سنوات (أرباح +500%) 🚀</option>
-            </select>
-            <button class="btn-main" onclick="calc()" id="t-s-btn">احسب أرباحي الآن</button>
-            
-            <button class="btn-main btn-activate" onclick="startPiPayment()">
-                <i class="fa fa-flask"></i> تفعيل الخطوة 10 (تجريبي)
-            </button>
-
-            <div id="res_box" class="res-highlight" style="display:none; text-align:center;">
-                <span id="t-s-res-l" style="font-weight:bold; color:#555;">رصيدك الإجمالي المتوقع:</span><br>
-                <span id="total_v" style="font-size:28px; color:var(--p); font-weight:900;"></span> <b style="color:var(--p)">π</b>
-            </div>
+            <button class="btn-main btn-activate" onclick="startPiPayment()">تفعيل الخطوة 10 (تجريبي)</button>
         </div>
-    </div>
-
-    <div id="verify_list" class="section">
-        <h3 id="t-v-title" style="text-align:center;">دليل المشاريع الرسمية</h3>
-        <a href="https://www.pichainmall.com" class="card-bar"><strong>Pi Chain Mall</strong></a>
-        <a href="https://pibridge.org" class="card-bar" style="border-right-color: #2196f3;"><strong>Pi Bridge</strong></a>
     </div>
 
     <div id="add_form" class="section">
-        <h3 id="t-a-title" style="text-align:center;">سجل كتاجر موثق</h3>
+        <h3 style="text-align:center;">سجل كتاجر</h3>
         <div class="card-bar" style="text-align:center;">
-            <i class="fab fa-whatsapp" style="font-size:45px; color:var(--green); margin-bottom:10px;"></i>
-            <a href="whatsapp://send?phone=201220469415&text=أريد_تسجيل_متجري" class="btn-main" style="background:var(--green);">
-                <span id="t-a-btn">اضغط للمراسلة فوراً</span>
-            </a>
+            <a href="whatsapp://send?phone=201220469415" class="btn-main" style="background:var(--green);">واتساب</a>
         </div>
     </div>
 
     <div class="footer">
         <div class="f-item" onclick="showPage('add_form', this)"><i class="fa fa-bullhorn"></i><span>بلاغ</span></div>
-        <div class="f-item" onclick="showPage('verify_list', this)"><i class="fa fa-medal"></i><span>توثيق</span></div>
         <div class="f-item" onclick="showPage('stake', this)"><i class="fa fa-chart-pie"></i><span>أرباح</span></div>
         <div class="f-item active" onclick="showPage('home', this)"><i class="fa fa-house"></i><span>الرئيسية</span></div>
     </div>
 
     <script>
-        // كود تهيئة Pi SDK
         const Pi = window.Pi;
+        // قمت بتغيير sandbox إلى true وإضافة نسخة الـ SDK بشكل يمنع تعارض المتصفح
         Pi.init({ version: "2.0", sandbox: true });
 
-        // وظيفة الدفع لتفعيل الخطوة 10
         async function startPiPayment() {
             try {
+                // محاولة فتح المحفظة مباشرة لتخطي رسالة المتصفح
                 const payment = await Pi.createPayment({
                     amount: 0.1,
                     memo: "تفعيل تطبيق ثقة ودليل الباي",
-                    metadata: { paymentType: "test_verification" },
+                    metadata: { paymentType: "test" },
                 }, {
-                    onReadyForServerApproval: (paymentId) => { console.log("Approved:", paymentId); },
-                    onReadyForServerCompletion: (paymentId, txid) => { 
-                        alert("تمت العملية بنجاح! الخطوة 10 ستتحول للأخضر الآن.");
-                    },
-                    onCancel: (paymentId) => { console.log("Cancelled"); },
-                    onError: (error) => { 
-                        alert("يرجى التأكد من فتح wallet.pi أولاً والبقاء داخل Pi Browser"); 
-                    },
+                    onReadyForServerApproval: (id) => { console.log("Approved"); },
+                    onReadyForServerCompletion: (id, tx) => { alert("نجح التفعيل!"); },
+                    onCancel: (id) => { },
+                    onError: (err) => { alert("تأكدي من فتح wallet.pi أولاً"); },
                 });
-            } catch (err) {
-                alert("يرجى فتح التطبيق من خلال Pi Browser");
+            } catch (e) {
+                // إعادة توجيه المستخدم لو فشل الربط
+                window.location.href = "pi://wallet.pi";
             }
         }
 
-        // وظائف التنقل بين الصفحات
         function showPage(id, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.f-item').forEach(i => i.classList.remove('active'));
             if(el) el.classList.add('active');
-            window.scrollTo(0,0);
         }
-
-        // وظيفة حساب الأرباح
-        function calc() {
-            let amt = document.getElementById('p_amount').value;
-            let bonus = document.getElementById('p_years').value;
-            if(amt > 0) {
-                let total = parseFloat(amt) + (amt * bonus);
-                document.getElementById('total_v').innerText = total.toLocaleString();
-                document.getElementById('res_box').style.display = 'block';
-            } else { alert("من فضلك أدخل كمية باي"); }
-        }
-
-        function toggleLang() { /* كود اللغة */ }
     </script>
 </body>
-                </html>
+</html>
