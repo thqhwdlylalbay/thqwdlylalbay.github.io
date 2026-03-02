@@ -13,15 +13,16 @@
         body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo-box { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        .section { display: none; padding: 15px; }
+        .section { display: none; padding: 15px; animation: fadeIn 0.3s; }
         .section.active { display: block; }
-        .card-bar { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-right: 5px solid var(--p); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .card-bar { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 12px; border-right: 5px solid var(--p); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 10px 0; z-index: 1000; }
         .f-item { flex: 1; text-align: center; color: #aaa; cursor: pointer; font-size: 11px; }
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
-        .btn-main { width: 100%; background: var(--p); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; }
-        .btn-activate { background: #000 !important; margin-top: 15px; border: 2px dashed var(--gold) !important; color: #fff; }
+        .btn-main { width: 100%; background: var(--p); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
+        .btn-activate { background: #000 !important; margin-top: 15px; border: 2px dashed var(--gold) !important; color: white !important; }
     </style>
 </head>
 <body>
@@ -33,16 +34,20 @@
         </div>
     </div>
 
-    <div id="stake" class="section active">
-        <h3 style="text-align:center;">تفعيل الخطوة 10</h3>
+    <div id="home" class="section">
         <div class="card-bar">
-            <p style="text-align:center; font-size:14px;">اضغطي على الزر الأسود بالأسفل. إذا لم تفتح المحفظة، تأكدي أنكِ فاتحة wallet.pi في الخلفية.</p>
-            <button class="btn-main btn-activate" onclick="launchPayment()">تفعيل الخطوة 10 (تجريبي)</button>
+            <strong>أهلاً بكِ في مشروعنا</strong><br>
+            <p>نحن الآن في مرحلة الربط التقني لتفعيل الخطوة 10.</p>
         </div>
+        <button class="btn-main" onclick="showPage('stake', document.querySelector('.f-item:nth-child(2)'))">انتقلي لصفحة الأرباح</button>
     </div>
 
-    <div id="home" class="section">
-        <div class="card-bar">أهلاً بكِ يا شريكتي في التطبيق.</div>
+    <div id="stake" class="section active">
+        <h3 style="text-align:center;">مركز الأرباح والتفعيل</h3>
+        <div class="card-bar">
+            <p style="text-align:center; font-size:14px;">اضغطي على الزر بالأسفل لتجربة فتح المحفظة (0.1 Pi تجريبي).</p>
+            <button class="btn-main btn-activate" onclick="startPiPayment()">تفعيل الخطوة 10 (تجريبي)</button>
+        </div>
     </div>
 
     <div class="footer">
@@ -51,29 +56,29 @@
     </div>
 
     <script>
-        // تهيئة الـ SDK مع السماح بالـ Sandbox للتجربة
+        // تهيئة الـ SDK للعمل مع الدومين الجديد
         const Pi = window.Pi;
         Pi.init({ version: "2.0", sandbox: true });
 
-        async function launchPayment() {
+        async function startPiPayment() {
             try {
-                // محاولة الاتصال المباشر بالمحفظة
+                // طلب الدفع التجريبي
                 const payment = await Pi.createPayment({
                     amount: 0.1,
-                    memo: "تفعيل مشروع ثقة ودليل الباي",
+                    memo: "تفعيل تطبيق ثقة ودليل الباي عبر pinet.com",
                     metadata: { type: "step10_activation" },
                 }, {
-                    onReadyForServerApproval: (id) => { console.log("Approved"); },
-                    onReadyForServerCompletion: (id, tx) => { alert("نجح التفعيل! مبروك."); },
-                    onCancel: (id) => { },
+                    onReadyForServerApproval: (id) => { console.log("Approved ID: " + id); },
+                    onReadyForServerCompletion: (id, tx) => { alert("مبروك يا شريكتي! تم التفعيل بنجاح."); },
+                    onCancel: (id) => { console.log("Payment Cancelled"); },
                     onError: (err) => { 
-                        alert("تنبيه: افتحي المحفظة wallet.pi أولاً وسجلي دخولك، ثم عودي هنا واضغطي الزر."); 
+                        alert("تنبيه: تأكدي من فتح wallet.pi أولاً وتسجيل دخولك."); 
+                        console.error(err);
                     },
                 });
-            } catch (error) {
-                // إذا ظهرت رسالة المتصفح، سنحاول إجبار الصفحة على إعادة التحميل داخل الإطار
-                console.error(error);
-                alert("يرجى التأكد من الدخول عبر زر Open App URL في لوحة المطورين.");
+            } catch (e) {
+                // محاولة أخيرة لو المتصفح لسه معترض
+                alert("يرجى التأكد من فتح التطبيق من خلال: trustpiguide7748.pinet.com");
             }
         }
 
