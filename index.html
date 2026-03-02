@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ثقة ودليل الباي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
-        /* التعديل هنا: اللون البنفسجي الفاتح الهادئ للخلفية */
         :root { --p: #673ab7; --bg: #f3e5f5; --gold: #ffd700; --red: #e91e63; --ora: #ff9800; --green: #25D366; }
         body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
         .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
@@ -21,6 +21,8 @@
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
         .btn-main { width: 100%; background: var(--p); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
+        /* ستايل لزرار التفعيل عشان ميبوظش شكل تطبيقك */
+        .btn-activate { background: #333 !important; margin-top: 10px; border: 2px dashed var(--gold) !important; }
         input, select { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; font-size: 16px; font-weight: bold; }
         .res-highlight { background: #fff9c4; padding: 20px; border-radius: 15px; border: 2px solid var(--gold); margin-top: 15px; }
     </style>
@@ -114,6 +116,9 @@
                 <option value="5.0">3 سنوات (أرباح +500%) 🚀</option>
             </select>
             <button class="btn-main" onclick="calc()" id="t-s-btn">احسب أرباحي الآن</button>
+            
+            <button class="btn-main btn-activate" onclick="startPiPayment()">تفعيل الخطوة 10 (تجريبي)</button>
+
             <div id="res_box" class="res-highlight" style="display:none; text-align:center;">
                 <span id="t-s-res-l" style="font-weight:bold; color:#555;">رصيدك الإجمالي المتوقع:</span><br>
                 <span id="total_v" style="font-size:28px; color:var(--p); font-weight:900;"></span> <b style="color:var(--p)">π</b>
@@ -151,6 +156,25 @@
     </div>
 
     <script>
+        // كود الربط المالي (SDK) لإنهاء المهمة
+        const Pi = window.Pi;
+        Pi.init({ version: "2.0", sandbox: true });
+
+        async function startPiPayment() {
+            try {
+                await Pi.createPayment({
+                    amount: 0.1,
+                    memo: "تفعيل تطبيق ثقة ودليل الباي",
+                    metadata: { paymentType: "test" },
+                }, {
+                    onReadyForServerApproval: (id) => { console.log("Approved"); },
+                    onReadyForServerCompletion: (id, tx) => { alert("تم التفعيل بنجاح!"); },
+                    onCancel: (id) => { },
+                    onError: (err) => { alert("افتحي من داخل متصفح باي"); },
+                });
+            } catch (e) { alert("يرجى المحاولة من داخل Pi Browser"); }
+        }
+
         let isAr = true;
         function showPage(id, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -223,4 +247,4 @@
         }
     </script>
 </body>
-    </html>
+            </html>
