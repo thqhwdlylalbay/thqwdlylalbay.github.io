@@ -3,65 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثقة ودليل الباي</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>تفعيل ثقة ودليل الباي</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
-        :root { --p: #673ab7; --bg: #f3e5f5; --gold: #ffd700; }
-        body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
-        .header { background: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .logo-box { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--gold); background: var(--p); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        .section { display: none; padding: 15px; }
-        .section.active { display: block; }
-        .card-bar { background: #fff; border-radius: 15px; padding: 15px; margin-bottom: 12px; border-right: 5px solid var(--p); }
-        .btn-main { width: 100%; background: #000; color: white; border: 2px dashed var(--gold); padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; }
-        .footer { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #eee; padding: 10px 0; }
-        .f-item { flex: 1; text-align: center; color: #aaa; font-size: 11px; }
-        .f-item.active { color: var(--p); font-weight: bold; }
-        .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
+        body { font-family: sans-serif; text-align: center; background: #f3e5f5; padding: 50px 20px; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .btn-pay { background: #000; color: #fff; padding: 20px; border-radius: 15px; border: 2px dashed #ffd700; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer; }
     </style>
 </head>
 <body>
-
-    <div class="header">
-        <div style="display:flex; align-items:center; gap:8px;">
-            <div style="text-align: right;"><b>ثقة ودليل الباي</b><br><small>تفعيل الخطوة 10</small></div>
-            <div class="logo-box">π</div>
-        </div>
-    </div>
-
-    <div id="stake" class="section active">
-        <div class="card-bar">
-            <p style="text-align:center;">إنتِ دلوقتي على بعد خطوة واحدة! اضغطي الزر الأسود للمحاولة الأخيرة.</p>
-            <button class="btn-main" onclick="startPayment()">تفعيل الخطوة 10 (0.1 Pi)</button>
-        </div>
-    </div>
-
-    <div class="footer">
-        <div class="f-item" onclick="location.reload()"><i class="fa fa-house"></i><span>الرئيسية</span></div>
-        <div class="f-item active"><i class="fa fa-chart-pie"></i><span>أرباح</span></div>
+    <div class="card">
+        <h2>تفعيل الخطوة 10</h2>
+        <p>باقي تكة واحدة! اضغطي الزر واختاري محفظتك.</p>
+        <button class="btn-pay" onclick="transferPi()">تفعيل بـ 0.1 Pi (تجريبي)</button>
     </div>
 
     <script>
-        // إعدادات الربط المتقدمة لتجنب القفل المفاجئ
         const Pi = window.Pi;
-        Pi.init({ version: "2.0", sandbox: true });
+        Pi.init({ version: "2.0", sandbox: true }); // تفعيل وضع الاختبار
 
-        async function startPayment() {
+        async function transferPi() {
             try {
                 const payment = await Pi.createPayment({
                     amount: 0.1,
-                    memo: "تفعيل تطبيق ثقة ودليل الباي",
-                    metadata: { step: "10" }
+                    memo: "تفعيل مشروع ثقة ودليل الباي",
+                    metadata: { step: 10 }
                 }, {
                     onReadyForServerApproval: (id) => { console.log("Approved"); },
-                    onReadyForServerCompletion: (id, tx) => { alert("مبروك! التفعيل تم."); },
-                    onCancel: (id) => { },
-                    onError: (err) => { alert("تأكدي من فتح المحفظة wallet.pi أولاً."); }
+                    onReadyForServerCompletion: (id, tx) => { alert("نجحنا! ارجعي لصفحة المهام الآن."); },
+                    onCancel: (id) => { console.log("Canceled"); },
+                    onError: (err) => { alert("افتحي محفظتك أولاً wallet.pi"); }
                 });
             } catch (e) {
-                // لو قفل تاني، هيفضل يحاول يفتح الصفحة الصح
-                window.location.href = "https://trustpiguide7748.pinet.com";
+                alert("تأكدي أنكِ داخل متصفح Pi");
             }
         }
     </script>
