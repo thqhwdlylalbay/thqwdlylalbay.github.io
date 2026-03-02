@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ثقة ودليل الباي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    
     <style>
         :root { --p: #673ab7; --bg: #f3e5f5; --gold: #ffd700; --red: #e91e63; --ora: #ff9800; --green: #25D366; }
         body { font-family: sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
@@ -20,6 +22,7 @@
         .f-item.active { color: var(--p); font-weight: bold; }
         .f-item i { display: block; font-size: 22px; margin-bottom: 4px; }
         .btn-main { width: 100%; background: var(--p); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
+        /* زر التفعيل الأسود المميز */
         .btn-activate { background: #333 !important; margin-top: 15px; border: 2px dashed var(--gold) !important; color: white !important; }
     </style>
 </head>
@@ -27,59 +30,63 @@
 
     <div class="header">
         <div style="display:flex; align-items:center; gap:8px;">
-            <div style="text-align: right;"><b>ثقة ودليل الباي</b><br><small>استثمر عملاتك بأمان</small></div>
+            <div style="text-align: right;">
+                <b>ثقة ودليل الباي</b><br>
+                <small>استثمر عملاتك بأمان</small>
+            </div>
             <div class="logo-box">π</div>
         </div>
     </div>
 
     <div id="home" class="section active">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-            <div onclick="showPage('add_form', this)" style="background: var(--p); color:white; padding:18px; border-radius:15px; text-align:center;">أضف متجرك</div>
-            <div onclick="showPage('stake', this)" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:18px; border-radius:15px; text-align:center;">احسب أرباحك</div>
+            <div onclick="showPage('add_form', this)" style="background: var(--p); color:white; padding:18px; border-radius:15px; text-align:center; cursor:pointer;">أضف متجرك</div>
+            <div onclick="showPage('stake', this)" style="background:#fff; border:1px solid var(--p); color:var(--p); padding:18px; border-radius:15px; text-align:center; cursor:pointer;">احسب أرباحك</div>
+        </div>
+        <div class="card-bar">
+            <strong>أهلاً بك في مشروعنا المشترك</strong><br>
+            <small>نحن هنا لنبني مجتمع باي آمن وموثوق.</small>
         </div>
     </div>
 
     <div id="stake" class="section">
         <h3 style="text-align:center;">مركز استثمار وأرباح Pi</h3>
         <div class="card-bar">
+            <p style="text-align:center; font-size:14px; color:#555;">لتفعيل الخطوة 10 بنجاح، يرجى الضغط على الزر أدناه:</p>
             <button class="btn-main btn-activate" onclick="startPiPayment()">تفعيل الخطوة 10 (تجريبي)</button>
         </div>
     </div>
 
     <div id="add_form" class="section">
-        <h3 style="text-align:center;">سجل كتاجر</h3>
-        <div class="card-bar" style="text-align:center;">
-            <a href="whatsapp://send?phone=201220469415" class="btn-main" style="background:var(--green);">واتساب</a>
-        </div>
+        <h3 style="text-align:center;">تواصل معنا</h3>
+        <a href="whatsapp://send?phone=201220469415" class="btn-main" style="background:var(--green);">واتساب</a>
     </div>
 
     <div class="footer">
-        <div class="f-item" onclick="showPage('add_form', this)"><i class="fa fa-bullhorn"></i><span>بلاغ</span></div>
+        <div class="f-item" onclick="showPage('add_form', this)"><i class="fa fa-bullhorn"></i><span>إبلاغ</span></div>
         <div class="f-item" onclick="showPage('stake', this)"><i class="fa fa-chart-pie"></i><span>أرباح</span></div>
         <div class="f-item active" onclick="showPage('home', this)"><i class="fa fa-house"></i><span>الرئيسية</span></div>
     </div>
 
     <script>
+        // إعدادات الربط المالي
         const Pi = window.Pi;
-        // قمت بتغيير sandbox إلى true وإضافة نسخة الـ SDK بشكل يمنع تعارض المتصفح
         Pi.init({ version: "2.0", sandbox: true });
 
         async function startPiPayment() {
             try {
-                // محاولة فتح المحفظة مباشرة لتخطي رسالة المتصفح
-                const payment = await Pi.createPayment({
+                await Pi.createPayment({
                     amount: 0.1,
                     memo: "تفعيل تطبيق ثقة ودليل الباي",
                     metadata: { paymentType: "test" },
                 }, {
                     onReadyForServerApproval: (id) => { console.log("Approved"); },
-                    onReadyForServerCompletion: (id, tx) => { alert("نجح التفعيل!"); },
+                    onReadyForServerCompletion: (id, tx) => { alert("تم التفعيل بنجاح! مبروك يا شريكتي."); },
                     onCancel: (id) => { },
-                    onError: (err) => { alert("تأكدي من فتح wallet.pi أولاً"); },
+                    onError: (err) => { alert("تأكدي من فتح المحفظة wallet.pi أولاً"); },
                 });
             } catch (e) {
-                // إعادة توجيه المستخدم لو فشل الربط
-                window.location.href = "pi://wallet.pi";
+                alert("يرجى المحاولة من داخل Pi Browser");
             }
         }
 
@@ -91,4 +98,4 @@
         }
     </script>
 </body>
-</html>
+                                                                                                                 </html>
